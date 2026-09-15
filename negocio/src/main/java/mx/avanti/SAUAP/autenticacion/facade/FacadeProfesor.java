@@ -10,11 +10,11 @@ public class FacadeProfesor {
             this.delegateProfesor = new DelegateProfesor();
         }
 
-        public Profesor login(String password, String correo){
-            return delegateProfesor.login(password, correo);
+        public Profesor login(String rfc){
+            return delegateProfesor.login(rfc);
         }
 
-        public void saveUsario(Profesor profesor){
+        public void saveProfesor(Profesor profesor){
             delegateProfesor.saveProfesor(profesor);
         }
 

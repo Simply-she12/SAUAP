@@ -6,20 +6,20 @@ import mx.desarrollo.persistencia.integration.ServiceLocator;
 import java.util.List;
 
 public class DelegateProfesor {
-    public Profesor login(String password, String correo){
+    public Profesor login(String rfc){
         Profesor profesor = new Profesor();
         List<Profesor> profesores = ServiceLocator.getInstanceProfesorDAO().findAll();
 
         for(Profesor pr:profesores){
-            if(pr.getNombre().equalsIgnoreCase(password) && pr.getRfc().equalsIgnoreCase(correo)){
+            if(pr.getRfc().equalsIgnoreCase(rfc)){
                 profesor = pr;
             }
         }
         return profesor;
     }
 
-    public void saveProfesor(Profesor usuario){
-        ServiceLocator.getInstanceProfesorDAO().save(usuario);
+    public void saveProfesor(Profesor profesor){
+        ServiceLocator.getInstanceProfesorDAO().save(profesor);
     }
 
 }
