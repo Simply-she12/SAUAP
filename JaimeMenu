@@ -1,0 +1,78 @@
+package mx.avanti.desarrollo.autenticacion;
+import java.util.Scanner;
+public class Menu
+{
+    public static void main(String[] args)
+    {
+        String op,op2,identificador,nombre,horaClase, horaTaller, horaLab,bscUnidad;
+        Unidad[] unidad = new Unidad[100];
+        int u=0;
+        Scanner sc =new Scanner(System.in);
+        do
+        {
+            System.out.println("Elige una opcion:");
+            System.out.println("1.-Altas de Maestros\n2.-Administracion de Unidades de Aprendizaje\n5.-Salir");
+            op = sc.nextLine();
+            switch (op) {
+                case "1":
+                    //Altas (Marlen)
+                    break;
+                case "2":
+                    //Administracion(Jaime)
+                    // identificador, nombre, hora(Clase, Taller, Laboratorio)
+                    System.out.println("Que accion deseas realizar?");
+                    System.out.println("1.-Registrar\n2.-Modificar\n3.-Eliminar");
+                    op2 = sc.nextLine();
+                    switch (op2) {
+                        case "1":
+                            System.out.println("Identificador de la Unidad: ");
+                            identificador = sc.nextLine();
+                            System.out.println("Nombre de la unidad de aprendizaje: ");
+                            nombre = sc.nextLine();
+                            System.out.println("Horas de Clase(0-4): ");
+                            horaClase = sc.nextLine();
+                            System.out.println("Horas de Taller(0-4): ");
+                            horaTaller = sc.nextLine();
+                            System.out.println("Horas de Laboratorio(0-4): ");
+                            horaLab = sc.nextLine();
+                            unidad[u] = new Unidad(identificador, nombre, horaClase, horaTaller, horaLab);
+                            u = u + 1;
+                            break;
+                        case "2":
+                            System.out.println("Da el indentificador de la unidad a modificar: ");
+                            bscUnidad = sc.nextLine();
+                            for (int i = 0; i < 100; i++) {
+                                if (bscUnidad.equals(unidad[i])) {
+                                    System.out.println("Identificador de la Unidad: ");
+                                    identificador = sc.nextLine();
+                                    System.out.println("Nombre de la unidad de aprendizaje: ");
+                                    nombre = sc.nextLine();
+                                    System.out.println("Horas de Clase(0-4): ");
+                                    horaClase = sc.nextLine();
+                                    System.out.println("Horas de Taller(0-4): ");
+                                    horaTaller = sc.nextLine();
+                                    System.out.println("Horas de Laboratorio(0-4): ");
+                                    horaLab = sc.nextLine();
+                                    unidad[i] = new Unidad(identificador, nombre, horaClase, horaTaller, horaLab);
+                                }
+                            }
+                            break;
+                        case "3":
+                            System.out.println("Da el indentificador de la unidad a modificar: ");
+                            bscUnidad = sc.nextLine();
+                            for (int i = 0; i < 100; i++) {
+                                if (bscUnidad.equals(unidad[i])) {
+                                    for (int n = i; n < 100; n++) {
+                                        unidad[n] = unidad[(n + 1)];
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }while(op!="5");
+    }
+}
