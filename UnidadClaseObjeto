@@ -1,0 +1,21 @@
+package mx.avanti.desarrollo.autenticacion;
+import java.util.Scanner;
+
+public class Unidad
+{
+    String identificador,nombre,horaClase, horaTaller, horaLab;
+    Scanner sc =new Scanner(System.in);
+
+    public Unidad(String identificador, String nombre, String horaClase, String horaTaller, String horaLab) {
+        this.identificador = identificador;
+        this.nombre = nombre;
+        this.horaClase = horaClase;
+        this.horaTaller = horaTaller;
+        this.horaLab = horaLab;
+    }
+
+    public String writeUnidad()
+    {
+        return ("Identificador de la Unidad: "+identificador+"\nNombre de la unidad de aprendizaje: "+nombre+"\nHoras de Clase(0-4): "+horaClase+"\nHoras de Taller(0-4): "+horaTaller+"\nHoras de Laboratorio(0-4): "+horaLab);
+    }
+}
