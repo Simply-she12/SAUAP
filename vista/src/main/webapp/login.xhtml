@@ -13,7 +13,10 @@
             background: #F4F6F6;
 
 
-            background-image: url("#{resource['fondo.png']}");
+            background-image:
+                    linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
+                    url("#{resource['fondo.png']}");
+
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -55,7 +58,7 @@
         .login {
             width: 637px;
             min-height: 567px;
-            background: #38727D;
+            background: rgb(12 61 66 / 0.72);
             border-radius: 47px;
             box-shadow: 12px 23px 7px rgba(0,0,0,0.25);
 
