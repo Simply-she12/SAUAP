@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>SAUAP - Iniciar sesión</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+            background: #F4F6F6;
+        }
+
+        .pagina {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 70px;
+        }
+
+        .izquierda {
+            text-align: center;
+        }
+
+        .sauap {
+            color: #0F4C52;
+            font-size: 96px;
+            font-family: "Inria Serif", serif;
+        }
+
+        .descripcion {
+            color: #172325;
+            font-size: 24px;
+            font-family: "Inria Serif", serif;
+            max-width: 500px;
+        }
+
+        .login {
+            width: 637px;
+            min-height: 567px;
+            background: #38727D;
+            border-radius: 47px;
+            box-shadow: 12px 23px 7px rgba(0,0,0,0.25);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contenido {
+            width: 556px;
+            text-align: center;
+        }
+
+        .titulo {
+            color: #172325;
+            font-size: 64px;
+            font-family: "Inria Serif", serif;
+            margin-bottom: 60px;
+        }
+
+        .campo {
+            margin-bottom: 25px;
+        }
+
+        .campo input {
+            width: 100%;
+            height: 60px;
+            box-sizing: border-box;
+            border-radius: 100px;
+            border: none;
+            background: #D9D9D9;
+            padding: 0 25px;
+            font-size: 18px;
+        }
+
+        .recordar {
+            text-align: left;
+            margin: 15px 0 25px 20px;
+            color: #172325;
+            font-family: "Inria Serif", serif;
+            font-size: 15px;
+        }
+
+        .boton {
+            background: #64165F !important;
+            border: none !important;
+            border-radius: 28px !important;
+            padding: 12px 35px !important;
+        }
+
+        .registrarse {
+            margin-top: 30px;
+            color: #172325;
+            font-size: 24px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+    <div class="pagina">
+
+        <div class="izquierda">
+            <div class="sauap">SAUAP</div>
+
+            <div class="descripcion">
+                Sistema de Asignación de
+                <br/>
+                Unidades de Aprendizaje a los Profesores
+            </div>
+        </div>
+
+        <div class="login">
+
+            <div class="contenido">
+
+                <div class="titulo">
+                    SIGN IN
+                </div>
+
+                <h:form>
+
+                    <div class="campo">
+                        <p:inputText
+                                value="#{loginHelper.correo}"
+                                placeholder="Usuario:"/>
+                    </div>
+
+                    <div class="campo">
+                        <p:password
+                                value="#{loginHelper.password}"
+                                placeholder="Contraseña:"/>
+                    </div>
+
+                    <div class="recordar">
+                        <p:selectBooleanCheckbox
+                                value="#{loginHelper.recordarme}"/>
+                        Recordarme
+                    </div>
+
+                    <p:commandButton
+                            value="Entrar"
+                            action="#{loginHelper.login}"
+                            styleClass="boton"/>
+
+                </h:form>
+
+                <div class="registrarse">
+                    Registrarse
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</h:body>
+</html>

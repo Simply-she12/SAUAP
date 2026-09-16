@@ -8,10 +8,10 @@ public class LoginHelper {
     /**
      * Metodo para hacer login llamara a la instancia de usuarioFacade
      *
-     * @param rfc
+     * @param idProfesor
      * @return
      */
-    public Profesor Login(String rfc){
-        return ServiceFacadeLocator.getInstanceFacadeUsuario().login(rfc);
+    public Profesor Login(String idProfesor){
+        return ServiceFacadeLocator.getInstanceFacadeUsuario().login(idProfesor);
     }
 }
