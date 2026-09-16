@@ -9,6 +9,7 @@
     <!-- Declaración manual de entidades -->
     <class>mx.desarrollo.entity.Profesor</class>
     <class>mx.desarrollo.entity.Materia</class>
+    <class>mx.desarrollo.entity.Asignar</class>
 
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
