@@ -13,5 +13,6 @@ public class LoginHelper {
      */
     public Profesor Login(String idProfesor){
         return ServiceFacadeLocator.getInstanceFacadeUsuario().login(idProfesor);
+
     }
 }
