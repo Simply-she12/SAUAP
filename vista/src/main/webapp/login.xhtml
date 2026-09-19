@@ -193,7 +193,6 @@
                                 styleClass="icono"/>
 
                         <p:password
-                                value="#{loginHelper.password}"
                                 placeholder="Contraseña:"/>
 
                         <h:graphicImage
@@ -203,22 +202,20 @@
                     </div>
 
                     <!-- RECORDARME -->
-                    <div class="recordar">
+<!--                    <div class="recordar">-->
 
-                        <p:selectBooleanCheckbox
-                                value="#{loginHelper.recordarme}"/>
+<!--                        <p:selectBooleanCheckbox-->
+<!--                                value="#{loginHelper.recordarme}"/>-->
 
-                        Recordarme
+<!--                        Recordarme-->
 
-                    </div>
+<!--                    </div>-->
 
                     <!-- Falta conectar -->
                     <p:commandButton
                             value="Entrar"
                             action="#{loginHelper.login}"
                             styleClass="boton"/>
-
-
                 </h:form>
 
 
@@ -227,6 +224,7 @@
         </div>
 
     </div>
+    <script src="login1.js"></script>
 
 </h:body>
 

@@ -72,4 +72,15 @@ public class Profesor {
         this.rfc = rfc;
     }
 
+    @Override
+    public String toString() {
+        return "Profesor{" +
+                "idProfesor=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellidoP='" + apellidoP + '\'' +
+                ", apellidoM='" + apellidoM + '\'' +
+                ", rfc='" + rfc + '\'' +
+                '}';
+    }
+
 }
