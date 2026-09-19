@@ -32,6 +32,11 @@ public class Profesor {
     @Column(name = "rfc", nullable = false, length = 13)
     private String rfc;
 
+    @Size(max = 10)
+    @NotNull
+    @Column(name = "password", nullable = false, length = 100)
+    private String password;
+
     public Integer getId() {
         return id;
     }
@@ -70,6 +75,14 @@ public class Profesor {
 
     public void setRfc(String rfc) {
         this.rfc = rfc;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

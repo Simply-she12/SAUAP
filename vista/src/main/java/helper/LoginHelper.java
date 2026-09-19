@@ -4,6 +4,8 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import mx.avanti.SAUAP.autenticacion.integration.ServiceFacadeLocator;
 import mx.desarrollo.entity.Profesor;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 
 @Named("loginHelper")
 @RequestScoped
@@ -12,6 +14,7 @@ public class LoginHelper {
     private String idProfesor;
     private String password;
     private boolean recordarme;
+    private boolean error;
 
     public String getIdProfesor() {
         return idProfesor;
@@ -36,16 +39,21 @@ public class LoginHelper {
     public void setRecordarme(boolean recordarme) {
         this.recordarme = recordarme;
     }
+    public boolean isError() {
+        return error;
+    }
     public String login() {
 
         Profesor profesor = ServiceFacadeLocator
                 .getInstanceFacadeUsuario()
-                .login(idProfesor);
+                .login(idProfesor, password);
 
         if (profesor != null) {
+            error = false;
             return "menu.xhtml?faces-redirect=true";
         }
 
+        error = true;
         return null;
     }
 }

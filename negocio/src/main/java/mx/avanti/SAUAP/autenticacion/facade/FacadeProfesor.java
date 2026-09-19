@@ -14,8 +14,8 @@ public class FacadeProfesor {
             this.delegateProfesor = new DelegateProfesor();
         }
 
-    public Profesor login(String idProfesor) {
-        return delegateProfesor.login(idProfesor);
+    public Profesor login(String idProfesor, String password){
+        return delegateProfesor.login(idProfesor, password);
     }
 
         public void saveProfesor(Profesor profesor){
