@@ -40,13 +40,15 @@ public class ServiceLocator {
         }
     }
 
-    public static AsignarDAO getInstanceAsignarDAO(){
-        if(asignarDAO == null){
-            asignarDAO = new AsignarDAO(getEntityManager());
-            return asignarDAO;
-        } else{
-            return asignarDAO;
+
+    public static AsignarDAO getInstanceAsignarDAO() {
+        if (asignarDAO == null) {
+            asignarDAO = new AsignarDAO(
+                    HibernateUtil.getEntityManager()
+            );
         }
+
+        return asignarDAO;
     }
 
 }

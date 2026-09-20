@@ -3,29 +3,82 @@ package helper;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
+import mx.avanti.SAUAP.autenticacion.integration.ServiceFacadeLocator;
+import mx.desarrollo.entity.Asignar;
+import mx.desarrollo.entity.Materia;
+import mx.desarrollo.entity.Profesor;
+
+import java.util.List;
+
+import static mx.desarrollo.entity.Asignar_.materia;
+
 @Named("asignarHelper")
 @RequestScoped
 public class AsignarHelper {
 
-    private String profesor;
-    private String materia;
+    private Integer profesorId;
+    private Integer materiaId;
+
     private String tipo;
     private Integer horas;
 
-    public String getProfesor() {
-        return profesor;
+
+
+
+    public void asignar() {
+
+        if (profesorId == null ||
+                materiaId == null ||
+                tipo == null ||
+                horas == null) {
+
+            System.out.println("Faltan datos");
+            return;
+        }
+
+        if (horas < 0 || horas > 4) {
+
+            System.out.println(
+                    "Las horas deben estar entre 0 y 4"
+            );
+
+            return;
+        }
+
+        System.out.println("ID Profesor: " + profesorId);
+        System.out.println("ID Materia: " + materiaId);
+        System.out.println("Tipo: " + tipo);
+        System.out.println("Horas: " + horas);
+
+        ServiceFacadeLocator
+                .getInstanceFacadeAsignar()
+                .guardarAsignacion(
+                        profesorId,
+                        materiaId,
+                        tipo,
+                        horas
+                );
+
+        System.out.println(
+                "Asignación guardada correctamente"
+        );
     }
 
-    public void setProfesor(String profesor) {
-        this.profesor = profesor;
+
+    public Integer getProfesorId() {
+        return profesorId;
     }
 
-    public String getMateria() {
-        return materia;
+    public void setProfesorId(Integer profesorId) {
+        this.profesorId = profesorId;
     }
 
-    public void setMateria(String materia) {
-        this.materia = materia;
+    public Integer getMateriaId() {
+        return materiaId;
+    }
+
+    public void setMateriaId(Integer materiaId) {
+        this.materiaId = materiaId;
     }
 
     public String getTipo() {
@@ -44,12 +97,21 @@ public class AsignarHelper {
         this.horas = horas;
     }
 
-    public void asignar() {
+    public List<Profesor> getProfesores() {
+        return ServiceFacadeLocator
+                .getInstanceFacadeUsuario()
+                .obtenerTodos();
+    }
 
-        System.out.println("Profesor: " + profesor);
-        System.out.println("Materia: " + materia);
-        System.out.println("Tipo: " + tipo);
-        System.out.println("Horas: " + horas);
+    public List<Materia> getMaterias() {
+        return ServiceFacadeLocator
+                .getInstanceFacadeMateria()
+                .obtenerTodos();
+    }
 
+    public List<Asignar> getAsignaciones() {
+        return ServiceFacadeLocator
+                .getInstanceFacadeAsignar()
+                .obtenerTodos();
     }
 }

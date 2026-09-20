@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
-      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
 
 <h:head>
 
@@ -499,117 +501,146 @@
 
             <div class="campo profesor">
 
-                <label for="profesor">
-                    Profesor:
-                </label>
-
-                <p:inputText
-                        id="profesor"
-                        value="#{asignarHelper.profesor}"/>
-
-            </div>
-
-            <div class="campo materia">
-
-                <label for="materia">
-                    Materia:
-                </label>
-
-                <p:inputText
-                        id="materia"
-                        value="#{asignarHelper.materia}"/>
-
-            </div>
-
-            <div class="campo tipo">
-
-                <label for="tipo">
-                    Tipo:
-                </label>
+                <label>Profesor:</label>
 
                 <p:selectOneMenu
-                        id="tipo"
-                        value="#{asignarHelper.tipo}">
+                        value="#{asignarHelper.profesorId}"
+                        styleClass="select">
 
                     <f:selectItem
-                            itemLabel=""
-                            itemValue=""/>
+                            itemLabel="Seleccione un profesor"
+                            itemValue="#{null}" />
 
-                    <f:selectItem
-                            itemLabel="Clase"
-                            itemValue="teoria"/>
-
-                    <f:selectItem
-                            itemLabel="Taller"
-                            itemValue="taller"/>
-
-                    <f:selectItem
-                            itemLabel="Laboratorio"
-                            itemValue="laboratorio"/>
+                    <f:selectItems
+                            value="#{asignarHelper.profesores}"
+                            var="p"
+                            itemLabel="#{p.nombre} #{p.apellidoP} #{p.apellidoM}"
+                            itemValue="#{p.id}" />
 
                 </p:selectOneMenu>
 
             </div>
 
-            <div class="campo horas">
 
-                <label for="horas">
-                    Horas:
-                </label>
+            <div class="campo materia">
 
-                <p:inputNumber
-                        id="horas"
-                        value="#{asignarHelper.horas}"
-                        minValue="0"
-                        maxValue="4"
-                        decimalPlaces="0"/>
+                <label>Materia:</label>
+
+                <p:selectOneMenu
+                        value="#{asignarHelper.materiaId}"
+                        styleClass="select">
+
+                    <f:selectItem
+                            itemLabel="Seleccione una materia"
+                            itemValue="#{null}" />
+
+                    <f:selectItems
+                            value="#{asignarHelper.materias}"
+                            var="m"
+                            itemLabel="#{m.nombre}"
+                            itemValue="#{m.id}" />
+
+                </p:selectOneMenu>
+            </div>
+
+
+            <div class="campo">
+
+                <label>Tipo:</label>
+
+                <p:selectOneMenu
+                        value="#{asignarHelper.tipo}"
+                        styleClass="select">
+
+                    <f:selectItem
+                            itemLabel="Seleccione un tipo"
+                            itemValue="#{null}" />
+
+                    <f:selectItem
+                            itemLabel="Clase"
+                            itemValue="teoria" />
+
+                    <f:selectItem
+                            itemLabel="Taller"
+                            itemValue="taller" />
+
+                    <f:selectItem
+                            itemLabel="Laboratorio"
+                            itemValue="laboratorio" />
+
+                </p:selectOneMenu>
 
             </div>
 
 
+            <div class="campo">
+
+                <label>Horas:</label>
+
+                <p:inputNumber
+                        value="#{asignarHelper.horas}"
+                        minValue="0"
+                        maxValue="4"
+                        decimalPlaces="0"
+                        required="true"
+                        requiredMessage="Ingrese las horas"/>
+
+            </div>
+
+
+            <p:commandButton
+                    value="Asignar"
+                    action="#{asignarHelper.asignar}"
+                    styleClass="boton-asignar" />
+
         </h:form>
 
-        <p:commandButton
-                value="Asignar"
-                action="#{asignarHelper.asignar}"
-                styleClass="boton-asignar"/>
+
 
         <div class="materias-asignadas">
 
-
-            <h3>
-                Materias asignadas
-            </h3>
-
+            <h3>Materias asignadas</h3>
 
             <table class="tabla">
 
-
                 <thead>
-
                 <tr>
-
                     <th>Profesor</th>
-
                     <th>Materia</th>
-
                     <th>Tipo</th>
-
                     <th>Horas</th>
-
                 </tr>
-
                 </thead>
 
-
                 <tbody>
-                <!-- Las materias aparecerán aquí
-                     cuando se conecte con Java/BD -->
+
+                <ui:repeat value="#{asignarHelper.asignaciones}" var="a">
+
+                    <tr>
+                        <td>
+                            #{a.profesor.nombre}
+                            #{a.profesor.apellidoP}
+                            #{a.profesor.apellidoM}
+                        </td>
+
+                        <td>
+                            #{a.materia.nombre}
+                        </td>
+
+                        <td>
+                            #{a.tipo}
+                        </td>
+
+                        <td>
+                            #{a.hora}
+                        </td>
+                    </tr>
+
+                </ui:repeat>
+
                 </tbody>
 
-
             </table>
-
 
         </div>
 
