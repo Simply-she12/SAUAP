@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 
@@ -495,7 +495,7 @@
             Nueva Asignación
         </h2>
 
-        <form class="formulario">
+        <h:form styleClass="formulario">
 
             <div class="campo profesor">
 
@@ -503,11 +503,9 @@
                     Profesor:
                 </label>
 
-                <input
-                        type="text"
+                <p:inputText
                         id="profesor"
-                        name="profesor"
-                />
+                        value="#{asignarHelper.profesor}"/>
 
             </div>
 
@@ -517,11 +515,9 @@
                     Materia:
                 </label>
 
-                <input
-                        type="text"
+                <p:inputText
                         id="materia"
-                        name="materia"
-                />
+                        value="#{asignarHelper.materia}"/>
 
             </div>
 
@@ -531,26 +527,27 @@
                     Tipo:
                 </label>
 
-                <select
+                <p:selectOneMenu
                         id="tipo"
-                        name="tipo"
-                >
+                        value="#{asignarHelper.tipo}">
 
-                    <option value=""></option>
+                    <f:selectItem
+                            itemLabel=""
+                            itemValue=""/>
 
-                    <option value="teoria">
-                        Clase
-                    </option>
+                    <f:selectItem
+                            itemLabel="Clase"
+                            itemValue="teoria"/>
 
-                    <option value="taller">
-                        Taller
-                    </option>
+                    <f:selectItem
+                            itemLabel="Taller"
+                            itemValue="taller"/>
 
-                    <option value="laboratorio">
-                        Laboratorio
-                    </option>
+                    <f:selectItem
+                            itemLabel="Laboratorio"
+                            itemValue="laboratorio"/>
 
-                </select>
+                </p:selectOneMenu>
 
             </div>
 
@@ -560,28 +557,22 @@
                     Horas:
                 </label>
 
-                <input
-                        type="number"
+                <p:inputNumber
                         id="horas"
-                        name="horas"
-                        min="0"
-                        max="4"
-                        step="1"
-                />
+                        value="#{asignarHelper.horas}"
+                        minValue="0"
+                        maxValue="4"
+                        decimalPlaces="0"/>
 
             </div>
 
 
-        </form>
+        </h:form>
 
-        <button
-                class="boton-asignar"
-                type="button"
-        >
-
-            Asignar
-
-        </button>
+        <p:commandButton
+                value="Asignar"
+                action="#{asignarHelper.asignar}"
+                styleClass="boton-asignar"/>
 
         <div class="materias-asignadas">
 
