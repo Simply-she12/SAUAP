@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Alta Profesor - SAUAP</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar profesor</title>
     <style>
         * {
             margin: 0;
@@ -14,8 +12,8 @@
         }
 
         body {
-            font-family: Georgia, 'Times New Roman', serif;
-            background-color: #202020;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
             min-height: 100vh;
         }
 
@@ -24,355 +22,206 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 80px;
+            height: 70px;
             background-color: #075c66;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 25px;
-            z-index: 10;
+            padding: 0 30px;
+            z-index: 100;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
-            color: white;
-            font-size: 28px;
+            gap: 12px;
+            color: #ffffff;
+            font-family: Georgia, serif;
+            font-size: 24px;
         }
 
         .logo img {
-            width: 45px;
-            height: 45px;
+            width: 32px;
+            height: 32px;
             object-fit: contain;
         }
 
         .usuario {
-            color: white;
-            font-size: 18px;
+            color: #ffffff;
+            font-size: 15px;
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        .icono-usuario {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-        }
-
-        .icono-salir {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-            margin-left: 25px;
+            gap: 10px;
         }
 
         .menu-lateral {
             position: fixed;
-            top: 80px;
+            top: 70px;
             left: 0;
-            width: 190px;
-            height: calc(100vh - 80px);
+            width: 220px;
+            height: calc(100vh - 70px);
             background-color: #075c66;
-            padding-top: 25px;
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .menu-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            width: 100%;
-            color: white;
+            gap: 12px;
+            color: #ffffff;
             text-decoration: none;
-            font-size: 16px;
-            padding: 18px 12px;
-            white-space: nowrap;
-        }
-
-        .menu-item img {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-            flex-shrink: 0;
+            font-family: Georgia, serif;
+            font-size: 14px;
+            padding: 10px 12px;
+            border-radius: 6px;
         }
 
         .menu-item:hover {
-            background-color: #064c55;
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .contenido {
-            position: absolute;
-            top: 80px;
-            left: 190px;
-            right: 0;
-            min-height: calc(100vh - 80px);
-            background-color: white;
-            padding: 25px 26px;
-            overflow-x: hidden;
-        }
-
-        .titulo {
-            height: 84px;
-            background-color: #d9d9d9;
-            border-radius: 13px;
-            display: flex;
-            align-items: center;
-            padding-left: 30px;
-            gap: 28px;
-            margin-bottom: 24px;
-        }
-
-        .titulo img {
-            width: 55px;
-            height: 55px;
+        .menu-item img {
+            width: 18px;
+            height: 18px;
             object-fit: contain;
         }
 
-        .titulo h1 {
-            font-size: 28px;
+        .contenido {
+            margin-top: 70px;
+            margin-left: 220px;
+            min-height: calc(100vh - 70px);
+            background-color: #f2f4f4;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .titulo {
+            font-family: Arial, sans-serif;
+            font-size: 70px;
+            color: #075c66;
             font-weight: normal;
         }
 
-        .asignacion {
-            background-color: #d9d9d9;
-            border-radius: 13px;
-            min-height: 357px;
-            padding: 14px 30px 30px;
-        }
-
         .subtitulo {
-            font-size: 18px;
-            margin-bottom: 8px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            color: #555555;
+            margin-top: 8px;
+            margin-bottom: 40px;
+            text-align: center;
         }
 
         .formulario {
+            width: 100%;
+            max-width: 480px;
             display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 25px;
+            flex-direction: column;
+            gap: 18px;
         }
 
         .campo {
             display: flex;
             flex-direction: column;
-            gap: 7px;
+            gap: 8px;
         }
 
         .campo label {
             font-size: 14px;
+            color: #333333;
         }
 
         .campo input {
-            height: 32px;
-            border: none;
-            border-radius: 18px;
-            background-color: white;
-            padding: 0 15px;
-            outline: none;
-            font-family: Georgia, 'Times New Roman', serif;
-            font-size: 14px;
-            width: 180px;
-        }
-
-        .rfc input {
-            width: 150px;
-            text-transform: uppercase;
-        }
-
-        .boton-asignar {
-            display: block;
-            margin: 35px auto 0;
-            width: 140px;
-            height: 32px;
-            border: none;
-            border-radius: 18px;
-            background-color: #74116f;
-            color: white;
-            font-family: Georgia, 'Times New Roman', serif;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .boton-asignar:hover {
-            background-color: #5c0d58;
-            transform: scale(1.03);
-        }
-
-        .materias-asignadas {
-            background-color: white;
-            border-radius: 13px;
-            min-height: 143px;
-            margin: 30px auto 0;
-            width: 90%;
-            padding: 12px;
-        }
-
-        .materias-asignadas h3 {
-            text-align: center;
-            font-size: 14px;
-            font-weight: normal;
-            margin-bottom: 15px;
-        }
-
-        .tabla {
             width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            background-color: #d8d8d8;
+            padding: 0 14px;
+            font-size: 15px;
+            outline: none;
         }
 
-        .tabla th {
-            background-color: #075c66;
-            color: white;
-            padding: 8px;
-        }
-
-        .tabla td {
-            padding: 8px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        @media (max-width: 800px) {
-            .menu-lateral {
-                width: 100px;
-            }
-
-            .menu-item {
-                font-size: 0;
-                justify-content: center;
-            }
-
-            .menu-item img {
-                width: 20px;
-                height: 20px;
-            }
-
-            .contenido {
-                left: 107px;
-            }
-
-            .formulario {
-                gap: 15px;
-            }
-
-            .materias-asignadas {
-                width: 95%;
-            }
+        .boton {
+            align-self: center;
+            margin-top: 20px;
+            width: 130px;
+            height: 38px;
+            border: none;
+            border-radius: 19px;
+            background-color: #612c53;
+            color: #ffffff;
+            font-size: 13px;
+            cursor: pointer;
         }
     </style>
 </head>
-
 <body>
 
 <header class="barra-superior">
     <div class="logo">
-        <img src="resources/iconlogo.png" alt="Logo SAUAP"/>
+        <img src="resources/iconlogo.png" alt="Logo"/>
         <span>SAUAP</span>
     </div>
-
     <div class="usuario">
-        <img src="resources/iconuserblanco.png" alt="Usuario" class="icono-usuario"/>
         <span>Administrador</span>
-        <img src="resources/iconsalir.png" alt="Cerrar sesión" class="icono-salir"/>
     </div>
 </header>
 
 <aside class="menu-lateral">
-
-    <a href="inicio.html" class="menu-item">
+    <a href="Menu.html" class="menu-item">
         <img src="resources/iconInicio.png" alt="Inicio"/>
         <span>INICIO</span>
     </a>
 
-    <a href="profesores.html" class="menu-item">
+    <a href="Profesor.html" class="menu-item">
         <img src="resources/iconuserblanco.png" alt="Profesores"/>
         <span>PROFESORES</span>
     </a>
 
-    <a href="materias.html" class="menu-item">
+    <a href="menuDesarrollo.html" class="menu-item">
         <img src="resources/iconmateria.png" alt="Materias"/>
         <span>MATERIAS</span>
     </a>
 
-    <a href="asignacion.html" class="menu-item">
-        <img src="resources/iconasig.png" alt="Asignación"/>
-        <span>ASIGNACIÓN</span>
-    </a>
-
-</aside>
-
-    <a href="#" class="menu-item">
-        <img src="resources/iconuserblanco.png" alt="Profesores"/>
-        <span>PROFESORES</span>
-    </a>
-
-    <a href="#" class="menu-item">
-        <img src="resources/iconmateria.png" alt="Materias"/>
-        <span>MATERIAS</span>
-    </a>
-
-    <a href="#" class="menu-item">
+    <a href="Asignacion.html" class="menu-item">
         <img src="resources/iconasig.png" alt="Asignación"/>
         <span>ASIGNACIÓN</span>
     </a>
 </aside>
 
 <main class="contenido">
-    <section class="titulo">
-        <img src="resources/iconuserblanco.png" alt="Profesores"/>
-        <h1>ALTA DE PROFESORES</h1>
-    </section>
+    <h1 class="titulo">SAUAP</h1>
+    <p class="subtitulo">Sistema de Asignación de Unidades de Aprendizaje a los Profesores</p>
 
-    <section class="asignacion">
-        <h2 class="subtitulo">Registrar Nuevo Profesor</h2>
-
-        <form class="formulario">
-            <div class="campo">
-                <label for="nombre">Nombre(s):</label>
-                <input type="text" id="nombre" name="nombre" maxlength="50" required/>
-            </div>
-
-            <div class="campo">
-                <label for="apellidoPaterno">Apellido Paterno:</label>
-                <input type="text" id="apellidoPaterno" name="apellidoPaterno" maxlength="50" required/>
-            </div>
-
-            <div class="campo">
-                <label for="apellidoMaterno">Apellido Materno:</label>
-                <input type="text" id="apellidoMaterno" name="apellidoMaterno" maxlength="50" required/>
-            </div>
-
-            <div class="campo rfc">
-                <label for="rfc">RFC:</label>
-                <input type="text" id="rfc" name="rfc" maxlength="13" required/>
-            </div>
-        </form>
-
-        <button class="boton-asignar" type="button">Registrar</button>
-
-        <div class="materias-asignadas">
-            <h3>Profesores Registrados</h3>
-
-            <table class="tabla">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>RFC</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- Aquí se cargarán los registros desde Java/PrimeFaces -->
-                </tbody>
-            </table>
+    <form class="formulario">
+        <div class="campo">
+            <label for="nombre">Nombre(s):</label>
+            <input type="text" id="nombre" name="nombre" required>
         </div>
-    </section>
+
+        <div class="campo">
+            <label for="apellidoPaterno">Apellido Paterno:</label>
+            <input type="text" id="apellidoPaterno" name="apellidoPaterno" required>
+        </div>
+
+        <div class="campo">
+            <label for="apellidoMaterno">Apellido Materno:</label>
+            <input type="text" id="apellidoMaterno" name="apellidoMaterno" required>
+        </div>
+
+        <div class="campo">
+            <label for="rfc">RFC:</label>
+            <input type="text" id="rfc" name="rfc" required>
+        </div>
+
+        <button type="submit" class="boton">Registrar</button>
+    </form>
 </main>
 
 </body>
