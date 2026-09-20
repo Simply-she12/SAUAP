@@ -10,6 +10,7 @@
     <class>mx.desarrollo.entity.Profesor</class>
     <class>mx.desarrollo.entity.Materia</class>
     <class>mx.desarrollo.entity.Asignar</class>
+    <class>mx.desarrollo.entity.Horario</class>
 
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

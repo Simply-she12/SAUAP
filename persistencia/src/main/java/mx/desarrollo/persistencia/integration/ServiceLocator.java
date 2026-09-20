@@ -6,12 +6,14 @@ import mx.desarrollo.persistencia.dao.AsignarDAO;
 import mx.desarrollo.persistencia.dao.MateriaDAO;
 import mx.desarrollo.persistencia.dao.ProfesorDAO;
 import mx.desarrollo.persistencia.persistence.HibernateUtil;
+import mx.desarrollo.persistencia.dao.HorarioDAO;
 
 public class ServiceLocator {
 
     private static MateriaDAO materiaDAO;
     private static ProfesorDAO profesorDAO;
     private static AsignarDAO asignarDAO;
+    private static HorarioDAO horarioDAO;
 
     private static EntityManager getEntityManager(){
         return HibernateUtil.getEntityManager();
@@ -43,12 +45,19 @@ public class ServiceLocator {
 
     public static AsignarDAO getInstanceAsignarDAO() {
         if (asignarDAO == null) {
-            asignarDAO = new AsignarDAO(
-                    HibernateUtil.getEntityManager()
-            );
+            asignarDAO = new AsignarDAO(getEntityManager());
+            return asignarDAO;
+        } else {
+            return asignarDAO;
         }
-
-        return asignarDAO;
+    }
+    public static HorarioDAO getInstanceHorarioDAO() {
+        if (horarioDAO == null) {
+            horarioDAO = new HorarioDAO(getEntityManager());
+            return horarioDAO;
+        } else {
+            return horarioDAO;
+        }
     }
 
 }

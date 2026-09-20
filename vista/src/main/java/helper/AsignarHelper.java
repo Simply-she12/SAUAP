@@ -1,70 +1,95 @@
 package helper;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 
 import mx.avanti.SAUAP.autenticacion.integration.ServiceFacadeLocator;
 import mx.desarrollo.entity.Asignar;
+import mx.desarrollo.entity.Horario;
 import mx.desarrollo.entity.Materia;
 import mx.desarrollo.entity.Profesor;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
-import static mx.desarrollo.entity.Asignar_.materia;
-
 @Named("asignarHelper")
-@RequestScoped
-public class AsignarHelper {
+@ViewScoped
+public class AsignarHelper implements Serializable {
 
     private Integer profesorId;
     private Integer materiaId;
-
+    private Integer horarioId;
     private String tipo;
-    private Integer horas;
-
-
+    private String mensajeError;
 
 
     public void asignar() {
 
+        mensajeError = null;
+
         if (profesorId == null ||
                 materiaId == null ||
-                tipo == null ||
-                horas == null) {
+                horarioId == null ||
+                tipo == null) {
 
-            System.out.println("Faltan datos");
+            mensajeError = "Debe completar todos los campos.";
             return;
         }
 
-        if (horas < 0 || horas > 4) {
+        List<Asignar> asignaciones =
+                ServiceFacadeLocator
+                        .getInstanceFacadeAsignar()
+                        .obtenerTodos();
 
-            System.out.println(
-                    "Las horas deben estar entre 0 y 4"
-            );
+        for (Asignar asignacion : asignaciones) {
 
-            return;
+            if (asignacion.getProfesor() != null &&
+                    asignacion.getHorario() != null) {
+
+                Integer profesorExistente =
+                        asignacion.getProfesor().getId();
+
+                Integer horarioExistente =
+                        asignacion.getHorario().getIdhorario();
+
+                if (profesorExistente.equals(profesorId) &&
+                        horarioExistente.equals(horarioId)) {
+
+                    mensajeError =
+                            "El profesor ya tiene una asignación en este horario.";
+
+                    return;
+                }
+            }
         }
-
-        System.out.println("ID Profesor: " + profesorId);
-        System.out.println("ID Materia: " + materiaId);
-        System.out.println("Tipo: " + tipo);
-        System.out.println("Horas: " + horas);
 
         ServiceFacadeLocator
                 .getInstanceFacadeAsignar()
                 .guardarAsignacion(
                         profesorId,
                         materiaId,
-                        tipo,
-                        horas
+                        horarioId,
+                        tipo
                 );
+    }
+    public void actualizarHorarios() {
 
         System.out.println(
-                "Asignación guardada correctamente"
+                "===== ACTUALIZANDO HORARIOS ====="
         );
+
+        System.out.println(
+                "Materia seleccionada: " + materiaId
+        );
+
+        System.out.println(
+                "Tipo seleccionado: " + tipo
+        );
+
+        horarioId = null;
     }
-
-
     public Integer getProfesorId() {
         return profesorId;
     }
@@ -72,7 +97,6 @@ public class AsignarHelper {
     public void setProfesorId(Integer profesorId) {
         this.profesorId = profesorId;
     }
-
     public Integer getMateriaId() {
         return materiaId;
     }
@@ -80,7 +104,13 @@ public class AsignarHelper {
     public void setMateriaId(Integer materiaId) {
         this.materiaId = materiaId;
     }
+    public Integer getHorarioId() {
+        return horarioId;
+    }
 
+    public void setHorarioId(Integer horarioId) {
+        this.horarioId = horarioId;
+    }
     public String getTipo() {
         return tipo;
     }
@@ -89,27 +119,48 @@ public class AsignarHelper {
         this.tipo = tipo;
     }
 
-    public Integer getHoras() {
-        return horas;
+    public String getMensajeError() {
+        return mensajeError;
     }
-
-    public void setHoras(Integer horas) {
-        this.horas = horas;
-    }
-
     public List<Profesor> getProfesores() {
+
         return ServiceFacadeLocator
                 .getInstanceFacadeUsuario()
                 .obtenerTodos();
     }
-
     public List<Materia> getMaterias() {
+
         return ServiceFacadeLocator
                 .getInstanceFacadeMateria()
                 .obtenerTodos();
     }
+    public List<Horario> getHorarios() {
 
+        System.out.println(
+                "===== BUSCANDO HORARIOS ====="
+        );
+
+        System.out.println(
+                "Materia: " + materiaId
+        );
+
+        System.out.println(
+                "Tipo: " + tipo
+        );
+
+        if (materiaId == null || tipo == null) {
+            return new ArrayList<>();
+        }
+
+        return ServiceFacadeLocator
+                .getInstanceFacadeHorario()
+                .obtenerPorMateriaYTipo(
+                        materiaId,
+                        tipo
+                );
+    }
     public List<Asignar> getAsignaciones() {
+
         return ServiceFacadeLocator
                 .getInstanceFacadeAsignar()
                 .obtenerTodos();

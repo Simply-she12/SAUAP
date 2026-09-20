@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "asignar")
-@IdClass(Asignar.class)
+@IdClass(AsignarId.class)
 public class Asignar {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "idProfesor")
+    @JoinColumn(name = "idprofesor")
     private Profesor profesor;
 
     @Id
@@ -17,11 +17,13 @@ public class Asignar {
     @JoinColumn(name = "idmaterias")
     private Materia materia;
 
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "idhorario")
+    private Horario horario;
+
     @Column(name = "tipo")
     private String tipo;
-
-    @Column(name = "hora")
-    private Integer hora;
 
     public Asignar() {
     }
@@ -42,6 +44,14 @@ public class Asignar {
         this.materia = materia;
     }
 
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+
     public String getTipo() {
         return tipo;
     }
@@ -50,21 +60,13 @@ public class Asignar {
         this.tipo = tipo;
     }
 
-    public Integer getHora() {
-        return hora;
-    }
-
-    public void setHora(Integer hora) {
-        this.hora = hora;
-    }
-
     @Override
     public String toString() {
         return "Asignar{" +
                 "profesor=" + profesor +
                 ", materia=" + materia +
+                ", horario=" + horario +
                 ", tipo='" + tipo + '\'' +
-                ", hora=" + hora +
                 '}';
     }
 }

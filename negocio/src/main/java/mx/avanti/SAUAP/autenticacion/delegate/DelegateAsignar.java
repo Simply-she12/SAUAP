@@ -10,16 +10,16 @@ public class DelegateAsignar {
     public void guardarAsignacion(
             Integer idProfesor,
             Integer idMateria,
-            String tipo,
-            Integer hora) {
+            Integer idHorario,
+            String tipo) {
 
         ServiceLocator
                 .getInstanceAsignarDAO()
                 .guardarAsignacion(
                         idProfesor,
                         idMateria,
-                        tipo,
-                        hora
+                        idHorario,
+                        tipo
                 );
     }
 

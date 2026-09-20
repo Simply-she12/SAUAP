@@ -3,12 +3,15 @@ package mx.avanti.SAUAP.autenticacion.integration;
 import mx.avanti.SAUAP.autenticacion.facade.FacadeAsignar;
 import mx.avanti.SAUAP.autenticacion.facade.FacadeMateria;
 import mx.avanti.SAUAP.autenticacion.facade.FacadeProfesor;
+import mx.avanti.SAUAP.autenticacion.facade.FacadeHorario;
 
 public class ServiceFacadeLocator {
 
     private static FacadeMateria facadeMateria;
     private static FacadeProfesor facadeProfesor;
     private static FacadeAsignar facadeAsignar;
+    private static FacadeHorario facadeHorario;
+
 
     public static FacadeMateria getInstanceFacadeMateria() {
 
@@ -35,5 +38,13 @@ public class ServiceFacadeLocator {
         }
 
         return facadeAsignar;
+    }
+    public static FacadeHorario getInstanceFacadeHorario() {
+
+        if (facadeHorario == null) {
+            facadeHorario = new FacadeHorario();
+        }
+
+        return facadeHorario;
     }
 }

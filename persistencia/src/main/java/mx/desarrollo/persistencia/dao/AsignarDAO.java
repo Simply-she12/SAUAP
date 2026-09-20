@@ -2,6 +2,7 @@ package mx.desarrollo.persistencia.dao;
 
 import jakarta.persistence.EntityManager;
 import mx.desarrollo.entity.Asignar;
+import mx.desarrollo.entity.Horario;
 import mx.desarrollo.entity.Materia;
 import mx.desarrollo.entity.Profesor;
 import mx.desarrollo.persistencia.persistence.AbstractDAO;
@@ -20,8 +21,8 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
     public void guardarAsignacion(
             Integer idProfesor,
             Integer idMateria,
-            String tipo,
-            Integer hora) {
+            Integer idHorario,
+            String tipo) {
 
         System.out.println("DAO: ENTRÓ A guardarAsignacion");
 
@@ -41,15 +42,22 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
                             idMateria
                     );
 
+            Horario horario =
+                    em.getReference(
+                            Horario.class,
+                            idHorario
+                    );
+
             System.out.println("DAO: Profesor = " + idProfesor);
             System.out.println("DAO: Materia = " + idMateria);
+            System.out.println("DAO: Horario = " + idHorario);
 
             Asignar asignar = new Asignar();
 
             asignar.setProfesor(profesor);
             asignar.setMateria(materia);
+            asignar.setHorario(horario);
             asignar.setTipo(tipo);
-            asignar.setHora(hora);
 
             System.out.println("DAO: ANTES DE PERSIST");
 
