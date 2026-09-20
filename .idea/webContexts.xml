@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/vista/src/main/webapp/WEB-INF/asignar.xhtml" value="file://$PROJECT_DIR$/vista/src/main/webapp/WEB-INF" />
         <entry key="file://$PROJECT_DIR$/vista/src/main/webapp/login.xhtml" value="file://$PROJECT_DIR$/vista/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/vista/src/main/webapp/menu.xhtml" value="file://$PROJECT_DIR$/vista/src/main/webapp" />
       </map>
     </option>
   </component>
