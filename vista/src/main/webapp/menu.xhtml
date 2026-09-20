@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
 
-<head>
+<h:head>
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>Asignación - SAUAP</title>
+    <title>Menu - SAUAP</title>
 
     <style>
 
@@ -97,7 +99,6 @@
             padding-top: 25px;
         }
 
-
         .menu-item {
             display: flex;
             align-items: center;
@@ -116,7 +117,6 @@
             white-space: nowrap;
         }
 
-
         .menu-item img {
             width: 20px;
             height: 20px;
@@ -125,7 +125,6 @@
 
             flex-shrink: 0;
         }
-
 
         .menu-item:hover {
             background-color: #064c55;
@@ -164,14 +163,12 @@
             margin-bottom: 24px;
         }
 
-
         .titulo img {
             width: 55px;
             height: 55px;
 
             object-fit: contain;
         }
-
 
         .titulo h1 {
             font-size: 28px;
@@ -188,13 +185,11 @@
             padding: 14px 30px 30px;
         }
 
-
         .subtitulo {
             font-size: 18px;
 
             margin-bottom: 8px;
         }
-
 
         .formulario {
             display: flex;
@@ -216,7 +211,6 @@
 
             gap: 7px;
         }
-
 
         .campo label {
             font-size: 14px;
@@ -282,8 +276,6 @@
             transition: 0.2s;
         }
 
-
-
         .boton-asignar:hover {
             background-color: #5c0d58;
 
@@ -309,7 +301,6 @@
             padding: 12px;
         }
 
-
         .materias-asignadas h3 {
             text-align: center;
 
@@ -328,7 +319,6 @@
             font-size: 12px;
         }
 
-
         .tabla th {
             background-color: #075c66;
 
@@ -336,7 +326,6 @@
 
             padding: 5px;
         }
-
 
         .tabla td {
             padding: 5px;
@@ -352,44 +341,49 @@
                 width: 100px;
             }
 
-
             .menu-item {
                 font-size: 0;
 
                 justify-content: center;
             }
 
-
             .menu-item img {
                 width: 20px;
                 height: 20px;
             }
 
-
             .contenido {
                 left: 107px;
             }
-
 
             .formulario {
                 gap: 15px;
             }
 
-
             .materias-asignadas {
                 width: 95%;
             }
-
         }
+
         .boton2 {
             background-color: #D9D9D9;
-            color:#000000;
+            color: #000000;
             border: none;
             padding: 15px 125px;
             font-size: 30px;
             border-radius: 40px;
             font-family: "Inria Serif", serif;
+
+            text-decoration: none;
+            display: inline-block;
+
+            cursor: pointer;
         }
+
+        .boton2:hover {
+            background-color: #c9c9c9;
+        }
+
         .section {
             background-color: #ffffff;
             color: #000000;
@@ -397,21 +391,16 @@
             font-family: "Inria Serif", serif;
             flex: 1;
             min-height: 100vh;
+
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+
             gap: 10vh;
         }
 
-        .registros{
-            display: flex;
-            flex-direction: column;
-            gap: 3vh;
-            justify-content: center;
-            align-items: center;
-        }
-        .consultar{
+        .registros {
             display: flex;
             flex-direction: column;
             gap: 3vh;
@@ -419,128 +408,164 @@
             align-items: center;
         }
 
-        .main{
+        .consultar {
+            display: flex;
+            flex-direction: column;
+            gap: 3vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main {
             display: flex;
             padding-left: 190px;
         }
-        .boton{
 
+        .boton {
+            display: flex;
+            gap: 20px;
         }
+
     </style>
 
-</head>
+</h:head>
 
+<h:body>
 
-<body>
+    <header class="barra-superior">
 
-<header class="barra-superior">
-
-    <div class="logo">
-
-        <img
-                src="resources/iconlogo.png"
-                alt="Logo SAUAP"
-        />
-
-        <span>SAUAP</span>
-
-    </div>
-
-
-    <div class="usuario">
-
-        <img
-                src="resources/iconuserblanco.png"
-                alt="Usuario"
-                class="icono-usuario"
-        />
-
-        <span>Administrador</span>
-
-
-
-        <img
-                src="resources/iconsalir.png"
-                alt="Cerrar sesión"
-                class="icono-salir"
-        />
-
-    </div>
-
-</header>
-<main class="main">
-    <aside class="menu-lateral">
-
-
-        <a href="#" class="menu-item">
+        <div class="logo">
 
             <img
-                    src="resources/iconInicio.png"
-                    alt="Inicio"
+                    src="resources/iconlogo.png"
+                    alt="Logo SAUAP"
             />
 
-            <span>INICIO</span>
+            <span>SAUAP</span>
 
-        </a>
+        </div>
 
-
-        <a href="#" class="menu-item">
+        <div class="usuario">
 
             <img
                     src="resources/iconuserblanco.png"
-                    alt="Profesores"
+                    alt="Usuario"
+                    class="icono-usuario"
             />
 
-            <span>PROFESORES</span>
-
-        </a>
-
-
-        <a href="#" class="menu-item">
+            <span>Administrador</span>
 
             <img
-                    src="resources/iconmateria.png"
-                    alt="Materias"
+                    src="resources/iconsalir.png"
+                    alt="Cerrar sesión"
+                    class="icono-salir"
             />
 
-            <span>MATERIAS</span>
-
-        </a>
-
-
-        <a href="#" class="menu-item">
-
-            <img
-                    src="resources/iconoasig.png"
-                    alt="Asignación"
-            />
-
-            <span>ASIGNACIÓN</span>
-
-        </a>
-
-
-    </aside>
-
-    <section class="section">
-        <div class="registros">
-            <p>Registros</p>
-            <div class="boton">
-                <button class="boton2">Maestro</button>
-                <button class="boton2">Materia</button>
-            </div>
         </div>
-        <div class="consultar">
-            <p>Consultar</p>
-            <div class="boton">
-                <button class="boton2">Maestro</button>
-                <button class="boton2">Materia</button>
-            </div>
-        </div>
-        <button class="boton2">Asignar Materia</button>
-    </section>
 
-</main>
-</body>
+    </header>
+
+    <main class="main">
+
+        <aside class="menu-lateral">
+
+            <a href="materia.xhtml" class="menu-item">
+
+                <img
+                        src="resources/iconInicio.png"
+                        alt="Inicio"
+                />
+
+                <span>INICIO</span>
+
+            </a>
+
+            <a href="profesores.xhtml" class="menu-item">
+
+                <img
+                        src="resources/iconuserblanco.png"
+                        alt="Profesores"
+                />
+
+                <span>PROFESORES</span>
+
+            </a>
+
+            <a href="materia.xhtml" class="menu-item">
+
+                <img
+                        src="resources/iconmateria.png"
+                        alt="Materias"
+                />
+
+                <span>MATERIAS</span>
+
+            </a>
+
+            <a href="asignar.xhtml" class="menu-item">
+
+                <img
+                        src="resources/iconoasig.png"
+                        alt="Asignación"
+                />
+
+                <span>ASIGNACIÓN</span>
+
+            </a>
+
+        </aside>
+
+
+        <section class="section">
+
+            <div class="registros">
+
+                <p>Registros</p>
+
+                <div class="boton">
+
+                    <button class="boton2">
+                        Maestro
+                    </button>
+
+                    <button class="boton2">
+                        Materia
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="consultar">
+
+                <p>Consultar</p>
+
+                <div class="boton">
+
+                    <button class="boton2">
+                        Maestro
+                    </button>
+
+                    <button class="boton2">
+                        Materia
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTÓN QUE MANDA A ASIGNAR -->
+
+            <a href="asignar.xhtml" class="boton2">
+                Asignar Materia
+            </a>
+
+        </section>
+
+    </main>
+
+</h:body>
 
 </html>
