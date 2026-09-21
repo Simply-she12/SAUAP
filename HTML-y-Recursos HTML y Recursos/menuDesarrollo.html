@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SAUAP - Menu</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+            background: #0B5562;
+        }
+        .sauap {
+            color: #ffffff;
+            font-size: 40px;
+            font-family: "Inria Serif", serif;
+        }
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .izquierda{
+            display: flex;
+        }
+        .derecha{
+            display: flex;
+        }
+        .administrador{
+            color: #ffffff;
+            font-size: 25px;
+            font-family: "Inria Serif", serif;
+        }
+        .aside{
+            min-width: 40vh;
+            color: #ffffff;
+            font-size: 25px;
+            font-family: "Inria Serif", serif;
+            display: flex;
+            flex-direction: column;
+        }
+        .section {
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 40px;
+            font-family: "Inria Serif", serif;
+            flex: 1;
+            min-height: 82vh;
+        }
+        .main{
+            display: flex;
+        }
+        .boton1 {
+            background-color:  #0B5562;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 30px;
+            border-radius: 5px;
+            font-family: "Inria Serif", serif;
+        }
+        .boton2 {
+            background-color: #D9D9D9;
+            color:#000000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            font-family: "Inria Serif", serif;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="izquierda">
+        <img src="https://flaticons.net/icon.php?slug_category=education&slug_icon=graduate-hat" height="70">
+        <p class="sauap">SAUAP</p>
+    </div>
+    <div class="derecha">
+        <p class="administrador">Administrador</p>
+    </div>
+</header>
+<main class="main">
+    <aside class="aside">
+        <button class="boton1">
+            <img height="25px" src="https://uxwing.com/wp-content/themes/uxwing/download/web-app-development/home-white-icon.png">
+            Inicio
+        </button>
+        <button class="boton1">
+            <img heigh="" src="">
+            Profesores
+        </button>
+        <button class="boton1">Materias</button>
+        <button class="boton1">Asignacion</button>
+    </aside>
+    <section class="section">
+        <div class="registros">
+            <p>Registros</p>
+            <button class="boton2">Maestro</button>
+            <button class="boton2">Materia</button>
+        </div>
+        <div class="consultar">
+            <p>Consultar</p>
+            <button class="boton2">Maestro</button>
+            <button class="boton2">Materia</button>
+        </div>
+        <button class="boton2">Asignar Materia</button>
+    </section>
+</main>
+</body>
+</html>
