@@ -50,7 +50,7 @@ public class LoginHelper {
 
         if (profesor != null) {
             error = false;
-            return "Menu.xhtml?faces-redirect=true";
+            return "menu.xhtml?faces-redirect=true";
         }
 
         error = true;
