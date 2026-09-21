@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      lang="es">
 
 <h:head>
 
@@ -10,7 +11,20 @@
 
     <title>Menu - SAUAP</title>
 
-    <style>
+    <style type="text/css">
+        /*<![CDATA[*/
+
+        :root {
+            --teal-950: #053237;
+            --teal-800: #075c66;
+            --teal-900: #064c55;
+            --teal-700: #286671;
+            --teal-100: #dff0f2;
+            --purple-700: #74116f;
+            --purple-900: #5c0d58;
+            --texto: #172325;
+            --texto-suave: #4d6164;
+        }
 
         * {
             margin: 0;
@@ -31,7 +45,7 @@
             width: 100%;
             height: 80px;
 
-            background-color: #075c66;
+            background-color: var(--teal-800);
 
             display: flex;
             align-items: center;
@@ -81,11 +95,6 @@
             margin-left: 25px;
         }
 
-        .flecha {
-            font-size: 16px;
-            margin-left: 3px;
-        }
-
         .menu-lateral {
             position: fixed;
             top: 80px;
@@ -94,7 +103,7 @@
             width: 190px;
             height: calc(100vh - 80px);
 
-            background-color: #075c66;
+            background-color: var(--teal-800);
 
             padding-top: 25px;
         }
@@ -117,7 +126,8 @@
             white-space: nowrap;
         }
 
-        .menu-item img {
+        .menu-item img,
+        .menu-item svg {
             width: 20px;
             height: 20px;
 
@@ -126,8 +136,14 @@
             flex-shrink: 0;
         }
 
-        .menu-item:hover {
-            background-color: #064c55;
+        .menu-item:hover,
+        .menu-item.activo {
+            background-color: var(--teal-900);
+        }
+
+        .menu-item:focus-visible {
+            outline: 2px solid white;
+            outline-offset: -2px;
         }
 
         .contenido {
@@ -139,200 +155,189 @@
 
             min-height: calc(100vh - 80px);
 
-            background-color: white;
+            background-color: #f4f8f8;
 
-            padding: 25px 26px;
+            padding: 30px 34px 40px;
 
             overflow-x: hidden;
         }
 
-        .titulo {
-            height: 84px;
-
-            background-color: #d9d9d9;
-
-            border-radius: 13px;
-
+        .banner {
             display: flex;
             align-items: center;
+            justify-content: space-between;
 
-            padding-left: 30px;
+            gap: 24px;
 
-            gap: 28px;
+            max-width: 1100px;
 
-            margin-bottom: 24px;
+            margin: 0 auto 34px;
+
+            padding: 30px 36px;
+
+            border-radius: 18px;
+
+            color: white;
+
+            background: linear-gradient(120deg, var(--teal-950) 0%, var(--teal-800) 62%, var(--teal-700) 100%);
+
+            box-shadow: 0 8px 22px rgba(5, 50, 55, 0.22);
         }
 
-        .titulo img {
-            width: 55px;
-            height: 55px;
-
-            object-fit: contain;
-        }
-
-        .titulo h1 {
-            font-size: 28px;
+        .banner h1 {
+            font-size: 30px;
             font-weight: normal;
-        }
-
-        .asignacion {
-            background-color: #d9d9d9;
-
-            border-radius: 13px;
-
-            min-height: 357px;
-
-            padding: 14px 30px 30px;
-        }
-
-        .subtitulo {
-            font-size: 18px;
 
             margin-bottom: 8px;
         }
 
-        .formulario {
-            display: flex;
+        .banner p {
+            max-width: 560px;
 
-            align-items: flex-end;
-            justify-content: center;
+            font-size: 16px;
+            line-height: 1.5;
 
-            gap: 45px;
-
-            flex-wrap: wrap;
-
-            margin-top: 25px;
+            color: #d5ecef;
         }
 
-        .campo {
-            display: flex;
+        .banner-logo {
+            width: 78px;
+            height: 78px;
 
+            object-fit: contain;
+
+            flex-shrink: 0;
+        }
+
+        .seccion {
+            max-width: 1100px;
+
+            margin: 0 auto;
+        }
+
+        .seccion-titulo {
+            font-size: 20px;
+            font-weight: normal;
+
+            color: var(--texto);
+
+            margin-bottom: 16px;
+        }
+
+        .barras {
+            display: flex;
             flex-direction: column;
 
-            gap: 7px;
+            gap: 16px;
         }
 
-        .campo label {
-            font-size: 14px;
-        }
+        .barra {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-        .campo input,
-        .campo select {
-            height: 32px;
-
-            border: none;
-
-            border-radius: 18px;
+            gap: 24px;
 
             background-color: white;
 
-            padding: 0 15px;
+            border: 1px solid #dfe8e9;
+            border-radius: 16px;
 
-            outline: none;
+            padding: 22px 28px;
 
-            font-family: Georgia, 'Times New Roman', serif;
+            box-shadow: 0 6px 18px rgba(5, 50, 55, 0.08);
 
-            font-size: 14px;
+            transition: box-shadow 0.2s;
         }
 
-        .profesor input {
-            width: 220px;
+        .barra:hover {
+            box-shadow: 0 10px 24px rgba(5, 50, 55, 0.14);
         }
 
-        .materia input {
-            width: 220px;
+        .barra-info {
+            display: flex;
+            align-items: center;
+
+            gap: 18px;
         }
 
-        .tipo select {
-            width: 150px;
+        .barra-icono {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 52px;
+            height: 52px;
+
+            border-radius: 50%;
+
+            background-color: var(--teal-100);
+
+            flex-shrink: 0;
         }
 
-        .horas input {
-            width: 80px;
+        .barra-icono svg {
+            width: 26px;
+            height: 26px;
         }
 
-        .boton-asignar {
-            display: block;
+        .barra h3 {
+            font-size: 22px;
+            font-weight: normal;
 
-            margin: 35px auto 0;
+            color: var(--texto);
 
-            width: 125px;
-            height: 32px;
+            margin-bottom: 4px;
+        }
 
-            border: none;
+        .barra p {
+            font-size: 15px;
+            line-height: 1.5;
 
-            border-radius: 18px;
+            color: var(--texto-suave);
+        }
 
-            background-color: #74116f;
+        .acciones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+
+            gap: 10px;
+
+            flex-shrink: 0;
+        }
+
+        .btn {
+            display: inline-block;
+
+            min-width: 150px;
+
+            padding: 9px 22px;
+
+            border-radius: 20px;
+
+            background-color: var(--purple-700);
 
             color: white;
 
+            text-align: center;
+
             font-family: Georgia, 'Times New Roman', serif;
-
-            font-size: 14px;
-
-            cursor: pointer;
+            font-size: 15px;
+            text-decoration: none;
 
             transition: 0.2s;
         }
 
-        .boton-asignar:hover {
-            background-color: #5c0d58;
+        .btn:hover {
+            background-color: var(--purple-900);
 
             transform: scale(1.03);
         }
 
-        .boton2:active {
-            background-color: #74116f;
-            color: white;
-        }
-
-        .materias-asignadas {
-            background-color: white;
-
-            border-radius: 13px;
-
-            height: 143px;
-
-            margin: 51px auto 0;
-
-            width: 78%;
-
-            padding: 12px;
-        }
-
-        .materias-asignadas h3 {
-            text-align: center;
-
-            font-size: 12px;
-
-            font-weight: normal;
-
-            margin-bottom: 15px;
-        }
-
-        .tabla {
-            width: 100%;
-
-            border-collapse: collapse;
-
-            font-size: 12px;
-        }
-
-        .tabla th {
-            background-color: #075c66;
-
-            color: white;
-
-            padding: 5px;
-        }
-
-        .tabla td {
-            padding: 5px;
-
-            text-align: center;
-
-            border-bottom: 1px solid #ddd;
+        .btn:focus-visible {
+            outline: 2px solid var(--teal-800);
+            outline-offset: 2px;
         }
 
         @media (max-width: 800px) {
@@ -347,85 +352,36 @@
                 justify-content: center;
             }
 
-            .menu-item img {
-                width: 20px;
-                height: 20px;
-            }
-
             .contenido {
                 left: 107px;
+
+                padding: 20px 16px 30px;
             }
 
-            .formulario {
-                gap: 15px;
+            .banner {
+                flex-direction: column-reverse;
+                align-items: flex-start;
+
+                padding: 24px;
             }
 
-            .materias-asignadas {
-                width: 95%;
+            .banner h1 {
+                font-size: 24px;
+            }
+
+            .barra {
+                flex-direction: column;
+                align-items: flex-start;
+
+                padding: 20px;
+            }
+
+            .acciones {
+                justify-content: flex-start;
             }
         }
 
-        .boton2 {
-            background-color: #D9D9D9;
-            color: #000000;
-            border: none;
-            padding: 15px 125px;
-            font-size: 30px;
-            border-radius: 40px;
-            font-family: "Inria Serif", serif;
-
-            text-decoration: none;
-            display: inline-block;
-
-            cursor: pointer;
-        }
-
-        .boton2:hover {
-            background-color: #c9c9c9;
-        }
-
-        .section {
-            background-color: #ffffff;
-            color: #000000;
-            font-size: 40px;
-            font-family: "Inria Serif", serif;
-            flex: 1;
-            min-height: 100vh;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            gap: 10vh;
-        }
-
-        .registros {
-            display: flex;
-            flex-direction: column;
-            gap: 3vh;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .consultar {
-            display: flex;
-            flex-direction: column;
-            gap: 3vh;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .main {
-            display: flex;
-            padding-left: 190px;
-        }
-
-        .boton {
-            display: flex;
-            gap: 20px;
-        }
-
+        /*]]>*/
     </style>
 
 </h:head>
@@ -436,8 +392,8 @@
 
         <div class="logo">
 
-            <img
-                    src="resources/iconlogo.png"
+            <h:graphicImage
+                    name="iconlogo.png"
                     alt="Logo SAUAP"
             />
 
@@ -447,120 +403,191 @@
 
         <div class="usuario">
 
-            <img
-                    src="resources/iconuserblanco.png"
+            <h:graphicImage
+                    name="iconuserblanco.png"
                     alt="Usuario"
-                    class="icono-usuario"
+                    styleClass="icono-usuario"
             />
 
             <span>Administrador</span>
 
-            <img
-                    src="resources/iconsalir.png"
+            <h:graphicImage
+                    name="iconsalir.png"
                     alt="Cerrar sesión"
-                    class="icono-salir"
+                    styleClass="icono-salir"
             />
 
         </div>
 
     </header>
 
-    <main class="main">
+    <aside class="menu-lateral">
 
-        <aside class="menu-lateral">
+        <a href="menu.xhtml" class="menu-item activo">
 
-            <a href="materia.xhtml" class="menu-item">
+            <h:graphicImage
+                    name="iconInicio.png"
+                    alt="Inicio"
+            />
 
-                <img
-                        src="resources/iconInicio.png"
-                        alt="Inicio"
-                />
+            <span>INICIO</span>
 
-                <span>INICIO</span>
+        </a>
 
-            </a>
+        <a href="profesores.xhtml" class="menu-item">
 
-            <a href="profesores.xhtml" class="menu-item">
+            <h:graphicImage
+                    name="iconuserblanco.png"
+                    alt="Profesores"
+            />
 
-                <img
-                        src="resources/iconuserblanco.png"
-                        alt="Profesores"
-                />
+            <span>PROFESORES</span>
 
-                <span>PROFESORES</span>
+        </a>
 
-            </a>
+        <a href="materia.xhtml" class="menu-item">
 
-            <a href="materia.xhtml" class="menu-item">
+            <h:graphicImage
+                    name="iconmateria.png"
+                    alt="Materias"
+            />
 
-                <img
-                        src="resources/iconmateria.png"
-                        alt="Materias"
-                />
+            <span>MATERIAS</span>
 
-                <span>MATERIAS</span>
+        </a>
 
-            </a>
+        <a href="asignar.xhtml" class="menu-item" aria-label="Asignación">
 
-            <a href="asignar.xhtml" class="menu-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="4" width="14" height="17" rx="2"/>
+                <path d="M9 4h6v3H9z"/>
+                <path d="M9 14l2 2 4-4"/>
+            </svg>
 
-                <img
-                        src="resources/iconoasig.png"
-                        alt="Asignación"
-                />
+            <span>ASIGNACIÓN</span>
 
-                <span>ASIGNACIÓN</span>
+        </a>
 
-            </a>
+        <a href="Consultas.xhtml" class="menu-item">
 
-        </aside>
+            <h:graphicImage
+                    name="iconocon.png"
+                    alt="Consultas"
+            />
 
+            <span>CONSULTAS</span>
 
-        <section class="section">
+        </a>
 
-            <div class="registros">
+    </aside>
 
-                <p>Registros</p>
+    <main class="contenido">
 
-                <div class="boton">
+        <section class="banner">
 
-                    <button class="boton2">
-                        Maestro
-                    </button>
+            <div>
 
-                    <button class="boton2">
-                        Materia
-                    </button>
+                <h1>Bienvenido al SAUAP</h1>
 
-                </div>
-
-            </div>
-
-
-            <div class="consultar">
-
-                <p>Consultar</p>
-
-                <div class="boton">
-
-                    <button class="boton2">
-                        Maestro
-                    </button>
-
-                    <button class="boton2">
-                        Materia
-                    </button>
-
-                </div>
+                <p>Sistema de Asignación de Unidades de Aprendizaje a los Profesores.</p>
 
             </div>
 
+            <h:graphicImage
+                    name="iconlogo.png"
+                    alt=""
+                    styleClass="banner-logo"
+            />
 
-            <!-- BOTÓN QUE MANDA A ASIGNAR -->
+        </section>
 
-            <a href="asignar.xhtml" class="boton2">
-                Asignar Materia
-            </a>
+        <section class="seccion">
+
+            <h2 class="seccion-titulo">¿Qué deseas hacer?</h2>
+
+            <div class="barras">
+
+                <article class="barra">
+
+                    <div class="barra-info">
+
+                        <div class="barra-icono">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#075c66" stroke-width="1.8"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M15 19v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1"/>
+                                <circle cx="9" cy="7" r="3.5"/>
+                                <line x1="19" y1="8" x2="19" y2="14"/>
+                                <line x1="16" y1="11" x2="22" y2="11"/>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <h3>Registros</h3>
+                            <p>Da de alta a los profesores y administra el catálogo de materias.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="acciones">
+                        <a href="profesores.xhtml" class="btn">Profesores</a>
+                        <a href="materia.xhtml" class="btn">Materias</a>
+                    </div>
+
+                </article>
+
+                <article class="barra">
+
+                    <div class="barra-info">
+
+                        <div class="barra-icono">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#075c66" stroke-width="1.8"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="5" y="4" width="14" height="17" rx="2"/>
+                                <path d="M9 4h6v3H9z"/>
+                                <path d="M9 14l2 2 4-4"/>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <h3>Asignación</h3>
+                            <p>Asigna unidades de aprendizaje a cada profesor.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="acciones">
+                        <a href="asignar.xhtml" class="btn">Asignar materia</a>
+                    </div>
+
+                </article>
+
+                <article class="barra">
+
+                    <div class="barra-info">
+
+                        <div class="barra-icono">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#075c66" stroke-width="1.8"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="10.5" cy="10.5" r="6.5"/>
+                                <line x1="15.5" y1="15.5" x2="21" y2="21"/>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <h3>Consultas</h3>
+                            <p>Revisa las unidades de aprendizaje que tiene asignadas cada profesor.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="acciones">
+                        <a href="Consultas.xhtml" class="btn">Consulta general</a>
+                    </div>
+
+                </article>
+
+            </div>
 
         </section>
 
