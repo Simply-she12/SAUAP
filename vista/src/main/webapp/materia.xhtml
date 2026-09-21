@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <title>Asignación - SAUAP</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar profesor</title>
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -17,8 +12,8 @@
         }
 
         body {
-            font-family: Georgia, 'Times New Roman', serif;
-            background-color: #202020;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
             min-height: 100vh;
         }
 
@@ -27,360 +22,144 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 80px;
-
+            height: 70px;
             background-color: #075c66;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
-            padding: 0 25px;
-
-            z-index: 10;
+            padding: 0 30px;
+            z-index: 100;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
-
-            color: white;
-            font-size: 28px;
+            gap: 12px;
+            color: #ffffff;
+            font-family: Georgia, serif;
+            font-size: 24px;
         }
 
         .logo img {
-            width: 45px;
-            height: 45px;
+            width: 32px;
+            height: 32px;
             object-fit: contain;
         }
 
         .usuario {
-            color: white;
-            font-size: 18px;
-
+            color: #ffffff;
+            font-size: 15px;
             display: flex;
             align-items: center;
-
-            gap: 8px;
-        }
-
-        .icono-usuario {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-        }
-
-        .icono-salir {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-
-            margin-left: 25px;
-        }
-
-        .flecha {
-            font-size: 16px;
-            margin-left: 3px;
+            gap: 10px;
         }
 
         .menu-lateral {
             position: fixed;
-            top: 80px;
+            top: 70px;
             left: 0;
-
-            width: 190px;
-            height: calc(100vh - 80px);
-
+            width: 220px;
+            height: calc(100vh - 70px);
             background-color: #075c66;
-
-            padding-top: 25px;
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
 
         .menu-item {
             display: flex;
             align-items: center;
-
-            gap: 10px;
-
-            width: 100%;
-
-            color: white;
+            gap: 12px;
+            color: #ffffff;
             text-decoration: none;
-
-            font-size: 16px;
-
-            padding: 18px 12px;
-
-            white-space: nowrap;
+            font-family: Georgia, serif;
+            font-size: 14px;
+            padding: 10px 12px;
+            border-radius: 6px;
         }
-
-
-        .menu-item img {
-            width: 20px;
-            height: 20px;
-
-            object-fit: contain;
-
-            flex-shrink: 0;
-        }
-
 
         .menu-item:hover {
-            background-color: #064c55;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
         }
 
         .contenido {
-            position: absolute;
-
-            top: 80px;
-            left: 190px;
-            right: 0;
-
-            min-height: calc(100vh - 80px);
-
-            background-color: white;
-
-            padding: 25px 26px;
-
-            overflow-x: hidden;
+            margin-top: 70px;
+            margin-left: 220px;
+            min-height: calc(100vh - 70px);
+            background-color: #f2f4f4;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .titulo {
-            height: 84px;
-
-            background-color: #d9d9d9;
-
-            border-radius: 13px;
-
-            display: flex;
-            align-items: center;
-
-            padding-left: 30px;
-
-            gap: 28px;
-
-            margin-bottom: 24px;
-        }
-
-
-        .titulo img {
-            width: 55px;
-            height: 55px;
-
-            object-fit: contain;
-        }
-
-
-        .titulo h1 {
-            font-size: 28px;
+            font-family: "Inria Serif", serif;
+            font-size: 50px;
+            color: #000000;
             font-weight: normal;
         }
 
-        .asignacion {
-            background-color: #d9d9d9;
-
-            border-radius: 13px;
-
-            min-height: 357px;
-
-            padding: 14px 30px 30px;
-        }
-
-
         .subtitulo {
-            font-size: 18px;
-
-            margin-bottom: 8px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            color: #555555;
+            margin-top: 8px;
+            margin-bottom: 40px;
+            text-align: center;
         }
-
 
         .formulario {
+            width: 100%;
+            max-width: 480px;
             display: flex;
-
-            align-items: flex-end;
-            justify-content: center;
-
-            gap: 45px;
-
-            flex-wrap: wrap;
-
-            margin-top: 25px;
+            flex-direction: column;
+            gap: 18px;
         }
 
         .campo {
             display: flex;
-
             flex-direction: column;
-
-            gap: 7px;
+            gap: 8px;
         }
-
 
         .campo label {
             font-size: 14px;
+            color: #333333;
         }
 
-        .campo input,
-        .campo select {
-            height: 32px;
-
-            border: none;
-
-            border-radius: 18px;
-
-            background-color: white;
-
-            padding: 0 15px;
-
-            outline: none;
-
-            font-family: Georgia, 'Times New Roman', serif;
-
-            font-size: 14px;
-        }
-
-        .profesor input {
-            width: 220px;
-        }
-
-        .materia input {
-            width: 220px;
-        }
-
-        .tipo select {
-            width: 150px;
-        }
-
-        .horas input {
-            width: 80px;
-        }
-
-        .boton-asignar {
-            display: block;
-
-            margin: 35px auto 0;
-
-            width: 125px;
-            height: 32px;
-
-            border: none;
-
-            border-radius: 18px;
-
-            background-color: #74116f;
-
-            color: white;
-
-            font-family: Georgia, 'Times New Roman', serif;
-
-            font-size: 14px;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-
-
-        .boton-asignar:hover {
-            background-color: #5c0d58;
-
-            transform: scale(1.03);
-        }
-
-        .boton2:active {
-            background-color: #74116f;
-            color: white;
-        }
-
-        .materias-asignadas {
-            background-color: white;
-
-            border-radius: 13px;
-
-            height: 143px;
-
-            margin: 51px auto 0;
-
-            width: 78%;
-
-            padding: 12px;
-        }
-
-
-        .materias-asignadas h3 {
-            text-align: center;
-
-            font-size: 12px;
-
-            font-weight: normal;
-
-            margin-bottom: 15px;
-        }
-
-        .tabla {
+        .campo input {
             width: 100%;
-
-            border-collapse: collapse;
-
-            font-size: 12px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            background-color: #d8d8d8;
+            padding: 0 14px;
+            font-size: 15px;
+            outline: none;
         }
 
-
-        .tabla th {
-            background-color: #075c66;
-
-            color: white;
-
-            padding: 5px;
+        .boton {
+            align-self: center;
+            margin-top: 20px;
+            width: 130px;
+            height: 38px;
+            border: none;
+            border-radius: 19px;
+            background-color: #612c53;
+            color: #ffffff;
+            font-size: 13px;
+            cursor: pointer;
         }
 
-
-        .tabla td {
-            padding: 5px;
-
-            text-align: center;
-
-            border-bottom: 1px solid #ddd;
-        }
-
-        @media (max-width: 800px) {
-
-            .menu-lateral {
-                width: 100px;
-            }
-
-
-            .menu-item {
-                font-size: 0;
-
-                justify-content: center;
-            }
-
-
-            .menu-item img {
-                width: 20px;
-                height: 20px;
-            }
-
-
-            .contenido {
-                left: 107px;
-            }
-
-
-            .formulario {
-                gap: 15px;
-            }
-
-
-            .materias-asignadas {
-                width: 95%;
-            }
-
-        }
         .boton2 {
             background-color: #D9D9D9;
             color:#000000;
@@ -391,185 +170,114 @@
             font-family: "Inria Serif", serif;
             margin-top: 30px;
         }
-        .section {
-            background-color: #ffffff;
-            color: #000000;
-            font-size: 40px;
-            font-family: "Inria Serif", serif;
-            flex: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-        }
-
-        .registros{
-            display: flex;
-            flex-direction: column;
-            gap: 3vh;
-            justify-content: center;
-            align-items: center;
-        }
-        .consultar{
-            display: flex;
-            flex-direction: column;
-            gap: 3vh;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .main{
-            display: flex;
-            padding-left: 190px;
-        }
-        .SAUAP{
-            color: #064c55;
-        }
-        .ADtext{
-            font-size: 30px;
-        }
-        .campos{
-            font-size: 30px;
-            font-family: Arial, Helvetica, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-self: flex-start;
-            margin-left:200px;
-        }
-        .input {
-            width: 700px;
-            height: 35px;
-            color: #000000;
-            background-color: rgb(159, 159, 159);
-            border: none;
-            border-radius: 10px;
-            padding: 0 15px;
-            font-size: 20px;
-            font-family: "Inria Serif", serif;
-            outline: none;
-        }
     </style>
-
 </head>
-
-
 <body>
 
 <header class="barra-superior">
-
     <div class="logo">
-
-        <img
-                src="resources/iconlogo.png"
-                alt="Logo SAUAP"
-        />
-
+        <img src="resources/iconlogo.png" alt="Logo"/>
         <span>SAUAP</span>
-
     </div>
-
-
     <div class="usuario">
-
-        <img
-                src="resources/iconuserblanco.png"
-                alt="Usuario"
-                class="icono-usuario"
-        />
-
         <span>Administrador</span>
+    </div>
+</header>
 
 
+<aside class="menu-lateral">
 
-        <img
-                src="resources/iconsalir.png"
-                alt="Cerrar sesión"
-                class="icono-salir"
+    <a href="menu.xhtml" class="menu-item">
+
+        <h:graphicImage
+                name="iconInicio.png"
+                alt="Inicio"
         />
 
-    </div>
+        <span>INICIO</span>
 
-</header>
-<main class="main">
-    <aside class="menu-lateral">
+    </a>
 
-        <a href="menu.xhtml" class="menu-item">
 
-            <img
-                    src="resources/iconInicio.png"
-                    alt="Inicio"
-            />
+    <a href="profesores.xhtml" class="menu-item">
 
-            <span>INICIO</span>
+        <h:graphicImage
+                name="iconuserblanco.png"
+                alt="Profesores"
+        />
 
-        </a>
+        <span>PROFESORES</span>
 
-        <a href="profesores.xhtml" class="menu-item">
+    </a>
 
-            <img
-                    src="resources/iconuserblanco.png"
-                    alt="Profesores"
-            />
 
-            <span>PROFESORES</span>
+    <a href="materia.xhtml" class="menu-item">
 
-        </a>
+        <h:graphicImage
+                name="iconmateria.png"
+                alt="Materias"
+        />
 
-        <a href="materia.xhtml" class="menu-item">
+        <span>MATERIAS</span>
 
-            <img
-                    src="resources/iconmateria.png"
-                    alt="Materias"
-            />
+    </a>
 
-            <span>MATERIAS</span>
 
-        </a>
+    <a href="asignar.xhtml" class="menu-item">
 
-        <a href="asignar.xhtml" class="menu-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="4" width="14" height="17" rx="2"/>
+            <path d="M9 4h6v3H9z"/>
+            <path d="M9 14l2 2 4-4"/>
+        </svg>
 
-            <img
-                    src="resources/iconoasig.png"
-                    alt="Asignación"
-            />
+        <span>ASIGNACIÓN</span>
 
-            <span>ASIGNACIÓN</span>
+    </a>
 
-        </a>
 
-        <a href="ConsultarProfe.html" class="menu-item">
+    <a href="Consultas.xhtml" class="menu-item activo">
 
-            <img
-                    src="resources/iconoasig.png"
-                    alt="Consultas"
-            />
+        <h:graphicImage
+                name="iconocon.png"
+                alt="Consultas"
+        />
 
-            <span>CONSULTAS</span>
+        <span>CONSULTAS</span>
 
-        </a>
+    </a>
 
-    </aside>
+</aside>
 
-    <section class="section">
-        <h1 class="SAUAP">SAUAP</h1>
-        <p class="ADtext">Sistema de Asignacion de Unidades de Aprendizaje a los Profesores</p>
-        <div class="campos">
-            <p>Nombre: </p>
-            <input type="text" class="input"/>
-            <p>Hora clase:</p>
-            <input type="text" class="input"/>
-            <p>Hora taller</p>
-            <input type="text" class="input"/>
-            <p>Hora laboratorio:</p>
-            <input type="text" class="input"/>
+<main class="contenido">
+    <h1 class="titulo">SAUAP</h1>
+    <p class="subtitulo">Sistema de Asignación de Unidades de Aprendizaje a los Profesores</p>
+
+    <form class="formulario">
+        <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
         </div>
+
+        <div class="campo">
+            <label for="apellidoPaterno">Tipo:</label>
+            <select>
+                <option></option>
+                <option>Clase</option>
+                <option>Taller</option>
+                <option>Laboratorio</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="apellidoMaterno">Horas:</label>
+            <input type="text" id="apellidoMaterno" name="apellidoMaterno" required>
+        </div>
+
         <button class="boton2">Registrar</button>
-    </section>
-
+    </form>
 </main>
-</body>
 
+</body>
 </html>

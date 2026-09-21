@@ -1,14 +1,9 @@
- <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html"
-      xmlns:p="http://primefaces.org/ui"
-      lang="es">
-
-<h:head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar profesor</title>
-
     <style>
         * {
             margin: 0;
@@ -107,9 +102,9 @@
         }
 
         .titulo {
-            font-family: Arial, sans-serif;
-            font-size: 70px;
-            color: #075c66;
+            font-family: "Inria Serif", serif;
+            font-size: 50px;
+            color: #000000;
             font-weight: normal;
         }
 
@@ -165,154 +160,113 @@
             cursor: pointer;
         }
     </style>
-</h:head>
+</head>
+<body>
 
-<h:body>
+<header class="barra-superior">
+    <div class="logo">
+        <img src="resources/iconlogo.png" alt="Logo"/>
+        <span>SAUAP</span>
+    </div>
+    <div class="usuario">
+        <span>Administrador</span>
+    </div>
+</header>
 
-    <!-- Barra superior -->
-    <header class="barra-superior">
 
-        <div class="logo">
-            <h:graphicImage
-                            name="iconlogo.png"
-                            alt="Logo"/>
-            <span>SAUAP</span>
+<aside class="menu-lateral">
+
+    <a href="menu.xhtml" class="menu-item">
+
+        <h:graphicImage
+                name="iconInicio.png"
+                alt="Inicio"
+        />
+
+        <span>INICIO</span>
+
+    </a>
+
+
+    <a href="profesores.xhtml" class="menu-item">
+
+        <h:graphicImage
+                name="iconuserblanco.png"
+                alt="Profesores"
+        />
+
+        <span>PROFESORES</span>
+
+    </a>
+
+
+    <a href="materia.xhtml" class="menu-item">
+
+        <h:graphicImage
+                name="iconmateria.png"
+                alt="Materias"
+        />
+
+        <span>MATERIAS</span>
+
+    </a>
+
+
+    <a href="asignar.xhtml" class="menu-item">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="4" width="14" height="17" rx="2"/>
+            <path d="M9 4h6v3H9z"/>
+            <path d="M9 14l2 2 4-4"/>
+        </svg>
+
+        <span>ASIGNACIÓN</span>
+
+    </a>
+
+
+    <a href="Consultas.xhtml" class="menu-item activo">
+
+        <h:graphicImage
+                name="iconocon.png"
+                alt="Consultas"
+        />
+
+        <span>CONSULTAS</span>
+
+    </a>
+
+</aside>
+
+<main class="contenido">
+    <h1 class="titulo">SAUAP</h1>
+    <p class="subtitulo">Sistema de Asignación de Unidades de Aprendizaje a los Profesores</p>
+
+    <form class="formulario">
+        <div class="campo">
+            <label for="nombre">Nombre(s):</label>
+            <input type="text" id="nombre" name="nombre" required>
         </div>
 
-        <div class="usuario">
-            <span>Administrador</span>
+        <div class="campo">
+            <label for="apellidoPaterno">Apellido Paterno:</label>
+            <input type="text" id="apellidoPaterno" name="apellidoPaterno" required>
         </div>
 
-    </header>
+        <div class="campo">
+            <label for="apellidoMaterno">Apellido Materno:</label>
+            <input type="text" id="apellidoMaterno" name="apellidoMaterno" required>
+        </div>
 
+        <div class="campo">
+            <label for="rfc">RFC:</label>
+            <input type="text" id="rfc" name="rfc" required>
+        </div>
 
-    <!-- Menú lateral -->
-    <aside class="menu-lateral">
+        <button type="submit" class="boton">Registrar</button>
+    </form>
+</main>
 
-        <h:link outcome="menu.xhtml"
-                styleClass="menu-item">
-
-            <h:graphicImage
-                            name="iconInicio.png"
-                            alt="Inicio"/>
-
-            <span>INICIO</span>
-
-        </h:link>
-
-
-        <h:link outcome="Profesor.xhtml"
-                styleClass="menu-item">
-
-            <h:graphicImage
-                            name="iconuserblanco.png"
-                            alt="Profesores"/>
-
-            <span>PROFESORES</span>
-
-        </h:link>
-
-
-        <h:link outcome="menuDesarrollo.xhtml"
-                styleClass="menu-item">
-
-            <h:graphicImage
-                            name="iconmateria.png"
-                            alt="Materias"/>
-
-            <span>MATERIAS</span>
-
-        </h:link>
-
-
-        <h:link outcome="Asignacion.xhtml"
-                styleClass="menu-item">
-
-            <h:graphicImage
-                            name="iconasig.png"
-                            alt="Asignación"/>
-
-            <span>ASIGNACIÓN</span>
-
-        </h:link>
-
-    </aside>
-
-
-    <!-- Contenido -->
-    <main class="contenido">
-
-        <h1 class="titulo">SAUAP</h1>
-
-        <p class="subtitulo">
-            Sistema de Asignación de Unidades de Aprendizaje a los Profesores
-        </p>
-
-
-        <!-- Formulario -->
-        <h:form id="formProfesor"
-                styleClass="formulario">
-
-            <div class="campo">
-
-                <label for="nombre">
-                    Nombre(s):
-                </label>
-
-                <h:inputText id="nombre"
-                             value="#{profesorHelper.nombre}"
-                             required="true"/>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label for="apellidoPaterno">
-                    Apellido Paterno:
-                </label>
-
-                <h:inputText id="apellidoPaterno"
-                             value="#{profesorHelper.apellidoP}"
-                             required="true"/>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label for="apellidoMaterno">
-                    Apellido Materno:
-                </label>
-
-                <h:inputText id="apellidoMaterno"
-                             value="#{profesorHelper.apellidoM}"
-                             required="true"/>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label for="rfc">
-                    RFC:
-                </label>
-
-                <h:inputText id="rfc"
-                             value="#{profesorHelper.rfc}"
-                             required="true"/>
-
-            </div>
-
-
-            <h:commandButton value="Registrar"
-                             action="#{profesorHelper.registrar}"
-                             styleClass="boton"/>
-
-        </h:form>
-
-    </main>
-
-</h:body>
+</body>
 </html>
-
