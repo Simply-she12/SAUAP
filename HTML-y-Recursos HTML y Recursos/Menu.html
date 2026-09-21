@@ -385,11 +385,10 @@
             background-color: #D9D9D9;
             color:#000000;
             border: none;
-            padding: 10px 75px;
-            font-size: 20px;
+            padding: 15px 125px;
+            font-size: 30px;
             border-radius: 40px;
             font-family: "Inria Serif", serif;
-            margin-top: 30px;
         }
         .section {
             background-color: #ffffff;
@@ -402,7 +401,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-
+            gap: 10vh;
         }
 
         .registros{
@@ -424,32 +423,8 @@
             display: flex;
             padding-left: 190px;
         }
-        .SAUAP{
-            color: #064c55;
-        }
-        .ADtext{
-            font-size: 30px;
-        }
-        .campos{
-            font-size: 30px;
-            font-family: Arial, Helvetica, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-self: flex-start;
-            margin-left:200px;
-        }
-        .input {
-            width: 700px;
-            height: 35px;
-            color: #000000;
-            background-color: rgb(159, 159, 159);
-            border: none;
-            border-radius: 10px;
-            padding: 0 15px;
-            font-size: 20px;
-            font-family: "Inria Serif", serif;
-            outline: none;
+        .boton{
+
         }
     </style>
 
@@ -496,7 +471,8 @@
 <main class="main">
     <aside class="menu-lateral">
 
-        <a href="Menu.xhtml" class="menu-item">
+
+        <a href="#" class="menu-item">
 
             <img
                     src="resources/iconInicio.png"
@@ -507,7 +483,8 @@
 
         </a>
 
-        <a href="profesores.xhtml" class="menu-item">
+
+        <a href="#" class="menu-item">
 
             <img
                     src="resources/iconuserblanco.png"
@@ -518,7 +495,8 @@
 
         </a>
 
-        <a href="materia.xhtml" class="menu-item">
+
+        <a href="#" class="menu-item">
 
             <img
                     src="resources/iconmateria.png"
@@ -529,7 +507,8 @@
 
         </a>
 
-        <a href="asignar.xhtml" class="menu-item">
+
+        <a href="#" class="menu-item">
 
             <img
                     src="resources/iconoasig.png"
@@ -540,33 +519,25 @@
 
         </a>
 
-        <a href="ConsultarProfe.html" class="menu-item">
-
-            <img
-                    src="resources/iconoasig.png"
-                    alt="Consultas"
-            />
-
-            <span>CONSULTAS</span>
-
-        </a>
 
     </aside>
 
     <section class="section">
-        <h1 class="SAUAP">SAUAP</h1>
-        <p class="ADtext">Sistema de Asignacion de Unidades de Aprendizaje a los Profesores</p>
-        <div class="campos">
-            <p>Nombre: </p>
-            <input type="text" class="input">
-            <p>Hora clase:</p>
-            <input type="text" class="input">
-            <p>Hora taller</p>
-            <input type="text" class="input">
-            <p>Hora laboratorio:</p>
-            <input type="text" class="input">
+        <div class="registros">
+            <p>Registros</p>
+            <div class="boton">
+                <button class="boton2">Maestro</button>
+                <button class="boton2">Materia</button>
+            </div>
         </div>
-        <button class="boton2">Registrar</button>
+        <div class="consultar">
+            <p>Consultar</p>
+            <div class="boton">
+                <button class="boton2">Maestro</button>
+                <button class="boton2">Materia</button>
+            </div>
+        </div>
+        <button class="boton2">Asignar Materia</button>
     </section>
 
 </main>

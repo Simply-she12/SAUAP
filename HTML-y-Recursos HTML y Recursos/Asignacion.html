@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="jakarta.faces.core"
-      xmlns:ui="jakarta.faces.facelets">
+<html lang="es">
 
-<h:head>
+<head>
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -184,14 +180,12 @@
 
         .asignacion {
             background-color: #d9d9d9;
+
             border-radius: 13px;
 
             min-height: 357px;
-            height: auto;
 
             padding: 14px 30px 30px;
-
-            overflow: hidden;
         }
 
 
@@ -259,6 +253,9 @@
             width: 150px;
         }
 
+        .horas input {
+            width: 80px;
+        }
 
         .boton-asignar {
             display: block;
@@ -285,14 +282,6 @@
             transition: 0.2s;
         }
 
-        .mensaje-error {
-            color: #d32f2f;
-            font-size: 13px;
-            font-weight: bold;
-            display: block;
-            text-align: center;
-            margin-top: 8px;
-        }
 
 
         .boton-asignar:hover {
@@ -306,15 +295,13 @@
 
             border-radius: 13px;
 
+            height: 143px;
+
             margin: 51px auto 0;
 
             width: 78%;
 
             padding: 12px;
-
-            max-height: 220px;
-
-            overflow-y: auto;
         }
 
 
@@ -339,11 +326,10 @@
 
         .tabla th {
             background-color: #075c66;
-            color: white;
-            padding: 5px;
 
-            position: sticky;
-            top: 0;
+            color: white;
+
+            padding: 5px;
         }
 
 
@@ -393,10 +379,10 @@
 
     </style>
 
-</h:head>
+</head>
 
 
-<h:body>
+<body>
 
 <header class="barra-superior">
 
@@ -407,8 +393,8 @@
                 alt="Logo SAUAP"
         />
 
-        <span>SAUAP</span>
 
+        <span>SAUAP</span>
     </div>
 
 
@@ -436,20 +422,30 @@
 
 <aside class="menu-lateral">
 
-
-    <a href="Menu.xhtml" class="menu-item">
-
-        <img
-                src="resources/iconInicio.png"
-                alt="Inicio"
-        />
-
+    <a href="inicio.html" class="menu-item">
+        <img src="resources/iconInicio.png" alt="Inicio"/>
         <span>INICIO</span>
-
     </a>
 
+    <a href="Profesor.html" class="menu-item">
+        <img src="resources/iconuserblanco.png" alt="Profesores"/>
+        <span>PROFESORES</span>
+    </a>
 
-    <a href="profesores.xhtml" class="menu-item">
+    <a href="menuDesarrollo.html" class="menu-item">
+        <img src="resources/iconmateria.png" alt="Materias"/>
+        <span>MATERIAS</span>
+    </a>
+
+    <a href="Asignacion.html" class="menu-item">
+        <img src="resources/iconasig.png" alt="Asignacion"/>
+        <span>ASIGNACIÓN</span>
+    </a>
+
+</aside>
+
+
+    <a href="#" class="menu-item">
 
         <img
                 src="resources/iconuserblanco.png"
@@ -461,7 +457,7 @@
     </a>
 
 
-    <a href="materia.xhtml" class="menu-item">
+    <a href="#" class="menu-item">
 
         <img
                 src="resources/iconmateria.png"
@@ -473,7 +469,7 @@
     </a>
 
 
-    <a href="asignar.xhtml" class="menu-item">
+    <a href="#" class="menu-item">
 
         <img
                 src="resources/iconasig.png"
@@ -484,10 +480,6 @@
 
     </a>
 
-    <a href="Consultas.xhtml" class="menu-item">
-        <img src="resources/iconocon.png" alt="Consultas"/>
-        <span>CONSULTAS</span>
-    </a>
 
 </aside>
 
@@ -511,189 +503,130 @@
             Nueva Asignación
         </h2>
 
-        <h:form id="formAsignar" styleClass="formulario">
-            <p:messages id="mensajes" showDetail="true" closable="true"/>
+        <form class="formulario">
 
             <div class="campo profesor">
 
-                <label>Profesor:</label>
+                <label for="profesor">
+                    Profesor:
+                </label>
 
-                <p:selectOneMenu
-                        value="#{asignarHelper.profesorId}"
-                        styleClass="select">
-
-                    <f:selectItem
-                            itemLabel="Seleccione un profesor"
-                            itemValue="#{null}" />
-
-                    <f:selectItems
-                            value="#{asignarHelper.profesores}"
-                            var="p"
-                            itemLabel="#{p.nombre} #{p.apellidoP} #{p.apellidoM}"
-                            itemValue="#{p.id}" />
-
-                </p:selectOneMenu>
+                <input
+                        type="text"
+                        id="profesor"
+                        name="profesor"
+                />
 
             </div>
 
+            <div class="campo materia">
 
-            <div class="campo">
+                <label for="materia">
+                    Materia:
+                </label>
 
-                <label>Materia:</label>
-
-                <p:selectOneMenu
+                <input
+                        type="text"
                         id="materia"
-                        value="#{asignarHelper.materiaId}"
-                        styleClass="select">
-
-                    <f:selectItem
-                            itemLabel="Seleccione una materia"
-                            itemValue="#{null}"
-                            noSelectionOption="true"/>
-
-                    <f:selectItems
-                            value="#{asignarHelper.materias}"
-                            var="m"
-                            itemLabel="#{m.nombre}"
-                            itemValue="#{m.id}"/>
-
-                    <p:ajax
-                            process="@this tipo"
-                            update="horario"
-                            listener="#{asignarHelper.actualizarHorarios}"/>
-
-                </p:selectOneMenu>
+                        name="materia"
+                />
 
             </div>
 
+            <div class="campo tipo">
 
-            <div class="campo">
+                <label for="tipo">
+                    Tipo:
+                </label>
 
-                <label>Tipo:</label>
-
-                <p:selectOneMenu
+                <select
                         id="tipo"
-                        value="#{asignarHelper.tipo}"
-                        styleClass="select">
+                        name="tipo"
+                >
 
-                    <f:selectItem
-                            itemLabel="Seleccione un tipo"
-                            itemValue="#{null}"
-                            noSelectionOption="true"/>
+                    <option value=""></option>
 
-                    <f:selectItem
-                            itemLabel="Clase"
-                            itemValue="teoria"/>
+                    <option value="teoria">
+                        Clase
+                    </option>
 
-                    <f:selectItem
-                            itemLabel="Taller"
-                            itemValue="taller"/>
+                    <option value="taller">
+                        Taller
+                    </option>
 
-                    <f:selectItem
-                            itemLabel="Laboratorio"
-                            itemValue="laboratorio"/>
+                    <option value="laboratorio">
+                        Laboratorio
+                    </option>
 
-                    <p:ajax
-                            process="@this materia"
-                            update="horario"
-                            listener="#{asignarHelper.actualizarHorarios}"/>
+                </select>
 
-                </p:selectOneMenu>
+            </div>
+
+            <div class="campo horas">
+
+                <label for="horas">
+                    Horas:
+                </label>
+
+                <input
+                        type="number"
+                        id="horas"
+                        name="horas"
+                        min="0"
+                        max="4"
+                        step="1"
+                />
 
             </div>
 
 
-            <div class="campo">
+        </form>
 
-                <label>Horario:</label>
+        <button
+                class="boton-asignar"
+                type="button"
+        >
 
-                <p:selectOneMenu
-                        id="horario"
-                        value="#{asignarHelper.horarioId}"
-                        styleClass="select">
+            Asignar
 
-                    <f:selectItem
-                            itemLabel="Seleccione un horario"
-                            itemValue="#{null}"
-                            noSelectionOption="true"/>
-
-                    <f:selectItems
-                            value="#{asignarHelper.horarios}"
-                            var="h"
-                            itemValue="#{h.idhorario}"
-                            itemLabel="#{h.dia} #{h.horaI} - #{h.horaF}"/>
-
-                </p:selectOneMenu>
-
-            </div>
-
-            <p:commandButton
-                    value="Asignar"
-                    action="#{asignarHelper.asignar}"
-                    update="mensajeError"
-                    styleClass="boton-asignar"/>
-
-            <h:panelGroup id="mensajeError" layout="block">
-
-                <h:outputText
-                        value="#{asignarHelper.mensajeError}"
-                        rendered="#{not empty asignarHelper.mensajeError}"
-                        styleClass="mensaje-error"/>
-
-            </h:panelGroup>
-        </h:form>
-
-
+        </button>
 
         <div class="materias-asignadas">
 
-            <h3>Materias asignadas</h3>
+
+            <h3>
+                Materias asignadas
+            </h3>
+
 
             <table class="tabla">
 
+
                 <thead>
+
                 <tr>
+
                     <th>Profesor</th>
+
                     <th>Materia</th>
+
                     <th>Tipo</th>
-                    <th>Horario</th>
+
+                    <th>Horas</th>
+
                 </tr>
+
                 </thead>
 
+
                 <tbody>
-
-                <ui:repeat value="#{asignarHelper.asignaciones}" var="a">
-
-                    <tr>
-
-                        <td>
-                            #{a.profesor.nombre}
-                            #{a.profesor.apellidoP}
-                            #{a.profesor.apellidoM}
-                        </td>
-
-                        <td>
-                            #{a.materia.nombre}
-                        </td>
-
-                        <td>
-                            #{a.tipo}
-                        </td>
-
-                        <td>
-                            #{a.horario.dia}
-                            #{a.horario.horaI}
-                            -
-                            #{a.horario.horaF}
-                        </td>
-
-                    </tr>
-
-                </ui:repeat>
-
+                <!-- Las materias aparecerán aquí
+                     cuando se conecte con Java/BD -->
                 </tbody>
 
+
             </table>
+
 
         </div>
 
@@ -704,6 +637,6 @@
 </main>
 
 
-</h:body>
+</body>
 
 </html>
