@@ -1,162 +1,318 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      lang="es">
 
 <h:head>
-    <title>SAUAP - Iniciar sesión</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Registrar profesor</title>
 
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: Inter, sans-serif;
-            background: #F4F6F6;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .pagina {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
             min-height: 100vh;
+        }
+
+        .barra-superior {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #075c66;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 70px;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 100;
         }
 
-        .izquierda {
-            text-align: center;
-        }
-
-        .sauap {
-            color: #0F4C52;
-            font-size: 96px;
-            font-family: "Inria Serif", serif;
-        }
-
-        .descripcion {
-            color: #172325;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            font-family: Georgia, serif;
             font-size: 24px;
-            font-family: "Inria Serif", serif;
-            max-width: 500px;
         }
 
-        .login {
-            width: 637px;
-            min-height: 567px;
-            background: #38727D;
-            border-radius: 47px;
-            box-shadow: 12px 23px 7px rgba(0,0,0,0.25);
+        .logo img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .usuario {
+            color: #ffffff;
+            font-size: 15px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            gap: 10px;
+        }
+
+        .menu-lateral {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 220px;
+            height: calc(100vh - 70px);
+            background-color: #075c66;
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: Georgia, serif;
+            font-size: 14px;
+            padding: 10px 12px;
+            border-radius: 6px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
         }
 
         .contenido {
-            width: 556px;
-            text-align: center;
+            margin-top: 70px;
+            margin-left: 220px;
+            min-height: calc(100vh - 70px);
+            background-color: #f2f4f4;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .titulo {
-            color: #172325;
-            font-size: 64px;
-            font-family: "Inria Serif", serif;
-            margin-bottom: 60px;
+            font-family: Arial, sans-serif;
+            font-size: 70px;
+            color: #075c66;
+            font-weight: normal;
+        }
+
+        .subtitulo {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            color: #555555;
+            margin-top: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .formulario {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
         }
 
         .campo {
-            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .campo label {
+            font-size: 14px;
+            color: #333333;
         }
 
         .campo input {
             width: 100%;
-            height: 60px;
-            box-sizing: border-box;
-            border-radius: 100px;
+            height: 40px;
             border: none;
-            background: #D9D9D9;
-            padding: 0 25px;
-            font-size: 18px;
-        }
-
-        .recordar {
-            text-align: left;
-            margin: 15px 0 25px 20px;
-            color: #172325;
-            font-family: "Inria Serif", serif;
+            border-radius: 8px;
+            background-color: #d8d8d8;
+            padding: 0 14px;
             font-size: 15px;
+            outline: none;
         }
 
         .boton {
-            background: #64165F !important;
-            border: none !important;
-            border-radius: 28px !important;
-            padding: 12px 35px !important;
-        }
-
-        .registrarse {
-            margin-top: 30px;
-            color: #172325;
-            font-size: 24px;
+            align-self: center;
+            margin-top: 20px;
+            width: 130px;
+            height: 38px;
+            border: none;
+            border-radius: 19px;
+            background-color: #612c53;
+            color: #ffffff;
+            font-size: 13px;
+            cursor: pointer;
         }
     </style>
 </h:head>
 
 <h:body>
 
-    <div class="pagina">
+    <!-- Barra superior -->
+    <header class="barra-superior">
 
-        <div class="izquierda">
-            <div class="sauap">SAUAP</div>
-
-            <div class="descripcion">
-                Sistema de Asignación de
-                <br/>
-                Unidades de Aprendizaje a los Profesores
-            </div>
+        <div class="logo">
+            <h:graphicImage
+                            name="iconlogo.png"
+                            alt="Logo"/>
+            <span>SAUAP</span>
         </div>
 
-        <div class="login">
+        <div class="usuario">
+            <span>Administrador</span>
+        </div>
 
-            <div class="contenido">
+    </header>
 
-                <div class="titulo">
-                    SIGN IN
-                </div>
 
-                <h:form>
+    <!-- Menú lateral -->
+    <aside class="menu-lateral">
 
-                    <div class="campo">
-                        <p:inputText
-                                value="#{loginHelper.idProfesor}"
-                                placeholder="Usuario:"/>
-                    </div>
+        <h:link outcome="menu.xhtml"
+                styleClass="menu-item">
 
-                    <div class="campo">
-                        <p:password
-                                value="#{loginHelper.password}"
-                                placeholder="Contraseña:"/>
-                    </div>
+            <h:graphicImage
+                            name="iconInicio.png"
+                            alt="Inicio"/>
 
-                    <div class="recordar">
-                        <p:selectBooleanCheckbox
-                                value="#{loginHelper.recordarme}"/>
-                        Recordarme
-                    </div>
+            <span>INICIO</span>
 
-                    <p:commandButton
-                            value="Entrar"
-                            action="#{loginHelper.login}"
-                            styleClass="boton"/>
+        </h:link>
 
-                </h:form>
 
-                <div class="registrarse">
-                    Registrarse
-                </div>
+        <h:link outcome="Profesor.xhtml"
+                styleClass="menu-item">
+
+            <h:graphicImage
+                            name="iconuserblanco.png"
+                            alt="Profesores"/>
+
+            <span>PROFESORES</span>
+
+        </h:link>
+
+
+        <h:link outcome="menuDesarrollo.xhtml"
+                styleClass="menu-item">
+
+            <h:graphicImage
+                            name="iconmateria.png"
+                            alt="Materias"/>
+
+            <span>MATERIAS</span>
+
+        </h:link>
+
+
+        <h:link outcome="Asignacion.xhtml"
+                styleClass="menu-item">
+
+            <h:graphicImage
+                            name="iconasig.png"
+                            alt="Asignación"/>
+
+            <span>ASIGNACIÓN</span>
+
+        </h:link>
+
+    </aside>
+
+
+    <!-- Contenido -->
+    <main class="contenido">
+
+        <h1 class="titulo">SAUAP</h1>
+
+        <p class="subtitulo">
+            Sistema de Asignación de Unidades de Aprendizaje a los Profesores
+        </p>
+
+
+        <!-- Formulario -->
+        <h:form id="formProfesor"
+                styleClass="formulario">
+
+            <div class="campo">
+
+                <label for="nombre">
+                    Nombre(s):
+                </label>
+
+                <h:inputText id="nombre"
+                             value="#{profesorHelper.nombre}"
+                             required="true"/>
 
             </div>
 
-        </div>
 
-    </div>
+            <div class="campo">
+
+                <label for="apellidoPaterno">
+                    Apellido Paterno:
+                </label>
+
+                <h:inputText id="apellidoPaterno"
+                             value="#{profesorHelper.apellidoP}"
+                             required="true"/>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="apellidoMaterno">
+                    Apellido Materno:
+                </label>
+
+                <h:inputText id="apellidoMaterno"
+                             value="#{profesorHelper.apellidoM}"
+                             required="true"/>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="rfc">
+                    RFC:
+                </label>
+
+                <h:inputText id="rfc"
+                             value="#{profesorHelper.rfc}"
+                             required="true"/>
+
+            </div>
+
+
+            <h:commandButton value="Registrar"
+                             action="#{profesorHelper.registrar}"
+                             styleClass="boton"/>
+
+        </h:form>
+
+    </main>
 
 </h:body>
 </html>
+
