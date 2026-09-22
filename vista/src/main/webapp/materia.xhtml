@@ -14,8 +14,8 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
+            font-family: "Inria Serif", serif;
+            background-color: #075c66;
             min-height: 100vh;
         }
 
@@ -67,7 +67,6 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .menu-item {
@@ -175,7 +174,7 @@
 
         .boton2 {
             background-color: #612c53;
-            color:#000000;
+            color: #ffffff;
             border: none;
             padding: 10px 75px;
             font-size: 20px;
@@ -191,18 +190,89 @@
             height: 20px;
             flex-shrink: 0;
         }
+        .barra-superior9 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+
+            background-color: var(--teal-800);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 25px;
+
+            z-index: 10;
+        }
+
+        .logo9 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            color: white;
+            font-size: 28px;
+        }
+        .usuario9 {
+            color: white;
+            font-size: 18px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+        }
+        .icono-usuario {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .icono-salir {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+
+            margin-left: 25px;
+        }
     </style>
 </head>
 <body>
 
-<header class="barra-superior">
-    <div class="logo">
-        <img src="resources/iconlogo.png" alt="Logo"/>
+<header class="barra-superior9">
+
+    <div class="logo9">
+
+        <h:graphicImage
+                name="iconlogo.png"
+                alt="Logo SAUAP"
+        />
+
         <span>SAUAP</span>
+
     </div>
-    <div class="usuario">
+
+    <div class="usuario9">
+
+        <h:graphicImage
+                name="iconuserblanco.png"
+                alt="Usuario"
+                styleClass="icono-usuario"
+        />
+
         <span>Administrador</span>
+
+        <h:graphicImage
+                name="iconsalir.png"
+                alt="Cerrar sesión"
+                styleClass="icono-salir"
+        />
+
     </div>
+
 </header>
 
 
