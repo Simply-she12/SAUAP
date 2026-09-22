@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar profesor</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Registrar Profesor - SAUAP</title>
+
     <style>
         * {
             margin: 0;
@@ -12,8 +14,8 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: #202020;
             min-height: 100vh;
         }
 
@@ -22,206 +24,240 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 70px;
+            height: 80px;
             background-color: #075c66;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 30px;
-            z-index: 100;
+            padding: 0 25px;
+            z-index: 10;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: #ffffff;
-            font-family: Georgia, serif;
-            font-size: 24px;
+            gap: 15px;
+            color: white;
+            font-size: 28px;
         }
 
         .logo img {
-            width: 32px;
-            height: 32px;
+            width: 45px;
+            height: 45px;
             object-fit: contain;
         }
 
         .usuario {
-            color: #ffffff;
-            font-size: 15px;
+            color: white;
+            font-size: 18px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+        }
+
+        .icono-usuario {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .icono-salir {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            margin-left: 25px;
         }
 
         .menu-lateral {
             position: fixed;
-            top: 70px;
+            top: 80px;
             left: 0;
-            width: 220px;
-            height: calc(100vh - 70px);
+            width: 190px;
+            height: calc(100vh - 80px);
             background-color: #075c66;
-            padding: 30px 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
         }
 
         .menu-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: #ffffff;
+            gap: 10px;
+            width: 100%;
+            color: white;
             text-decoration: none;
-            font-family: Georgia, serif;
-            font-size: 14px;
-            padding: 10px 12px;
-            border-radius: 6px;
-        }
-
-        .menu-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            font-size: 16px;
+            padding: 18px 12px;
+            white-space: nowrap;
         }
 
         .menu-item img {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             object-fit: contain;
+            flex-shrink: 0;
         }
 
-        .contenido {
-            margin-top: 70px;
-            margin-left: 220px;
-            min-height: calc(100vh - 70px);
-            background-color: #f2f4f4;
-            padding: 60px 40px;
+        .menu-item:hover {
+            background-color: #064c55;
+        }
+
+        .main {
+            display: flex;
+            padding-left: 190px;
+            padding-top: 80px;
+        }
+
+        .section {
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 40px;
+            font-family: "Inria Serif", serif;
+            flex: 1;
+            min-height: calc(100vh - 80px);
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            padding: 40px 0;
         }
 
-        .titulo {
-            font-family: Arial, sans-serif;
-            font-size: 70px;
-            color: #075c66;
-            font-weight: normal;
+        .SAUAP {
+            color: #064c55;
         }
 
-        .subtitulo {
-            font-family: Arial, sans-serif;
-            font-size: 15px;
-            color: #555555;
-            margin-top: 8px;
-            margin-bottom: 40px;
-            text-align: center;
+        .ADtext {
+            font-size: 30px;
+            margin-bottom: 20px;
         }
 
-        .formulario {
-            width: 100%;
-            max-width: 480px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .campo {
+        .campos {
+            font-size: 24px;
+            font-family: Arial, Helvetica, sans-serif;
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
-        .campo label {
-            font-size: 14px;
-            color: #333333;
+        .campos p {
+            margin-top: 10px;
         }
 
-        .campo input {
-            width: 100%;
-            height: 40px;
+        .input {
+            width: 700px;
+            height: 35px;
+            color: #000000;
+            background-color: rgb(159, 159, 159);
             border: none;
-            border-radius: 8px;
-            background-color: #d8d8d8;
-            padding: 0 14px;
-            font-size: 15px;
+            border-radius: 10px;
+            padding: 0 15px;
+            font-size: 20px;
+            font-family: "Inria Serif", serif;
             outline: none;
         }
 
-        .boton {
-            align-self: center;
-            margin-top: 20px;
-            width: 130px;
-            height: 38px;
+        .boton2 {
+            background-color: #D9D9D9;
+            color: #000000;
             border: none;
-            border-radius: 19px;
-            background-color: #612c53;
-            color: #ffffff;
-            font-size: 13px;
+            padding: 10px 75px;
+            font-size: 20px;
+            border-radius: 40px;
+            font-family: "Inria Serif", serif;
+            margin-top: 30px;
             cursor: pointer;
+        }
+
+        .boton2:active {
+            background-color: #74116f;
+            color: white;
+        }
+
+        @media (max-width: 800px) {
+            .menu-lateral {
+                width: 100px;
+            }
+
+            .menu-item {
+                font-size: 0;
+                justify-content: center;
+            }
+
+            .main {
+                padding-left: 100px;
+            }
+
+            .input {
+                width: 90%;
+            }
         }
     </style>
 </head>
+
 <body>
 
 <header class="barra-superior">
     <div class="logo">
-        <img src="resources/iconlogo.png" alt="Logo"/>
+        <img src="resources/iconlogo.png" alt="Logo SAUAP"/>
         <span>SAUAP</span>
     </div>
+
     <div class="usuario">
+        <img src="resources/iconuserblanco.png" alt="Usuario" class="icono-usuario"/>
         <span>Administrador</span>
+        <img src="resources/iconsalir.png" alt="Cerrar sesión" class="icono-salir"/>
     </div>
 </header>
 
-<aside class="menu-lateral">
-    <a href="menu.html" class="menu-item">
-        <img src="resources/iconInicio.png" alt="Inicio"/>
-        <span>INICIO</span>
-    </a>
+<main class="main">
+    <aside class="menu-lateral">
+        <a href="menu.xhtml" class="menu-item">
+            <img src="resources/iconInicio.png" alt="Inicio"/>
+            <span>INICIO</span>
+        </a>
 
-    <a href="Profesor.html" class="menu-item">
-        <img src="resources/iconuserblanco.png" alt="Profesores"/>
-        <span>PROFESORES</span>
-    </a>
+        <a href="profesores.xhtml" class="menu-item">
+            <img src="resources/iconuserblanco.png" alt="Profesores"/>
+            <span>PROFESORES</span>
+        </a>
 
-    <a href="menuDesarrollo.html" class="menu-item">
-        <img src="resources/iconmateria.png" alt="Materias"/>
-        <span>MATERIAS</span>
-    </a>
+        <a href="materia.xhtml" class="menu-item">
+            <img src="resources/iconmateria.png" alt="Materias"/>
+            <span>MATERIAS</span>
+        </a>
 
-    <a href="Asignacion.html" class="menu-item">
-        <img src="resources/iconasig.png" alt="Asignación"/>
-        <span>ASIGNACIÓN</span>
-    </a>
-</aside>
+        <a href="asignar.xhtml" class="menu-item">
+            <img src="resources/iconoasig.png" alt="Asignación"/>
+            <span>ASIGNACIÓN</span>
+        </a>
 
-<main class="contenido">
-    <h1 class="titulo">SAUAP</h1>
-    <p class="subtitulo">Sistema de Asignación de Unidades de Aprendizaje a los Profesores</p>
+        <a href="ConsultarProfe.html" class="menu-item">
+            <img src="resources/iconoasig.png" alt="Consultas"/>
+            <span>CONSULTAS</span>
+        </a>
+    </aside>
 
-    <form class="formulario">
-        <div class="campo">
-            <label for="nombre">Nombre(s):</label>
-            <input type="text" id="nombre" name="nombre" required>
-        </div>
+    <section class="section">
+        <h1 class="SAUAP">SAUAP</h1>
+        <p class="ADtext">Sistema de Asignación de Unidades de Aprendizaje a los Profesores</p>
 
-        <div class="campo">
-            <label for="apellidoPaterno">Apellido Paterno:</label>
-            <input type="text" id="apellidoPaterno" name="apellidoPaterno" required>
-        </div>
+        <form class="campos">
+            <p>Nombre(s):</p>
+            <input type="text" name="nombre" class="input" required/>
 
-        <div class="campo">
-            <label for="apellidoMaterno">Apellido Materno:</label>
-            <input type="text" id="apellidoMaterno" name="apellidoMaterno" required>
-        </div>
+            <p>Apellido Paterno:</p>
+            <input type="text" name="apellidoPaterno" class="input" required/>
 
-        <div class="campo">
-            <label for="rfc">RFC:</label>
-            <input type="text" id="rfc" name="rfc" required>
-        </div>
+            <p>Apellido Materno:</p>
+            <input type="text" name="apellidoMaterno" class="input" required/>
 
-        <button type="submit" class="boton">Registrar</button>
-    </form>
+            <p>RFC:</p>
+            <input type="text" name="rfc" class="input" required/>
+
+            <div style="text-align: center;">
+                <button type="submit" class="boton2">Registrar</button>
+            </div>
+        </form>
+    </section>
 </main>
 
 </body>
