@@ -106,29 +106,40 @@
             font-size: 50px;
             color: #000000;
             font-weight: normal;
+            background-color: #d9d9d9;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            width: 100%;
         }
 
         .subtitulo {
-            font-family: Arial, sans-serif;
-            font-size: 15px;
-            color: #555555;
+            font-family: "Inria Serif", serif;
+            font-size: 23px;
+            color: #000000;
             margin-top: 8px;
             margin-bottom: 40px;
-            text-align: center;
+            text-align: left;
         }
 
         .formulario {
             width: 100%;
-            max-width: 480px;
             display: flex;
             flex-direction: column;
             gap: 18px;
+            background-color: #d9d9d9;
+            padding: 15px;
+            border-radius: 15px;
         }
 
-        .campo {
+
+        .campo{
             display: flex;
             flex-direction: column;
             gap: 8px;
+            width: 100%;
+            max-width: 600px;
+            align-self: center;
         }
 
         .campo label {
@@ -141,7 +152,7 @@
             height: 40px;
             border: none;
             border-radius: 8px;
-            background-color: #d8d8d8;
+            background-color: #fafafa;
             padding: 0 14px;
             font-size: 15px;
             outline: none;
@@ -161,7 +172,7 @@
         }
 
         .boton2 {
-            background-color: #D9D9D9;
+            background-color: #612c53;
             color:#000000;
             border: none;
             padding: 10px 75px;
@@ -169,6 +180,9 @@
             border-radius: 40px;
             font-family: "Inria Serif", serif;
             margin-top: 30px;
+            width: 100%;
+            max-width: 500px;
+            align-self: center;
         }
     </style>
 </head>
@@ -251,10 +265,11 @@
 </aside>
 
 <main class="contenido">
-    <h1 class="titulo">SAUAP</h1>
-    <p class="subtitulo">Sistema de Asignación de Unidades de Aprendizaje a los Profesores</p>
+
+    <h1 class="titulo">Mantenimiento CRUD</h1>
 
     <form class="formulario">
+        <b class="subtitulo">Catálogo de unidades de aprendizaje</b>
         <div class="campo">
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" required>
