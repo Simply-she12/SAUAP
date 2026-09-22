@@ -138,63 +138,75 @@
             font-weight: normal;
         }
 
+        /* Contenedor principal de alta de profesor */
         .asignacion {
             background-color: #d9d9d9;
             border-radius: 13px;
-            min-height: 357px;
-            height: auto;
-            padding: 20px 30px 30px;
-            overflow: hidden;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 420px;
         }
 
         .subtitulo {
-            font-size: 18px;
-            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: normal;
+            margin-bottom: 25px;
+            text-align: center;
         }
 
+        /* Estructura vertical y centrada del formulario */
         .formulario {
             display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 15px;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+            gap: 18px;
         }
 
         .campo {
             display: flex;
             flex-direction: column;
-            gap: 7px;
+            gap: 6px;
+            width: 100%;
         }
 
         .campo label {
-            font-size: 14px;
+            font-size: 15px;
+            color: #222222;
         }
 
         .campo input {
-            height: 32px;
+            height: 38px;
             border: none;
-            border-radius: 18px;
+            border-radius: 12px;
             background-color: white;
             padding: 0 15px;
             outline: none;
             font-family: Georgia, 'Times New Roman', serif;
-            font-size: 14px;
-            width: 200px;
+            font-size: 15px;
+            width: 100% !important;
             box-shadow: none !important;
         }
 
+        .contenedor-boton {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
         .boton-asignar {
-            display: block;
-            margin: 25px auto 0;
-            width: 140px;
-            height: 35px;
+            width: 160px;
+            height: 38px;
             border: none;
-            border-radius: 18px;
+            border-radius: 19px;
             background-color: #74116f !important;
             color: white !important;
             font-family: Georgia, 'Times New Roman', serif;
-            font-size: 14px;
+            font-size: 15px;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -202,43 +214,6 @@
         .boton-asignar:hover {
             background-color: #5c0d58 !important;
             transform: scale(1.03);
-        }
-
-        .materias-asignadas {
-            background-color: white;
-            border-radius: 13px;
-            margin: 40px auto 0;
-            width: 90%;
-            padding: 15px;
-            max-height: 250px;
-            overflow-y: auto;
-        }
-
-        .materias-asignadas h3 {
-            text-align: center;
-            font-size: 14px;
-            font-weight: normal;
-            margin-bottom: 15px;
-        }
-
-        .tabla {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-        .tabla th {
-            background-color: #075c66;
-            color: white;
-            padding: 8px;
-            position: sticky;
-            top: 0;
-        }
-
-        .tabla td {
-            padding: 8px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
         }
 
         @media (max-width: 800px) {
@@ -261,11 +236,7 @@
             }
 
             .formulario {
-                gap: 15px;
-            }
-
-            .materias-asignadas {
-                width: 95%;
+                max-width: 90%;
             }
         }
     </style>
@@ -324,75 +295,48 @@
 
             <h2 class="subtitulo">Nuevo Profesor</h2>
 
-            <h:form id="formProfesor">
-                <p:messages id="mensajes" showDetail="true" closable="true"/>
+            <h:form id="formProfesor" styleClass="formulario">
+                <p:messages id="mensajes" showDetail="true" closable="true" style="width:100%;"/>
 
-                <div class="formulario">
-                    <div class="campo">
-                        <label for="nombre">Nombre(s):</label>
-                        <p:inputText id="nombre"
-                                     value="#{profesorHelper.profesor.nombre}"
-                                     required="true"
-                                     requiredMessage="El nombre es obligatorio"/>
-                    </div>
-
-                    <div class="campo">
-                        <label for="apellidoP">Apellido Paterno:</label>
-                        <p:inputText id="apellidoP"
-                                     value="#{profesorHelper.profesor.apellidoP}"
-                                     required="true"
-                                     requiredMessage="El apellido paterno es obligatorio"/>
-                    </div>
-
-                    <div class="campo">
-                        <label for="apellidoM">Apellido Materno:</label>
-                        <p:inputText id="apellidoM"
-                                     value="#{profesorHelper.profesor.apellidoM}"
-                                     required="true"
-                                     requiredMessage="El apellido materno es obligatorio"/>
-                    </div>
-
-                    <div class="campo">
-                        <label for="rfc">RFC:</label>
-                        <p:inputText id="rfc"
-                                     value="#{profesorHelper.profesor.rfc}"
-                                     required="true"
-                                     requiredMessage="El RFC es obligatorio"/>
-                    </div>
+                <div class="campo">
+                    <label for="nombre">Nombre(s):</label>
+                    <p:inputText id="nombre"
+                                 value="#{profesorHelper.profesor.nombre}"
+                                 required="true"
+                                 requiredMessage="El nombre es obligatorio"/>
                 </div>
 
-                <p:commandButton value="Registrar"
-                                 action="#{profesorHelper.registrar}"
-                                 update="formProfesor tablaProfesores"
-                                 styleClass="boton-asignar"/>
+                <div class="campo">
+                    <label for="apellidoP">Apellido Paterno:</label>
+                    <p:inputText id="apellidoP"
+                                 value="#{profesorHelper.profesor.apellidoP}"
+                                 required="true"
+                                 requiredMessage="El apellido paterno es obligatorio"/>
+                </div>
+
+                <div class="campo">
+                    <label for="apellidoM">Apellido Materno:</label>
+                    <p:inputText id="apellidoM"
+                                 value="#{profesorHelper.profesor.apellidoM}"
+                                 required="true"
+                                 requiredMessage="El apellido materno es obligatorio"/>
+                </div>
+
+                <div class="campo">
+                    <label for="rfc">RFC:</label>
+                    <p:inputText id="rfc"
+                                 value="#{profesorHelper.profesor.rfc}"
+                                 required="true"
+                                 requiredMessage="El RFC es obligatorio"/>
+                </div>
+
+                <div class="contenedor-boton">
+                    <p:commandButton value="Registrar"
+                                     action="#{profesorHelper.registrar}"
+                                     update="formProfesor"
+                                     styleClass="boton-asignar"/>
+                </div>
             </h:form>
-
-            <div class="materias-asignadas">
-                <h3>Profesores Registrados</h3>
-
-                <h:panelGroup id="tablaProfesores" layout="block">
-                    <table class="tabla">
-                        <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido Paterno</th>
-                            <th>Apellido Materno</th>
-                            <th>RFC</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <ui:repeat value="#{profesorHelper.listaProfesores}" var="p">
-                            <tr>
-                                <td>#{p.nombre}</td>
-                                <td>#{p.apellidoP}</td>
-                                <td>#{p.apellidoM}</td>
-                                <td>#{p.rfc}</td>
-                            </tr>
-                        </ui:repeat>
-                        </tbody>
-                    </table>
-                </h:panelGroup>
-            </div>
 
         </section>
 
