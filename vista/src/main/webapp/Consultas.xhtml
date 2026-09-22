@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
@@ -6,14 +7,12 @@
 <h:head>
 
     <meta charset="UTF-8"/>
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>Consultas Generales - SAUAP</title>
 
-
     <style type="text/css">
+        /*<![CDATA[*/
 
         * {
             margin: 0;
@@ -21,13 +20,11 @@
             box-sizing: border-box;
         }
 
-
         body {
             font-family: Georgia, 'Times New Roman', serif;
             background-color: #202020;
             min-height: 100vh;
         }
-
 
         .barra-superior {
             position: fixed;
@@ -47,7 +44,6 @@
             z-index: 10;
         }
 
-
         .logo {
             display: flex;
             align-items: center;
@@ -57,13 +53,11 @@
             font-size: 28px;
         }
 
-
         .logo img {
             width: 45px;
             height: 45px;
             object-fit: contain;
         }
-
 
         .usuario {
             color: white;
@@ -75,13 +69,11 @@
             gap: 8px;
         }
 
-
         .icono-usuario {
             width: 20px;
             height: 20px;
             object-fit: contain;
         }
-
 
         .icono-salir {
             width: 20px;
@@ -90,7 +82,6 @@
 
             margin-left: 25px;
         }
-
 
         .menu-lateral {
             position: fixed;
@@ -104,7 +95,6 @@
 
             padding-top: 25px;
         }
-
 
         .menu-item {
             display: flex;
@@ -124,7 +114,6 @@
             white-space: nowrap;
         }
 
-
         .menu-item img,
         .menu-item svg {
             width: 20px;
@@ -135,12 +124,15 @@
             flex-shrink: 0;
         }
 
-
         .menu-item:hover,
         .menu-item.activo {
             background-color: #064c55;
         }
 
+        .menu-item:focus-visible {
+            outline: 2px solid white;
+            outline-offset: -2px;
+        }
 
         .contenido {
             position: absolute;
@@ -157,7 +149,6 @@
 
             overflow-x: hidden;
         }
-
 
         .titulo {
             height: 84px;
@@ -176,7 +167,6 @@
             margin-bottom: 24px;
         }
 
-
         .titulo img,
         .titulo svg {
             width: 55px;
@@ -185,12 +175,10 @@
             object-fit: contain;
         }
 
-
         .titulo h1 {
             font-size: 28px;
             font-weight: normal;
         }
-
 
         .consulta {
             background-color: #d9d9d9;
@@ -202,12 +190,11 @@
             padding: 14px 30px 30px;
         }
 
-
         .subtitulo {
             font-size: 18px;
+
             margin-bottom: 8px;
         }
-
 
         .barra-herramientas {
             display: flex;
@@ -222,18 +209,6 @@
             margin: 25px 0 14px;
         }
 
-
-        .busqueda {
-            display: flex;
-
-            align-items: flex-end;
-
-            gap: 12px;
-
-            flex-wrap: wrap;
-        }
-
-
         .campo {
             display: flex;
 
@@ -242,11 +217,9 @@
             gap: 7px;
         }
 
-
         .campo label {
             font-size: 14px;
         }
-
 
         .campo input {
             width: 320px;
@@ -268,11 +241,29 @@
             font-size: 14px;
         }
 
-
-        .campo input:focus {
+        .campo input:focus-visible {
             outline: 2px solid #075c66;
         }
 
+        .estado {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            font-size: 14px;
+        }
+
+        .busqueda {
+            display: flex;
+
+            align-items: flex-end;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
 
         .boton {
             width: 150px;
@@ -295,20 +286,28 @@
             transition: 0.2s;
         }
 
-
-        .boton:hover {
+        .boton:hover:not(:disabled) {
             background-color: #5c0d58;
+
+            transform: scale(1.03);
         }
 
+        .boton:focus-visible {
+            outline: 2px solid #075c66;
+            outline-offset: 2px;
+        }
+
+        .boton:disabled {
+            opacity: 0.55;
+
+            cursor: not-allowed;
+        }
 
         .estado {
             min-height: 24px;
 
             margin-bottom: 14px;
-
-            font-size: 14px;
         }
-
 
         .lista {
             display: flex;
@@ -317,7 +316,6 @@
             gap: 16px;
         }
 
-
         .profesor-card {
             background-color: white;
 
@@ -325,7 +323,6 @@
 
             padding: 12px 16px 14px;
         }
-
 
         .profesor-encabezado {
             display: flex;
@@ -340,23 +337,19 @@
             margin-bottom: 10px;
         }
 
-
         .profesor-encabezado h3 {
             font-size: 17px;
             font-weight: normal;
         }
-
 
         .profesor-datos {
             font-size: 12px;
             color: #555;
         }
 
-
         .tabla-scroll {
             overflow-x: auto;
         }
-
 
         .tabla {
             width: 100%;
@@ -365,7 +358,6 @@
 
             font-size: 13px;
         }
-
 
         .tabla th {
             background-color: #075c66;
@@ -377,7 +369,6 @@
             padding: 6px 8px;
         }
 
-
         .tabla td {
             padding: 6px 8px;
 
@@ -386,12 +377,17 @@
             border-bottom: 1px solid #ddd;
         }
 
-
         .tabla th:first-child,
         .tabla td:first-child {
             text-align: left;
         }
 
+        .tabla tfoot td {
+            border-bottom: none;
+            font-size: 12px;
+            color: #555;
+            text-align: right;
+        }
 
         .tipo {
             display: inline-block;
@@ -405,24 +401,29 @@
             font-size: 12px;
         }
 
-
         .tipo-clase {
             background-color: #d6ecee;
             color: #064c55;
         }
-
 
         .tipo-taller {
             background-color: #f0d9ef;
             color: #5c0d58;
         }
 
-
         .tipo-laboratorio {
             background-color: #e6e6e6;
             color: #333;
         }
 
+        .sin-unidades {
+            text-align: center;
+
+            font-size: 13px;
+            color: #555;
+
+            padding: 10px 0 4px;
+        }
 
         .sin-resultados {
             background-color: white;
@@ -436,10 +437,15 @@
             color: #555;
         }
 
+        .sin-resultados svg {
+            width: 44px;
+            height: 44px;
+
+            margin-bottom: 10px;
+        }
 
         .sin-resultados h3 {
             font-size: 18px;
-
             font-weight: normal;
 
             color: #172325;
@@ -447,69 +453,14 @@
             margin-bottom: 6px;
         }
 
-
         .sin-resultados p {
             max-width: 430px;
 
             margin: 0 auto;
 
             font-size: 14px;
-
             line-height: 1.5;
         }
-
-
-        .paginacion {
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            gap: 18px;
-
-            margin-top: 22px;
-        }
-
-
-        .flecha {
-            width: 36px;
-            height: 36px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background-color: #075c66;
-
-            color: white;
-
-            font-size: 25px;
-
-            cursor: pointer;
-        }
-
-
-        .flecha:hover:not(:disabled) {
-            background-color: #064c55;
-        }
-
-
-        .flecha:disabled {
-            opacity: 0.4;
-
-            cursor: not-allowed;
-        }
-
-
-        .numero-pagina {
-            min-width: 60px;
-
-            text-align: center;
-
-            font-size: 14px;
-        }
-
 
         @media (max-width: 800px) {
 
@@ -517,23 +468,19 @@
                 width: 100px;
             }
 
-
             .menu-item {
                 font-size: 0;
 
                 justify-content: center;
             }
 
-
             .contenido {
                 left: 107px;
             }
 
-
             .consulta {
                 padding: 14px 15px 25px;
             }
-
 
             .barra-herramientas {
                 gap: 12px;
@@ -541,6 +488,7 @@
 
         }
 
+        /*]]>*/
     </style>
 
 </h:head>
@@ -554,7 +502,8 @@
 
             <h:graphicImage
                     name="iconlogo.png"
-                    alt="Logo SAUAP"/>
+                    alt="Logo SAUAP"
+            />
 
             <span>SAUAP</span>
 
@@ -566,76 +515,79 @@
             <h:graphicImage
                     name="iconuserblanco.png"
                     alt="Usuario"
-                    styleClass="icono-usuario"/>
+                    styleClass="icono-usuario"
+            />
 
             <span>Administrador</span>
 
             <h:graphicImage
                     name="iconsalir.png"
                     alt="Cerrar sesión"
-                    styleClass="icono-salir"/>
+                    styleClass="icono-salir"
+            />
 
         </div>
 
     </header>
 
-
     <aside class="menu-lateral">
 
-        <a href="menu.xhtml"
-           class="menu-item">
+        <a href="menu.xhtml" class="menu-item">
 
             <h:graphicImage
                     name="iconInicio.png"
-                    alt="Inicio"/>
+                    alt="Inicio"
+            />
 
             <span>INICIO</span>
 
         </a>
 
 
-        <a href="Profesores.xhtml"
-           class="menu-item">
+        <a href="profesores.xhtml" class="menu-item">
 
             <h:graphicImage
                     name="iconuserblanco.png"
-                    alt="Profesores"/>
+                    alt="Profesores"
+            />
 
             <span>PROFESORES</span>
 
         </a>
 
 
-        <a href="materia.xhtml"
-           class="menu-item">
+        <a href="materia.xhtml" class="menu-item">
 
             <h:graphicImage
                     name="iconmateria.png"
-                    alt="Materias"/>
+                    alt="Materias"
+            />
 
             <span>MATERIAS</span>
 
         </a>
 
 
-        <a href="asignar.xhtml"
-           class="menu-item">
+        <a href="asignar.xhtml" class="menu-item">
 
-            <h:graphicImage
-                    name="iconasig.png"
-                    alt="Asignación"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="4" width="14" height="17" rx="2"/>
+                <path d="M9 4h6v3H9z"/>
+                <path d="M9 14l2 2 4-4"/>
+            </svg>
 
             <span>ASIGNACIÓN</span>
 
         </a>
 
 
-        <a href="Consultas.xhtml"
-           class="menu-item activo">
+        <a href="Consultas.xhtml" class="menu-item activo">
 
             <h:graphicImage
                     name="iconocon.png"
-                    alt="Consultas"/>
+                    alt="Consultas"
+            />
 
             <span>CONSULTAS</span>
 
@@ -643,19 +595,20 @@
 
     </aside>
 
-
-    <main class="contenido">
+    <main class="contenido" id="app"
+          data-api="#{request.contextPath}/api/consulta-asignaciones">
 
         <section class="titulo">
 
-            <h:graphicImage
-                    name="iconocon.png"
-                    alt="Consultas"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#075c66" stroke-width="1.8"
+                 stroke-linecap="round" aria-hidden="true">
+                <circle cx="10.5" cy="10.5" r="6.5"/>
+                <line x1="15.5" y1="15.5" x2="21" y2="21"/>
+            </svg>
 
             <h1>CONSULTAS GENERALES</h1>
 
         </section>
-
 
         <section class="consulta">
 
@@ -663,221 +616,219 @@
                 Asignación por profesor
             </h2>
 
+            <div class="barra-herramientas">
 
-            <h:form>
+                <div class="busqueda">
 
-                <div class="barra-herramientas">
+                    <div class="campo">
 
-                    <div class="busqueda">
+                        <label for="buscar">
+                            Buscar profesor:
+                        </label>
 
-                        <div class="campo">
-
-                            <label for="buscar">
-                                Buscar profesor o materia:
-                            </label>
-
-
-                            <h:inputText
-                                    id="buscar"
-                                    value="#{consultas.busqueda}"
-                                    maxlength="100"
-                                    autocomplete="off"
-                                    styleClass="campo-busqueda"/>
-
-                        </div>
-
-
-                        <h:commandButton
-                                value="Buscar"
-                                action="#{consultas.buscar}"
-                                styleClass="boton"/>
+                        <input
+                                type="search"
+                                id="buscar"
+                                placeholder="Nombre, RFC o materia"
+                                autocomplete="off"
+                        />
 
                     </div>
 
-                </div>
-
-
-                <div class="estado">
-
-                    <h:outputText
-                            value="#{consultas.mensajeBusqueda}"/>
-
-                </div>
-
-
-                <div class="lista">
-
-                    <h:panelGroup
-                            rendered="#{consultas.sinResultados}"
-                            layout="block"
-                            styleClass="sin-resultados">
-
-                        <h3>Sin resultados</h3>
-
-                        <p>
-                            No se encontraron profesores o materias
-                            que coincidan con la búsqueda.
-                        </p>
-
-                    </h:panelGroup>
-
-
-                    <h:panelGroup
-                            rendered="#{not consultas.sinResultados}"
-                            layout="block">
-
-                        <ui:repeat
-                                xmlns:ui="jakarta.faces.facelets"
-                                value="#{consultas.resultadosPagina}"
-                                var="p">
-
-                            <article class="profesor-card">
-
-                                <div class="profesor-encabezado">
-
-                                    <h3>
-                                        #{p.nombreCompleto}
-                                    </h3>
-
-
-                                    <span class="profesor-datos">
-
-                                        RFC: #{p.rfc}
-
-                                        |
-
-                                        #{p.cantidadAsignaciones}
-
-                                        #{p.cantidadAsignaciones == 1
-                                            ? 'asignación'
-                                            : 'asignaciones'}
-
-                                        |
-
-                                        #{p.totalHoras} h en total
-
-                                    </span>
-
-                                </div>
-
-
-                                <div class="tabla-scroll">
-
-                                    <table class="tabla">
-
-                                        <thead>
-
-                                        <tr>
-
-                                            <th>
-                                                Materia
-                                            </th>
-
-                                            <th>
-                                                Tipo
-                                            </th>
-
-                                            <th>
-                                                Horario
-                                            </th>
-
-                                            <th>
-                                                Horas
-                                            </th>
-
-                                        </tr>
-
-                                        </thead>
-
-
-                                        <tbody>
-
-                                        <ui:repeat
-                                                value="#{p.unidades}"
-                                                var="u">
-
-                                            <tr>
-
-                                                <td>
-                                                    #{u.materia}
-                                                </td>
-
-                                                <td>
-
-                                                        <span
-                                                                class="tipo #{u.tipo == 'Clase'
-                                                                    ? 'tipo-clase'
-                                                                    : u.tipo == 'Taller'
-                                                                        ? 'tipo-taller'
-                                                                        : 'tipo-laboratorio'}">
-
-                                                            #{u.tipo}
-
-                                                        </span>
-
-                                                </td>
-
-                                                <td>
-                                                    #{u.horario}
-                                                </td>
-
-                                                <td>
-                                                    #{u.horas}
-                                                </td>
-
-                                            </tr>
-
-                                        </ui:repeat>
-
-                                        </tbody>
-
-                                    </table>
-
-                                </div>
-
-                            </article>
-
-                        </ui:repeat>
-
-                    </h:panelGroup>
+                    <button
+                            type="button"
+                            id="btn-buscar"
+                            class="boton"
+                    >
+                        Buscar
+                    </button>
 
                 </div>
 
+            </div>
 
-                <h:panelGroup
-                        rendered="#{not consultas.sinResultados}"
-                        layout="block"
-                        styleClass="paginacion">
+            <div class="estado">
 
-                    <h:commandButton
-                            value="‹"
-                            action="#{consultas.paginaAnterior}"
-                            disabled="#{not consultas.puedeAnterior}"
-                            styleClass="flecha"
-                            title="Página anterior"/>
+                <span id="resumen" role="status" aria-live="polite"></span>
 
+            </div>
 
-                    <span class="numero-pagina">
-
-                        #{consultas.paginaTexto}
-
-                    </span>
-
-
-                    <h:commandButton
-                            value="›"
-                            action="#{consultas.paginaSiguiente}"
-                            disabled="#{not consultas.puedeSiguiente}"
-                            styleClass="flecha"
-                            title="Página siguiente"/>
-
-                </h:panelGroup>
-
-            </h:form>
+            <div id="lista" class="lista"></div>
 
         </section>
 
     </main>
+
+    <script type="text/javascript">
+        //<![CDATA[
+
+        const URL_API = document.getElementById('app').getAttribute('data-api');
+
+        let profesores = [];
+        let cargado = false;
+
+        const $lista = document.getElementById('lista');
+        const $resumen = document.getElementById('resumen');
+        const $buscar = document.getElementById('buscar');
+        const $btnBuscar = document.getElementById('btn-buscar');
+
+        function normalizar(texto) {
+            return String(texto || '')
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase();
+        }
+
+        function el(etiqueta, clase, texto) {
+            const nodo = document.createElement(etiqueta);
+            if (clase) nodo.className = clase;
+            if (texto !== undefined) nodo.textContent = texto;
+            return nodo;
+        }
+
+        function nombreCompleto(p) {
+            return [p.nombre, p.apellidoPaterno, p.apellidoMaterno].filter(Boolean).join(' ');
+        }
+
+        async function cargar() {
+            const aviso = setTimeout(() => mostrarMensaje('Cargando',
+                'Obteniendo los profesores registrados…'), 500);
+
+            let datos;
+            try {
+                const respuesta = await fetch(URL_API, {headers: {'Accept': 'application/json'}});
+                const tipo = respuesta.headers.get('content-type') || '';
+                if (!respuesta.ok || !tipo.includes('json')) {
+                    throw new Error('Respuesta inválida del servicio');
+                }
+                datos = await respuesta.json();
+            } catch (error) {
+                clearTimeout(aviso);
+                mostrarMensaje('No se pudo cargar la consulta',
+                    'El servicio no respondió. Revisa que el servidor y la base de datos estén funcionando.');
+                return;
+            }
+
+            clearTimeout(aviso);
+            profesores = datos;
+            cargado = true;
+            mostrarTodos();
+        }
+
+        function coincide(p, filtro) {
+            if (!filtro) return true;
+            const bolsa = [nombreCompleto(p), p.rfc]
+                .concat(p.unidades.map(u => u.materia))
+                .map(normalizar)
+                .join(' ');
+            return bolsa.includes(filtro);
+        }
+
+        function crearTarjeta(p) {
+            const tarjeta = el('article', 'profesor-card');
+
+            const encabezado = el('div', 'profesor-encabezado');
+            encabezado.appendChild(el('h3', '', nombreCompleto(p)));
+
+            const cuantas = p.unidades.length;
+            const datos = 'RFC: ' + p.rfc + '  |  ' +
+                cuantas + (cuantas === 1 ? ' asignación' : ' asignaciones') +
+                '  |  ' + p.totalHoras + ' h en total';
+            encabezado.appendChild(el('span', 'profesor-datos', datos));
+            tarjeta.appendChild(encabezado);
+
+            if (cuantas === 0) {
+                tarjeta.appendChild(el('p', 'sin-unidades',
+                    'Este profesor todavía no tiene unidades de aprendizaje asignadas.'));
+                return tarjeta;
+            }
+
+            const envoltura = el('div', 'tabla-scroll');
+            const tabla = el('table', 'tabla');
+
+            const cabecera = tabla.createTHead().insertRow();
+            ['Materia', 'Tipo', 'Horario', 'Horas']
+                .forEach(t => cabecera.appendChild(el('th', '', t)));
+
+            const cuerpo = tabla.createTBody();
+            p.unidades.forEach(u => {
+                const fila = cuerpo.insertRow();
+                fila.insertCell().textContent = u.materia;
+                fila.insertCell().appendChild(el('span', 'tipo tipo-' + normalizar(u.tipo), u.tipo));
+                fila.insertCell().textContent = u.horario;
+                fila.insertCell().textContent = u.horas;
+            });
+
+            envoltura.appendChild(tabla);
+            tarjeta.appendChild(envoltura);
+            return tarjeta;
+        }
+
+        const ICONO_LUPA = '<svg viewBox="0 0 24 24" fill="none" stroke="#075c66" ' +
+            'stroke-width="1.6" stroke-linecap="round" aria-hidden="true">' +
+            '<circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>';
+
+        function mostrarMensaje(titulo, texto) {
+            const caja = el('div', 'sin-resultados');
+            caja.insertAdjacentHTML('afterbegin', ICONO_LUPA);
+            caja.appendChild(el('h3', '', titulo));
+            caja.appendChild(el('p', '', texto));
+            $lista.replaceChildren(caja);
+            $resumen.textContent = '';
+        }
+
+        function pintar(visibles, titulo) {
+            $lista.replaceChildren();
+            visibles.forEach(p => $lista.appendChild(crearTarjeta(p)));
+
+            const total = visibles.reduce((suma, p) => suma + p.unidades.length, 0);
+            $resumen.textContent = titulo + ': ' +
+                visibles.length + (visibles.length === 1 ? ' profesor' : ' profesores') +
+                ', ' + total + (total === 1 ? ' asignación' : ' asignaciones');
+        }
+
+        function mostrarTodos() {
+            if (profesores.length === 0) {
+                mostrarMensaje('Sin profesores', 'Todavía no hay profesores registrados.');
+                return;
+            }
+            pintar(profesores, 'Consulta general');
+        }
+
+        function buscar() {
+            if (!cargado) return;
+
+            const texto = $buscar.value.trim();
+
+            if (!texto) {
+                mostrarTodos();
+                return;
+            }
+
+            const filtro = normalizar(texto);
+            const visibles = profesores.filter(p => coincide(p, filtro));
+
+            if (visibles.length === 0) {
+                mostrarMensaje('Sin resultados',
+                    'Ningún profesor coincide con «' + texto +
+                    '». Prueba con otro nombre, RFC o materia.');
+                return;
+            }
+            pintar(visibles, 'Búsqueda «' + texto + '»');
+        }
+
+        $btnBuscar.addEventListener('click', buscar);
+        $buscar.addEventListener('keydown', e => {
+            if (e.key === 'Enter') buscar();
+        });
+        $buscar.addEventListener('input', () => {
+            if (cargado && !$buscar.value.trim()) mostrarTodos();
+        });
+
+        cargar();
+
+        //]]>
+    </script>
 
 </h:body>
 
