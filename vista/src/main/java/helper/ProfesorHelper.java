@@ -27,7 +27,7 @@ public class ProfesorHelper implements Serializable {
             this.profesor = new Profesor();
         } catch (Exception e) {
             e.printStackTrace();
-            this.mensaje = "No se pudo registrar el profesor";
+            this.mensaje = "No se pudo registrar el profesor, intenta de nuevo";
         }
     }
 
