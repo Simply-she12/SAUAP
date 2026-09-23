@@ -46,9 +46,6 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
             );
 
 
-            /*
-             * OBTENER PROFESOR
-             */
 
             Profesor profesor =
                     em.getReference(
@@ -57,9 +54,6 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
                     );
 
 
-            /*
-             * OBTENER MATERIA
-             */
 
             Materia materia =
                     em.getReference(
@@ -67,10 +61,6 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
                             idMateria
                     );
 
-
-            /*
-             * CREAR HORARIO
-             */
 
             Horario horario =
                     new Horario();
@@ -87,9 +77,7 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
             horario.setMateria(materia);
 
 
-            /*
-             * GUARDAR HORARIO
-             */
+
 
             em.persist(horario);
 
@@ -105,11 +93,6 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
                             + horario.getIdhorario()
             );
 
-
-            /*
-             * CREAR ASIGNACIÓN
-             */
-
             Asignar asignar =
                     new Asignar();
 
@@ -122,10 +105,6 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
 
             asignar.setTipo(tipo);
 
-
-            /*
-             * GUARDAR ASIGNACIÓN
-             */
 
             em.persist(asignar);
 

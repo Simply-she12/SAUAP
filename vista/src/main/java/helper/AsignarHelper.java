@@ -34,9 +34,6 @@ public class AsignarHelper implements Serializable {
         mensajeError = null;
 
 
-        /*
-         * VALIDAR CAMPOS
-         */
 
         if (profesorId == null ||
                 materiaId == null ||
@@ -55,10 +52,6 @@ public class AsignarHelper implements Serializable {
         }
 
 
-        /*
-         * CONVERTIR LAS HORAS
-         */
-
         LocalTime inicio;
         LocalTime fin;
 
@@ -75,14 +68,6 @@ public class AsignarHelper implements Serializable {
         }
 
 
-        /*
-         * VALIDAR QUE LA HORA FINAL NO SEA
-         * ANTES DE LA HORA INICIAL
-         *
-         * IMPORTANTE:
-         * Si son iguales, son 0 horas y SÍ se permite.
-         */
-
         if (fin.isBefore(inicio)) {
 
             mensajeError =
@@ -90,27 +75,12 @@ public class AsignarHelper implements Serializable {
 
             return;
         }
-
-
-        /*
-         * CALCULAR DURACIÓN
-         */
-
         long minutos = Duration
                 .between(inicio, fin)
                 .toMinutes();
 
 
-        /*
-         * VALIDAR MÍNIMO 0 HORAS
-         *
-         * Con la validación anterior no puede existir
-         * una duración negativa.
-         *
-         * Por lo tanto:
-         *
-         * 08:00 - 08:00 = 0 horas -> permitido.
-         */
+
 
 
         if (minutos < 0) {
@@ -122,12 +92,6 @@ public class AsignarHelper implements Serializable {
         }
 
 
-        /*
-         * VALIDAR MÁXIMO 4 HORAS
-         *
-         * 4 horas = 240 minutos
-         */
-
         if (minutos > 240) {
 
             mensajeError =
@@ -137,19 +101,12 @@ public class AsignarHelper implements Serializable {
         }
 
 
-        /*
-         * OBTENER ASIGNACIONES EXISTENTES
-         */
-
         List<Asignar> asignaciones =
                 ServiceFacadeLocator
                         .getInstanceFacadeAsignar()
                         .obtenerTodos();
 
 
-        /*
-         * VALIDAR TRASLAPES
-         */
 
         for (Asignar asignacion : asignaciones) {
 
@@ -184,11 +141,6 @@ public class AsignarHelper implements Serializable {
                             .getHoraF();
 
 
-            /*
-             * REVISAR SOLO SI ES EL MISMO PROFESOR
-             * Y EL MISMO DÍA
-             */
-
             if (profesorExistente != null &&
                     profesorExistente.equals(profesorId) &&
                     diaExistente != null &&
@@ -196,10 +148,6 @@ public class AsignarHelper implements Serializable {
                     inicioExistente != null &&
                     finExistente != null) {
 
-
-                /*
-                 * VALIDAR TRASLAPE
-                 */
 
                 boolean hayTraslape =
                         inicio.isBefore(finExistente) &&
@@ -216,11 +164,6 @@ public class AsignarHelper implements Serializable {
             }
         }
 
-
-        /*
-         * GUARDAR ASIGNACIÓN
-         */
-
         ServiceFacadeLocator
                 .getInstanceFacadeAsignar()
                 .guardarAsignacion(
@@ -233,10 +176,6 @@ public class AsignarHelper implements Serializable {
                 );
 
 
-        /*
-         * LIMPIAR FORMULARIO
-         */
-
         profesorId = null;
         materiaId = null;
         tipo = null;
@@ -245,9 +184,6 @@ public class AsignarHelper implements Serializable {
         horaFin = null;
 
 
-        /*
-         * MENSAJE DE ÉXITO
-         */
 
         mensajeError =
                 "Asignación guardada correctamente.";
