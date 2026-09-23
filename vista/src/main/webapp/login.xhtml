@@ -10,9 +10,17 @@
         body {
             margin: 0;
             font-family: Inter, sans-serif;
+
+            background-image:
+                    linear-gradient(
+                            rgba(255, 255, 255, 0.55),
+                            rgba(255, 255, 255, 0.55)
+                    ),
+                    url("resources/fondo.png");
+
             background-size: cover;
-            background: #F4F6F6 linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
-            url("#{resource['fondo.png']}") no-repeat center;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .pagina {
@@ -182,7 +190,7 @@
 
                         <p:password
                                 value="#{loginHelper.password}"
-                                placeholder="Contraseña:"/>
+                                placeholder="Contraseña"/>
 
                         <h:graphicImage
                                 name="iconOjo.png"
@@ -199,7 +207,6 @@
 
                     </h:panelGroup>
 
-                    <!-- Falta conectar -->
                     <p:commandButton
                             value="Entrar"
                             action="#{loginHelper.login}"

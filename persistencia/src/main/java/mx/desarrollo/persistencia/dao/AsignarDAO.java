@@ -1,34 +1,54 @@
 package mx.desarrollo.persistencia.dao;
 
 import jakarta.persistence.EntityManager;
+
 import mx.desarrollo.entity.Asignar;
 import mx.desarrollo.entity.Horario;
 import mx.desarrollo.entity.Materia;
 import mx.desarrollo.entity.Profesor;
 import mx.desarrollo.persistencia.persistence.AbstractDAO;
 
+import java.time.LocalTime;
 import java.util.List;
 
 public class AsignarDAO extends AbstractDAO<Asignar> {
 
     private final EntityManager entityManager;
 
+
     public AsignarDAO(EntityManager em) {
+
         super(Asignar.class);
+
         this.entityManager = em;
     }
+
 
     public void guardarAsignacion(
             Integer idProfesor,
             Integer idMateria,
-            Integer idHorario,
-            String tipo) {
+            String tipo,
+            String dia,
+            LocalTime horaInicio,
+            LocalTime horaFin) {
 
-        System.out.println("DAO: ENTRÓ A guardarAsignacion");
+
+        System.out.println(
+                "DAO: ENTRÓ A guardarAsignacion"
+        );
+
 
         executeInsideTransaction(em -> {
 
-            System.out.println("DAO: INICIANDO TRANSACCIÓN");
+
+            System.out.println(
+                    "DAO: INICIANDO TRANSACCIÓN"
+            );
+
+
+            /*
+             * OBTENER PROFESOR
+             */
 
             Profesor profesor =
                     em.getReference(
@@ -36,44 +56,97 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
                             idProfesor
                     );
 
+
+            /*
+             * OBTENER MATERIA
+             */
+
             Materia materia =
                     em.getReference(
                             Materia.class,
                             idMateria
                     );
 
+
+            /*
+             * CREAR HORARIO
+             */
+
             Horario horario =
-                    em.getReference(
-                            Horario.class,
-                            idHorario
-                    );
+                    new Horario();
 
-            System.out.println("DAO: Profesor = " + idProfesor);
-            System.out.println("DAO: Materia = " + idMateria);
-            System.out.println("DAO: Horario = " + idHorario);
 
-            Asignar asignar = new Asignar();
+            horario.setDia(dia);
 
-            asignar.setProfesor(profesor);
-            asignar.setMateria(materia);
-            asignar.setHorario(horario);
-            asignar.setTipo(tipo);
+            horario.setHoraI(horaInicio);
 
-            System.out.println("DAO: ANTES DE PERSIST");
+            horario.setHoraF(horaFin);
 
-            em.persist(asignar);
+            horario.setTipo(tipo);
 
-            System.out.println("DAO: DESPUÉS DE PERSIST");
+            horario.setMateria(materia);
+
+
+            /*
+             * GUARDAR HORARIO
+             */
+
+            em.persist(horario);
 
             em.flush();
 
-            System.out.println("DAO: DESPUÉS DE FLUSH");
+
+            System.out.println(
+                    "DAO: HORARIO GUARDADO"
+            );
+
+            System.out.println(
+                    "DAO: ID HORARIO = "
+                            + horario.getIdhorario()
+            );
+
+
+            /*
+             * CREAR ASIGNACIÓN
+             */
+
+            Asignar asignar =
+                    new Asignar();
+
+
+            asignar.setProfesor(profesor);
+
+            asignar.setMateria(materia);
+
+            asignar.setHorario(horario);
+
+            asignar.setTipo(tipo);
+
+
+            /*
+             * GUARDAR ASIGNACIÓN
+             */
+
+            em.persist(asignar);
+
+            em.flush();
+
+
+            System.out.println(
+                    "DAO: ASIGNACIÓN GUARDADA"
+            );
+
         });
 
-        System.out.println("DAO: TRANSACCIÓN TERMINADA");
+
+        System.out.println(
+                "DAO: TRANSACCIÓN TERMINADA"
+        );
     }
 
+
     public List<Asignar> obtenerTodos() {
+
         return entityManager
                 .createQuery(
                         "SELECT a FROM Asignar a",
@@ -82,8 +155,10 @@ public class AsignarDAO extends AbstractDAO<Asignar> {
                 .getResultList();
     }
 
+
     @Override
     public EntityManager getEntityManager() {
+
         return entityManager;
     }
 }
