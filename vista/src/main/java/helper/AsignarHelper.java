@@ -58,7 +58,7 @@ public class AsignarHelper implements Serializable {
                         horarioExistente.equals(horarioId)) {
 
                     mensajeError =
-                            "El profesor ya tiene una asignación en este horario.";
+                            "El profesor ya tiene una asignacion en este horario.";
 
                     return;
                 }
@@ -77,7 +77,7 @@ public class AsignarHelper implements Serializable {
     public void actualizarHorarios() {
 
         System.out.println(
-                "===== ACTUALIZANDO HORARIOS ====="
+                "Actualizando horarios"
         );
 
         System.out.println(
@@ -137,7 +137,7 @@ public class AsignarHelper implements Serializable {
     public List<Horario> getHorarios() {
 
         System.out.println(
-                "===== BUSCANDO HORARIOS ====="
+                "Buscando horarios"
         );
 
         System.out.println(
