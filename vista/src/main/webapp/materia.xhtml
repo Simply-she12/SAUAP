@@ -551,13 +551,19 @@
 
         <form class="formulario">
             <b class="subtitulo">Catálogo de unidades de aprendizaje</b>
+
+            <div class="campo">
+                <label for="identificador">Identificador</label>
+                <input type="text" id="indetificador" name="identificador" required="required"/>
+            </div>
+
             <div class="campo">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" required="required"/>
             </div>
 
             <div class="campo">
-                <label for="apellidoPaterno">Tipo:</label>
+                <label for="tipo">Tipo:</label>
                 <select>
                     <option></option>
                     <option>Clase</option>
@@ -567,8 +573,8 @@
             </div>
 
             <div class="campo">
-                <label for="apellidoMaterno">Horas:</label>
-                <input type="text" id="apellidoMaterno" name="apellidoMaterno" required="required"/>
+                <label for="horas">Horas:</label>
+                <input type="text" id="horas" name="horas" required="required"/>
             </div>
 
             <button class="boton2">Registrar</button>
