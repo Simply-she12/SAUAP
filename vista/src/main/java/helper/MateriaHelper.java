@@ -28,7 +28,13 @@ public class MateriaHelper {
         ServiceFacadeLocator
                 .getInstanceFacadeMateria()
                 .guardarMateria(materia);
+
+        nombre = null;
+        horaC = null;
+        horaT = null;
+        horaL = null;
     }
+
 
     public Integer getId() {
         return id;

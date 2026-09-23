@@ -564,7 +564,7 @@
             <p>Mantenimiento CRUD</p>
         </div>
 
-        <h:form>
+        <h:form class="formulario">
 
             <b class="subtitulo">Catálogo de unidades de aprendizaje</b>
 
@@ -610,7 +610,8 @@
             <h:commandButton
                     value="Registrar"
                     action="#{materiaHelper.registrar}"
-                    styleClass="boton2"/>
+                    styleClass="boton2"
+                    onclick="document.getElementById('formulario:identificador').value = '';"/>
 
         </h:form>
     </main>
