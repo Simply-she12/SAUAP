@@ -12,7 +12,7 @@ public class ProfesorDAO extends AbstractDAO<Profesor> {
 
     public ProfesorDAO(EntityManager em) {
         super(Profesor.class);
-        this.entityManager = em;
+        this.entityManager=em;
     }
 
     public List<Profesor> obtenerTodos(){

@@ -157,7 +157,7 @@
 
             background-color: #d9d9d9;
 
-            border-radius: 10px;
+            border-radius: 13px;
 
             display: flex;
             align-items: center;
@@ -170,22 +170,22 @@
         }
 
         .titulo svg {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
 
             object-fit: contain;
         }
 
         .titulo h1 {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 26px;
+            font-weight: normal;
             color: #172325;
         }
 
         .consulta {
             background-color: #d9d9d9;
 
-            border-radius: 10px;
+            border-radius: 13px;
 
             min-height: 357px;
 
@@ -193,7 +193,7 @@
         }
 
         .subtitulo {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: bold;
             color: #172325;
 
@@ -217,7 +217,7 @@
         .profesor-card {
             background-color: white;
 
-            border-radius: 8px;
+            border-radius: 13px;
 
             padding: 12px 16px 14px;
         }
@@ -236,8 +236,8 @@
         }
 
         .profesor-encabezado h3 {
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 17px;
+            font-weight: normal;
             color: #172325;
         }
 
@@ -422,7 +422,7 @@
         </a>
 
 
-        <a href="Profesores.xhtml" class="menu-item">
+        <a href="profesores.xhtml" class="menu-item">
 
             <h:graphicImage
                     name="iconuserblanco.png"
@@ -520,7 +520,7 @@
                                 <span class="profesor-datos">
                                     RFC: #{p.rfc} &#160;|&#160;
                                     #{fn:length(p.unidades)} #{fn:length(p.unidades) == 1 ? 'asignación' : 'asignaciones'}
-                                    &#160;|&#160; #{p.totalHoras} h en total
+                                    &#160;|&#160; #{p.totalHorasTexto} h en total
                                 </span>
                             </div>
 
@@ -551,7 +551,7 @@
                                                         </span>
                                                 </td>
                                                 <td>#{u.horario}</td>
-                                                <td>#{u.horas}</td>
+                                                <td>#{u.horasTexto}</td>
                                             </tr>
                                         </ui:repeat>
                                         </tbody>
