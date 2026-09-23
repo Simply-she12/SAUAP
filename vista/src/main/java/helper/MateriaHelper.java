@@ -9,7 +9,6 @@ import mx.desarrollo.entity.Materia;
 @RequestScoped
 public class MateriaHelper {
 
-    private Integer id;
     private String nombre;
     private Integer horaC;
     private Integer horaT;
@@ -19,7 +18,6 @@ public class MateriaHelper {
 
         Materia materia = new Materia();
 
-        materia.setId(id);
         materia.setNombre(nombre);
         materia.setHoraC(horaC);
         materia.setHoraT(horaT);
@@ -28,14 +26,6 @@ public class MateriaHelper {
         ServiceFacadeLocator
                 .getInstanceFacadeMateria()
                 .guardarMateria(materia);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNombre() {
