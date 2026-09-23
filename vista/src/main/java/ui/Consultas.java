@@ -1,10 +1,8 @@
 package ui;
 
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 import mx.desarrollo.entity.Asignar;
 import mx.desarrollo.entity.Horario;
@@ -12,7 +10,6 @@ import mx.desarrollo.entity.Materia;
 import mx.desarrollo.entity.Profesor;
 import mx.desarrollo.persistencia.integration.ServiceLocator;
 
-import java.io.IOException;
 import java.text.Collator;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,9 +20,26 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-@WebServlet("/api/consulta-asignaciones")
-public class Consultas extends HttpServlet {
+@Named("consultasBean")
+@RequestScoped
+public class Consultas {
 
+    private List<ProfesorConsulta> profesores;
+
+    public List<ProfesorConsulta> getProfesores() {
+        if (profesores == null) {
+            profesores = consultaGeneral();
+        }
+        return profesores;
+    }
+
+    public int getTotalProfesores() {
+        return getProfesores().size();
+    }
+
+    public boolean isHayProfesores() {
+        return getTotalProfesores() > 0;
+    }
     public static class UnidadAsignada {
         public final String materia;
         public final String tipo;
@@ -38,6 +52,11 @@ public class Consultas extends HttpServlet {
             this.horario = horario;
             this.horas = horas;
         }
+
+        public String getMateria() { return materia; }
+        public String getTipo() { return tipo; }
+        public String getHorario() { return horario; }
+        public int getHoras() { return horas; }
     }
 
     public static class ProfesorConsulta {
@@ -57,6 +76,13 @@ public class Consultas extends HttpServlet {
             this.rfc = vacioSiNulo(rfc);
         }
 
+        public long getId() { return id; }
+        public String getNombre() { return nombre; }
+        public String getApellidoPaterno() { return apellidoPaterno; }
+        public String getApellidoMaterno() { return apellidoMaterno; }
+        public String getRfc() { return rfc; }
+        public List<UnidadAsignada> getUnidades() { return unidades; }
+
         public int getTotalHoras() {
             int total = 0;
             for (UnidadAsignada u : unidades) {
@@ -66,7 +92,7 @@ public class Consultas extends HttpServlet {
         }
     }
 
-    static class Fila {
+    private static class Fila {
         final long profesorId;
         final String nombre, apellidoPaterno, apellidoMaterno, rfc;
         final String materia, tipo, horario;
@@ -87,8 +113,9 @@ public class Consultas extends HttpServlet {
     }
 
     private static final DateTimeFormatter HORA = DateTimeFormatter.ofPattern("HH:mm");
+    private static final Collator COLLATOR = Collator.getInstance(Locale.forLanguageTag("es-MX"));
 
-    static List<Fila> obtenerFilas() {
+    private static List<Fila> obtenerFilas() {
         EntityManager em = ServiceLocator.getInstanceProfesorDAO().getEntityManager();
 
         List<Profesor> profesores = em
@@ -126,8 +153,6 @@ public class Consultas extends HttpServlet {
         }
         return filas;
     }
-
-    private static final Collator COLLATOR = Collator.getInstance(Locale.forLanguageTag("es-MX"));
 
     public static List<ProfesorConsulta> consultaGeneral() {
         Map<Long, ProfesorConsulta> porProfesor = new LinkedHashMap<>();
@@ -207,66 +232,5 @@ public class Consultas extends HttpServlet {
 
     private static String vacioSiNulo(String texto) {
         return texto == null ? "" : texto;
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        try {
-            resp.getWriter().write(aJson(consultaGeneral()));
-        } catch (RuntimeException e) {
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().write("{\"error\":\"No se pudo consultar las asignaciones\"}");
-        }
-    }
-
-    static String aJson(List<ProfesorConsulta> profesores) {
-        StringBuilder sb = new StringBuilder("[");
-        for (int i = 0; i < profesores.size(); i++) {
-            if (i > 0) {
-                sb.append(',');
-            }
-            ProfesorConsulta p = profesores.get(i);
-            sb.append("{\"id\":").append(p.id)
-                    .append(",\"nombre\":").append(texto(p.nombre))
-                    .append(",\"apellidoPaterno\":").append(texto(p.apellidoPaterno))
-                    .append(",\"apellidoMaterno\":").append(texto(p.apellidoMaterno))
-                    .append(",\"rfc\":").append(texto(p.rfc))
-                    .append(",\"totalHoras\":").append(p.getTotalHoras())
-                    .append(",\"unidades\":[");
-            for (int j = 0; j < p.unidades.size(); j++) {
-                if (j > 0) {
-                    sb.append(',');
-                }
-                UnidadAsignada u = p.unidades.get(j);
-                sb.append("{\"materia\":").append(texto(u.materia))
-                        .append(",\"tipo\":").append(texto(u.tipo))
-                        .append(",\"horario\":").append(texto(u.horario))
-                        .append(",\"horas\":").append(u.horas).append('}');
-            }
-            sb.append("]}");
-        }
-        return sb.append(']').toString();
-    }
-
-    private static String texto(String valor) {
-        StringBuilder sb = new StringBuilder("\"");
-        for (char c : valor.toCharArray()) {
-            switch (c) {
-                case '"':  sb.append("\\\""); break;
-                case '\\': sb.append("\\\\"); break;
-                case '\n': sb.append("\\n");  break;
-                case '\r': sb.append("\\r");  break;
-                case '\t': sb.append("\\t");  break;
-                default:
-                    if (c < 0x20) {
-                        sb.append(String.format("\\u%04x", (int) c));
-                    } else {
-                        sb.append(c);
-                    }
-            }
-        }
-        return sb.append('"').toString();
     }
 }
