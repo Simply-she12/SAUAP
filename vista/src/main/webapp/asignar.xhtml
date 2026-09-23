@@ -20,11 +20,13 @@
             box-sizing: border-box;
         }
 
+
         body {
             font-family: Georgia, 'Times New Roman', serif;
             background-color: #202020;
             min-height: 100vh;
         }
+
 
         .barra-superior {
             position: fixed;
@@ -44,6 +46,7 @@
             z-index: 10;
         }
 
+
         .logo {
             display: flex;
             align-items: center;
@@ -53,11 +56,13 @@
             font-size: 28px;
         }
 
+
         .logo img {
             width: 45px;
             height: 45px;
             object-fit: contain;
         }
+
 
         .usuario {
             color: white;
@@ -69,11 +74,13 @@
             gap: 8px;
         }
 
+
         .icono-usuario {
             width: 20px;
             height: 20px;
             object-fit: contain;
         }
+
 
         .icono-salir {
             width: 20px;
@@ -83,10 +90,6 @@
             margin-left: 25px;
         }
 
-        .flecha {
-            font-size: 16px;
-            margin-left: 3px;
-        }
 
         .menu-lateral {
             position: fixed;
@@ -135,6 +138,7 @@
             background-color: #064c55;
         }
 
+
         .contenido {
             position: absolute;
 
@@ -150,6 +154,7 @@
 
             overflow-x: hidden;
         }
+
 
         .titulo {
             height: 84px;
@@ -182,11 +187,14 @@
             font-weight: normal;
         }
 
+
         .asignacion {
             background-color: #d9d9d9;
+
             border-radius: 13px;
 
-            min-height: 357px;
+            min-height: 400px;
+
             height: auto;
 
             padding: 14px 30px 30px;
@@ -206,14 +214,16 @@
             display: flex;
 
             align-items: flex-end;
+
             justify-content: center;
 
-            gap: 45px;
+            gap: 35px;
 
             flex-wrap: wrap;
 
             margin-top: 25px;
         }
+
 
         .campo {
             display: flex;
@@ -228,8 +238,8 @@
             font-size: 14px;
         }
 
-        .campo input,
-        .campo select {
+
+        .campo input {
             height: 32px;
 
             border: none;
@@ -247,25 +257,45 @@
             font-size: 14px;
         }
 
-        .profesor input {
-            width: 220px;
-        }
+        .campo input[type="time"] {
 
-        .materia input {
-            width: 220px;
-        }
-
-        .tipo select {
             width: 150px;
+
+            height: 32px;
+
+            border: 1px solid #aaa;
+
+            border-radius: 3px;
+
+            background-color: white;
+
+            padding: 0 8px;
+
+            outline: none;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
         }
 
+
+        .ui-selectonemenu {
+
+            min-width: 180px;
+
+            height: 32px;
+
+            border-radius: 18px;
+        }
 
         .boton-asignar {
+
             display: block;
 
             margin: 35px auto 0;
 
             width: 125px;
+
             height: 32px;
 
             border: none;
@@ -285,23 +315,31 @@
             transition: 0.2s;
         }
 
-        .mensaje-error {
-            color: #d32f2f;
-            font-size: 13px;
-            font-weight: bold;
-            display: block;
-            text-align: center;
-            margin-top: 8px;
-        }
-
 
         .boton-asignar:hover {
+
             background-color: #5c0d58;
 
             transform: scale(1.03);
         }
 
+        .mensaje-error {
+
+            color: #d32f2f;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 8px;
+        }
+
         .materias-asignadas {
+
             background-color: white;
 
             border-radius: 13px;
@@ -319,6 +357,7 @@
 
 
         .materias-asignadas h3 {
+
             text-align: center;
 
             font-size: 12px;
@@ -328,7 +367,9 @@
             margin-bottom: 15px;
         }
 
+
         .tabla {
+
             width: 100%;
 
             border-collapse: collapse;
@@ -338,16 +379,21 @@
 
 
         .tabla th {
+
             background-color: #075c66;
+
             color: white;
+
             padding: 5px;
 
             position: sticky;
+
             top: 0;
         }
 
 
         .tabla td {
+
             padding: 5px;
 
             text-align: center;
@@ -355,14 +401,17 @@
             border-bottom: 1px solid #ddd;
         }
 
+
         @media (max-width: 800px) {
 
             .menu-lateral {
+
                 width: 100px;
             }
 
 
             .menu-item {
+
                 font-size: 0;
 
                 justify-content: center;
@@ -370,22 +419,27 @@
 
 
             .menu-item img {
+
                 width: 20px;
+
                 height: 20px;
             }
 
 
             .contenido {
+
                 left: 107px;
             }
 
 
             .formulario {
+
                 gap: 15px;
             }
 
 
             .materias-asignadas {
+
                 width: 95%;
             }
 
@@ -398,310 +452,385 @@
 
 <h:body>
 
-<header class="barra-superior">
 
-    <div class="logo">
+    <header class="barra-superior">
 
-        <img
-                src="resources/iconlogo.png"
-                alt="Logo SAUAP"
-        />
+        <div class="logo">
 
-        <span>SAUAP</span>
+            <img
+                    src="resources/iconlogo.png"
+                    alt="Logo SAUAP"
+            />
 
-    </div>
-
-
-    <div class="usuario">
-
-        <img
-                src="resources/iconuserblanco.png"
-                alt="Usuario"
-                class="icono-usuario"
-        />
-
-        <span>Administrador</span>
-
-
-
-        <img
-                src="resources/iconsalir.png"
-                alt="Cerrar sesión"
-                class="icono-salir"
-        />
-
-    </div>
-
-</header>
-
-<aside class="menu-lateral">
-
-
-    <a href="menu.xhtml" class="menu-item">
-
-        <img
-                src="resources/iconInicio.png"
-                alt="Inicio"
-        />
-
-        <span>INICIO</span>
-
-    </a>
-
-
-    <a href="Profesores.xhtml" class="menu-item">
-
-        <img
-                src="resources/iconuserblanco.png"
-                alt="Profesores"
-        />
-
-        <span>PROFESORES</span>
-
-    </a>
-
-
-    <a href="materia.xhtml" class="menu-item">
-
-        <img
-                src="resources/iconmateria.png"
-                alt="Materias"
-        />
-
-        <span>MATERIAS</span>
-
-    </a>
-
-
-    <a href="asignar.xhtml" class="menu-item">
-
-        <img
-                src="resources/iconasig.png"
-                alt="Asignación"
-        />
-
-        <span>ASIGNACIÓN</span>
-
-    </a>
-
-    <a href="Consultas.xhtml" class="menu-item">
-        <img src="resources/iconocon.png" alt="Consultas"/>
-        <span>CONSULTAS</span>
-    </a>
-
-</aside>
-
-<main class="contenido">
-
-    <section class="titulo">
-
-        <img
-                src="resources/iconasig.png"
-                alt="Asignación de materias"
-        />
-
-        <h1>ASIGNACIÓN DE MATERIAS</h1>
-
-    </section>
-
-    <section class="asignacion">
-
-
-        <h2 class="subtitulo">
-            Nueva Asignación
-        </h2>
-
-        <h:form id="formAsignar" styleClass="formulario">
-            <p:messages id="mensajes" showDetail="true" closable="true"/>
-
-            <div class="campo profesor">
-
-                <label>Profesor:</label>
-
-                <p:selectOneMenu
-                        value="#{asignarHelper.profesorId}"
-                        styleClass="select">
-
-                    <f:selectItem
-                            itemLabel="Seleccione un profesor"
-                            itemValue="#{null}" />
-
-                    <f:selectItems
-                            value="#{asignarHelper.profesores}"
-                            var="p"
-                            itemLabel="#{p.nombre} #{p.apellidoP} #{p.apellidoM}"
-                            itemValue="#{p.id}" />
-
-                </p:selectOneMenu>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label>Materia:</label>
-
-                <p:selectOneMenu
-                        id="materia"
-                        value="#{asignarHelper.materiaId}"
-                        styleClass="select">
-
-                    <f:selectItem
-                            itemLabel="Seleccione una materia"
-                            itemValue="#{null}"
-                            noSelectionOption="true"/>
-
-                    <f:selectItems
-                            value="#{asignarHelper.materias}"
-                            var="m"
-                            itemLabel="#{m.nombre}"
-                            itemValue="#{m.id}"/>
-
-                    <p:ajax
-                            process="@this tipo"
-                            update="horario"
-                            listener="#{asignarHelper.actualizarHorarios}"/>
-
-                </p:selectOneMenu>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label>Tipo:</label>
-
-                <p:selectOneMenu
-                        id="tipo"
-                        value="#{asignarHelper.tipo}"
-                        styleClass="select">
-
-                    <f:selectItem
-                            itemLabel="Seleccione un tipo"
-                            itemValue="#{null}"
-                            noSelectionOption="true"/>
-
-                    <f:selectItem
-                            itemLabel="Clase"
-                            itemValue="teoria"/>
-
-                    <f:selectItem
-                            itemLabel="Taller"
-                            itemValue="taller"/>
-
-                    <f:selectItem
-                            itemLabel="Laboratorio"
-                            itemValue="laboratorio"/>
-
-                    <p:ajax
-                            process="@this materia"
-                            update="horario"
-                            listener="#{asignarHelper.actualizarHorarios}"/>
-
-                </p:selectOneMenu>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label>Horario:</label>
-
-                <p:selectOneMenu
-                        id="horario"
-                        value="#{asignarHelper.horarioId}"
-                        styleClass="select">
-
-                    <f:selectItem
-                            itemLabel="Seleccione un horario"
-                            itemValue="#{null}"
-                            noSelectionOption="true"/>
-
-                    <f:selectItems
-                            value="#{asignarHelper.horarios}"
-                            var="h"
-                            itemValue="#{h.idhorario}"
-                            itemLabel="#{h.dia} #{h.horaI} - #{h.horaF}"/>
-
-                </p:selectOneMenu>
-
-            </div>
-
-            <p:commandButton
-                    value="Asignar"
-                    action="#{asignarHelper.asignar}"
-                    update="mensajeError"
-                    styleClass="boton-asignar"/>
-
-            <h:panelGroup id="mensajeError" layout="block">
-
-                <h:outputText
-                        value="#{asignarHelper.mensajeError}"
-                        rendered="#{not empty asignarHelper.mensajeError}"
-                        styleClass="mensaje-error"/>
-
-            </h:panelGroup>
-        </h:form>
-
-
-
-        <div class="materias-asignadas">
-
-            <h3>Materias asignadas</h3>
-
-            <table class="tabla">
-
-                <thead>
-                <tr>
-                    <th>Profesor</th>
-                    <th>Materia</th>
-                    <th>Tipo</th>
-                    <th>Horario</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-                <ui:repeat value="#{asignarHelper.asignaciones}" var="a">
-
-                    <tr>
-
-                        <td>
-                            #{a.profesor.nombre}
-                            #{a.profesor.apellidoP}
-                            #{a.profesor.apellidoM}
-                        </td>
-
-                        <td>
-                            #{a.materia.nombre}
-                        </td>
-
-                        <td>
-                            #{a.tipo}
-                        </td>
-
-                        <td>
-                            #{a.horario.dia}
-                            #{a.horario.horaI}
-                            -
-                            #{a.horario.horaF}
-                        </td>
-
-                    </tr>
-
-                </ui:repeat>
-
-                </tbody>
-
-            </table>
+            <span>SAUAP</span>
 
         </div>
 
 
-    </section>
+        <div class="usuario">
+
+            <img
+                    src="resources/iconuserblanco.png"
+                    alt="Usuario"
+                    class="icono-usuario"
+            />
+
+            <span>Administrador</span>
 
 
-</main>
+            <img
+                    src="resources/iconsalir.png"
+                    alt="Cerrar sesión"
+                    class="icono-salir"
+            />
+
+        </div>
+
+    </header>
+
+
+    <aside class="menu-lateral">
+
+
+        <a href="menu.xhtml" class="menu-item">
+
+            <img
+                    src="resources/iconInicio.png"
+                    alt="Inicio"
+            />
+
+            <span>INICIO</span>
+
+        </a>
+
+
+        <a href="Profesores.xhtml" class="menu-item">
+
+            <img
+                    src="resources/iconuserblanco.png"
+                    alt="Profesores"
+            />
+
+            <span>PROFESORES</span>
+
+        </a>
+
+
+        <a href="materia.xhtml" class="menu-item">
+
+            <img
+                    src="resources/iconmateria.png"
+                    alt="Materias"
+            />
+
+            <span>MATERIAS</span>
+
+        </a>
+
+
+        <a href="asignar.xhtml" class="menu-item">
+
+            <img
+                    src="resources/asigna.png"
+                    alt="Asignación"
+            />
+
+            <span>ASIGNACIÓN</span>
+
+        </a>
+
+
+        <a href="Consultas.xhtml" class="menu-item">
+
+            <img
+                    src="resources/iconocon.png"
+                    alt="Consultas"
+            />
+
+            <span>CONSULTAS</span>
+
+        </a>
+
+    </aside>
+
+
+    <main class="contenido">
+
+
+        <section class="titulo">
+
+            <img
+                    src="resources/iconasig.png"
+                    alt="Asignación de materias"
+            />
+
+            <h1>ASIGNACIÓN DE MATERIAS</h1>
+
+        </section>
+
+
+        <section class="asignacion">
+
+
+            <h2 class="subtitulo">
+                Nueva Asignación
+            </h2>
+
+
+            <h:form
+                    id="formAsignar"
+                    styleClass="formulario">
+
+                <div class="campo">
+
+                    <label>Profesor:</label>
+
+                    <p:selectOneMenu
+                            id="profesor"
+                            value="#{asignarHelper.profesorId}">
+
+                        <f:selectItem
+                                itemLabel="Seleccione un profesor"
+                                itemValue="#{null}"
+                                noSelectionOption="true"/>
+
+                        <f:selectItems
+                                value="#{asignarHelper.profesores}"
+                                var="p"
+                                itemLabel="#{p.nombre} #{p.apellidoP} #{p.apellidoM}"
+                                itemValue="#{p.id}"/>
+
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Materia:</label>
+
+                    <p:selectOneMenu
+                            id="materia"
+                            value="#{asignarHelper.materiaId}">
+
+                        <f:selectItem
+                                itemLabel="Seleccione una materia"
+                                itemValue="#{null}"
+                                noSelectionOption="true"/>
+
+                        <f:selectItems
+                                value="#{asignarHelper.materias}"
+                                var="m"
+                                itemLabel="#{m.nombre}"
+                                itemValue="#{m.id}"/>
+
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Tipo:</label>
+
+                    <p:selectOneMenu
+                            id="tipo"
+                            value="#{asignarHelper.tipo}">
+
+                        <f:selectItem
+                                itemLabel="Seleccione un tipo"
+                                itemValue="#{null}"
+                                noSelectionOption="true"/>
+
+                        <f:selectItem
+                                itemLabel="Clase"
+                                itemValue="teoria"/>
+
+                        <f:selectItem
+                                itemLabel="Taller"
+                                itemValue="taller"/>
+
+                        <f:selectItem
+                                itemLabel="Laboratorio"
+                                itemValue="laboratorio"/>
+
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Día:</label>
+
+                    <p:selectOneMenu
+                            id="dia"
+                            value="#{asignarHelper.dia}">
+
+                        <f:selectItem
+                                itemLabel="Seleccione un día"
+                                itemValue="#{null}"
+                                noSelectionOption="true"/>
+
+                        <f:selectItem
+                                itemLabel="Lunes"
+                                itemValue="Lunes"/>
+
+                        <f:selectItem
+                                itemLabel="Martes"
+                                itemValue="Martes"/>
+
+                        <f:selectItem
+                                itemLabel="Miércoles"
+                                itemValue="Miércoles"/>
+
+                        <f:selectItem
+                                itemLabel="Jueves"
+                                itemValue="Jueves"/>
+
+                        <f:selectItem
+                                itemLabel="Viernes"
+                                itemValue="Viernes"/>
+
+                        <f:selectItem
+                                itemLabel="Sábado"
+                                itemValue="Sábado"/>
+
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Hora de inicio:</label>
+
+                    <h:inputText
+                            id="horaInicio"
+                            value="#{asignarHelper.horaInicio}"
+                            type="time"/>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Hora final:</label>
+
+                    <h:inputText
+                            id="horaFin"
+                            value="#{asignarHelper.horaFin}"
+                            type="time"/>
+
+                </div>
+
+                <p:commandButton
+                        value="Asignar"
+                        action="#{asignarHelper.asignar}"
+                        update="@form tablaAsignaciones"
+                        styleClass="boton-asignar"/>
+
+                <h:panelGroup
+                        id="mensajeError"
+                        layout="block">
+
+                    <h:outputText
+                            value="#{asignarHelper.mensajeError}"
+                            rendered="#{not empty asignarHelper.mensajeError}"
+                            styleClass="mensaje-error"/>
+
+                </h:panelGroup>
+
+
+            </h:form>
+
+            <div
+                    id="tablaAsignaciones"
+                    class="materias-asignadas">
+
+                <h3>Materias asignadas</h3>
+
+
+                <table class="tabla">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Profesor</th>
+
+                        <th>Materia</th>
+
+                        <th>Tipo</th>
+
+                        <th>Horario</th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                    <ui:repeat
+                            value="#{asignarHelper.asignaciones}"
+                            var="a">
+
+
+                        <tr>
+
+
+                            <td>
+
+                                #{a.profesor.nombre}
+
+                                #{a.profesor.apellidoP}
+
+                                #{a.profesor.apellidoM}
+
+                            </td>
+
+
+                            <td>
+
+                                #{a.materia.nombre}
+
+                            </td>
+
+
+                            <td>
+
+                                #{a.tipo}
+
+                            </td>
+
+
+                            <td>
+
+                                #{a.horario.dia}
+
+                                #{a.horario.horaI}
+
+                                -
+
+                                #{a.horario.horaF}
+
+                            </td>
+
+
+                        </tr>
+
+
+                    </ui:repeat>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
 
 
 </h:body>
