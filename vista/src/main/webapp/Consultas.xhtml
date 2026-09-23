@@ -109,7 +109,7 @@
             color: white;
             text-decoration: none;
 
-            font-size: 15px;
+            font-size: 16px;
 
             padding: 18px 12px;
 
@@ -173,6 +173,11 @@
             width: 44px;
             height: 44px;
 
+            object-fit: contain;
+        }
+        .titulo-icono {
+            width: 44px;
+            height: 45px;
             object-fit: contain;
         }
 
@@ -477,11 +482,10 @@
 
         <section class="titulo">
 
-            <svg viewBox="0 0 24 24" fill="none" stroke="#075c66" stroke-width="1.8"
-                 stroke-linecap="round" aria-hidden="true">
-                <circle cx="10.5" cy="10.5" r="6.5"/>
-                <line x1="15.5" y1="15.5" x2="21" y2="21"/>
-            </svg>
+            <h:graphicImage
+                    name="iconocon.png"
+                    styleClass="titulo-icono"
+            />
 
             <h1>CONSULTAS</h1>
 
