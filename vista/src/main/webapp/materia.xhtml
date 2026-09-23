@@ -394,7 +394,7 @@
 
         .titulo {
             font-family: "Inria Serif", serif;
-            font-size: 50px;
+            font-size: 30px;
             color: #000000;
             font-weight: normal;
             background-color: #d9d9d9;
@@ -402,6 +402,8 @@
             border-radius: 15px;
             margin-bottom: 30px;
             width: 100%;
+            display: flex;
+            flex-direction: row;
         }
         .subtitulo {
             font-family: "Inria Serif", serif;
@@ -444,6 +446,12 @@
             max-width: 500px;
             align-self: center;
         }
+
+        .manten{
+            height: 80px;
+            filter: invert(59.55%) sepia(78.87%) saturate(1389.58%) hue-rotate(154.47deg) brightness(51.59%) contrast(94.51%);
+        }
+
         /*]]>*/
     </style>
 
@@ -546,8 +554,14 @@
     </aside>
 
     <main class="contenidoo">
-
-        <h1 class="titulo">Mantenimiento CRUD</h1>
+        <div class="titulo">
+            <h:graphicImage
+                    class="manten"
+                    name="mantenimiento.png"
+                    alt="Mantenimiento"
+            />
+            <h1>Mantenimiento CRUD</h1>
+        </div>
 
         <form class="formulario">
             <b class="subtitulo">Catálogo de unidades de aprendizaje</b>
@@ -575,6 +589,27 @@
             <div class="campo">
                 <label for="horas">Horas:</label>
                 <input type="text" id="horas" name="horas" required="required"/>
+            </div>
+
+            <div class="campo">
+                <label for="dia">Dia:</label>
+                <select>
+                    <option></option>
+                    <option>Lunes</option>
+                    <option>Martes</option>
+                    <option>Miercoles</option>
+                    <option>Jueves</option>
+                    <option>Viernes</option>
+                    <option>Sabado</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Hora de Inicio:</label>
+                <input type="time"/>
+
+                <label>Hora Final:</label>
+                <input type="time"/>
             </div>
 
             <button class="boton2">Registrar</button>
