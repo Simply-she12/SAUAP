@@ -35,7 +35,7 @@ public class DelegateProfesor {
 
     public void saveProfesor(Profesor profesor) {
         if (profesor.getPassword() == null || profesor.getPassword().trim().isEmpty()) {
-            profesor.setPassword(" ");
+            profesor.setPassword("  ");
         }
 
         ServiceLocator.getInstanceProfesorDAO().save(profesor);
