@@ -60,20 +60,19 @@ public class Consultas {
         public final String materia;
         public final String tipo;
         public final String horario;
-        public final double horas;
+        public final long minutos;
 
-        public UnidadAsignada(String materia, String tipo, String horario, double horas) {
+        public UnidadAsignada(String materia, String tipo, String horario, long minutos) {
             this.materia = materia;
             this.tipo = tipo;
             this.horario = horario;
-            this.horas = horas;
+            this.minutos = minutos;
         }
 
         public String getMateria() { return materia; }
         public String getTipo() { return tipo; }
         public String getHorario() { return horario; }
-        public double getHoras() { return horas; }
-        public String getHorasTexto() { return formatearHoras(horas); }
+        public String getHorasTexto() { return formatearMinutos(minutos); }
     }
 
     public static class ProfesorConsulta {
@@ -100,25 +99,23 @@ public class Consultas {
         public String getRfc() { return rfc; }
         public List<UnidadAsignada> getUnidades() { return unidades; }
 
-        public double getTotalHoras() {
-            double total = 0;
+        public String getTotalHorasTexto() {
+            long totalMinutos = 0;
             for (UnidadAsignada u : unidades) {
-                total += u.horas;
+                totalMinutos += u.minutos;
             }
-            return total;
+            return formatearMinutos(totalMinutos);
         }
-
-        public String getTotalHorasTexto() { return formatearHoras(getTotalHoras()); }
     }
 
     private static class Fila {
         final long profesorId;
         final String nombre, apellidoPaterno, apellidoMaterno, rfc;
         final String materia, tipo, horario;
-        final double horas;
+        final long minutos;
 
         Fila(long profesorId, String nombre, String apellidoPaterno, String apellidoMaterno,
-             String rfc, String materia, String tipo, String horario, double horas) {
+             String rfc, String materia, String tipo, String horario, long minutos) {
             this.profesorId = profesorId;
             this.nombre = nombre;
             this.apellidoPaterno = apellidoPaterno;
@@ -127,7 +124,7 @@ public class Consultas {
             this.materia = materia;
             this.tipo = tipo;
             this.horario = horario;
-            this.horas = horas;
+            this.minutos = minutos;
         }
     }
 
@@ -171,7 +168,7 @@ public class Consultas {
                         p.getApellidoM(), p.getRfc(),
                         a.getMateria().getNombre(), tipo,
                         textoHorario(a.getHorario()),
-                        calcularHoras(a.getHorario())));
+                        calcularMinutos(a.getHorario())));
             }
         }
         return filas;
@@ -188,7 +185,7 @@ public class Consultas {
                 porProfesor.put(f.profesorId, p);
             }
             if (f.materia != null) {
-                p.unidades.add(new UnidadAsignada(f.materia, f.tipo, f.horario, f.horas));
+                p.unidades.add(new UnidadAsignada(f.materia, f.tipo, f.horario, f.minutos));
             }
         }
 
@@ -225,7 +222,7 @@ public class Consultas {
         }
     }
 
-    private static double calcularHoras(Horario h) {
+    private static long calcularMinutos(Horario h) {
         if (h == null || h.getHoraI() == null || h.getHoraF() == null) {
             return 0;
         }
@@ -234,14 +231,16 @@ public class Consultas {
             // el horario cruza la medianoche (ej. 23:00 - 01:00)
             minutos += 24 * 60;
         }
-        return minutos / 60.0;
+        return minutos;
     }
 
-    private static String formatearHoras(double horas) {
-        if (horas == Math.floor(horas)) {
-            return String.valueOf((long) horas);
+    private static String formatearMinutos(long totalMinutos) {
+        long horas = totalMinutos / 60;
+        long minutosSobrantes = totalMinutos % 60;
+        if (minutosSobrantes == 0) {
+            return String.valueOf(horas);
         }
-        return String.format(Locale.forLanguageTag("es-MX"), "%.1f", horas);
+        return horas + ":" + String.format(Locale.ROOT, "%02d", minutosSobrantes);
     }
 
     private static String textoHorario(Horario h) {
