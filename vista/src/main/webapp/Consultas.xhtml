@@ -1,6 +1,9 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:fn="jakarta.tags.functions"
       lang="es">
 
 <h:head>
@@ -20,7 +23,7 @@
         }
 
         body {
-            font-family: Georgia, 'Times New Roman', serif;
+            font-family: Arial, Helvetica, sans-serif;
             background-color: #202020;
             min-height: 100vh;
         }
@@ -49,7 +52,7 @@
             gap: 15px;
 
             color: white;
-            font-size: 28px;
+            font-size: 26px;
         }
 
         .logo img {
@@ -60,7 +63,7 @@
 
         .usuario {
             color: white;
-            font-size: 18px;
+            font-size: 16px;
 
             display: flex;
             align-items: center;
@@ -106,7 +109,7 @@
             color: white;
             text-decoration: none;
 
-            font-size: 16px;
+            font-size: 15px;
 
             padding: 18px 12px;
 
@@ -154,169 +157,67 @@
 
             background-color: #d9d9d9;
 
-            border-radius: 13px;
+            border-radius: 10px;
 
             display: flex;
             align-items: center;
 
             padding-left: 30px;
 
-            gap: 28px;
+            gap: 24px;
 
             margin-bottom: 24px;
         }
 
-        .titulo img,
         .titulo svg {
-            width: 55px;
-            height: 55px;
+            width: 44px;
+            height: 44px;
 
             object-fit: contain;
         }
 
         .titulo h1 {
-            font-size: 28px;
-            font-weight: normal;
+            font-size: 24px;
+            font-weight: bold;
+            color: #172325;
         }
 
         .consulta {
             background-color: #d9d9d9;
 
-            border-radius: 13px;
+            border-radius: 10px;
 
             min-height: 357px;
 
-            padding: 14px 30px 30px;
+            padding: 20px 30px 30px;
         }
 
         .subtitulo {
-            font-size: 18px;
-
-            margin-bottom: 8px;
-        }
-
-        .barra-herramientas {
-            display: flex;
-
-            align-items: flex-end;
-            justify-content: space-between;
-
-            gap: 20px;
-
-            flex-wrap: wrap;
-
-            margin: 25px 0 14px;
-        }
-
-        .campo {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 7px;
-        }
-
-        .campo label {
-            font-size: 14px;
-        }
-
-        .campo input {
-            width: 320px;
-            max-width: 100%;
-            height: 32px;
-
-            border: none;
-
-            border-radius: 18px;
-
-            background-color: white;
-
-            padding: 0 15px;
-
-            outline: none;
-
-            font-family: Georgia, 'Times New Roman', serif;
-
-            font-size: 14px;
-        }
-
-        .campo input:focus-visible {
-            outline: 2px solid #075c66;
-        }
-
-        .estado {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-
-            flex-wrap: wrap;
-
-            font-size: 14px;
-
-            min-height: 24px;
+            font-size: 17px;
+            font-weight: bold;
+            color: #172325;
 
             margin-bottom: 14px;
         }
 
-        .busqueda {
-            display: flex;
+        .resumen {
+            font-size: 13px;
+            color: #444;
 
-            align-items: flex-end;
-
-            gap: 12px;
-
-            flex-wrap: wrap;
-        }
-
-        .boton {
-            width: 150px;
-            height: 32px;
-
-            border: none;
-
-            border-radius: 18px;
-
-            background-color: #74116f;
-
-            color: white;
-
-            font-family: Georgia, 'Times New Roman', serif;
-
-            font-size: 14px;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .boton:hover:not(:disabled) {
-            background-color: #5c0d58;
-
-            transform: scale(1.03);
-        }
-
-        .boton:focus-visible {
-            outline: 2px solid #075c66;
-            outline-offset: 2px;
-        }
-
-        .boton:disabled {
-            opacity: 0.55;
-
-            cursor: not-allowed;
+            margin-bottom: 14px;
         }
 
         .lista {
             display: flex;
             flex-direction: column;
 
-            gap: 16px;
+            gap: 14px;
         }
 
         .profesor-card {
             background-color: white;
 
-            border-radius: 13px;
+            border-radius: 8px;
 
             padding: 12px 16px 14px;
         }
@@ -335,8 +236,9 @@
         }
 
         .profesor-encabezado h3 {
-            font-size: 17px;
-            font-weight: normal;
+            font-size: 16px;
+            font-weight: bold;
+            color: #172325;
         }
 
         .profesor-datos {
@@ -361,32 +263,25 @@
 
             color: white;
 
-            font-weight: normal;
+            font-weight: bold;
 
             padding: 6px 8px;
+
+            text-align: left;
         }
 
         .tabla td {
             padding: 6px 8px;
 
-            text-align: center;
-
             border-bottom: 1px solid #ddd;
-        }
-
-        .tabla th:first-child,
-        .tabla td:first-child {
-            text-align: left;
         }
 
         .tipo {
             display: inline-block;
 
-            min-width: 92px;
+            border-radius: 4px;
 
-            border-radius: 18px;
-
-            padding: 2px 12px;
+            padding: 2px 10px;
 
             font-size: 12px;
         }
@@ -407,18 +302,16 @@
         }
 
         .sin-unidades {
-            text-align: center;
-
             font-size: 13px;
             color: #555;
 
-            padding: 10px 0 4px;
+            padding: 4px 0 2px;
         }
 
         .sin-resultados {
             background-color: white;
 
-            border-radius: 13px;
+            border-radius: 8px;
 
             padding: 34px 24px 30px;
 
@@ -428,16 +321,15 @@
         }
 
         .sin-resultados svg {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
 
             margin-bottom: 10px;
         }
 
         .sin-resultados h3 {
-            font-size: 18px;
-            font-weight: normal;
-
+            font-size: 17px;
+            font-weight: bold;
             color: #172325;
 
             margin-bottom: 6px;
@@ -448,58 +340,8 @@
 
             margin: 0 auto;
 
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .paginacion {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            gap: 16px;
-
-            margin-top: 18px;
-        }
-
-        .btn-pagina {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            width: 34px;
-            height: 34px;
-
-            border: none;
-            border-radius: 50%;
-
-            background-color: #075c66;
-
-            color: white;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .btn-pagina svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .btn-pagina:hover:not(:disabled) {
-            background-color: #064c55;
-        }
-
-        .btn-pagina:disabled {
-            opacity: 0.35;
-
-            cursor: not-allowed;
-        }
-
-        .pagina-info {
             font-size: 13px;
-            color: #444;
+            line-height: 1.5;
         }
 
         @media (max-width: 800px) {
@@ -519,11 +361,7 @@
             }
 
             .consulta {
-                padding: 14px 15px 25px;
-            }
-
-            .barra-herramientas {
-                gap: 12px;
+                padding: 16px 15px 25px;
             }
 
         }
@@ -635,8 +473,7 @@
 
     </aside>
 
-    <main class="contenido" id="app"
-          data-api="#{request.contextPath}/api/consulta-asignaciones">
+    <main class="contenido">
 
         <section class="titulo">
 
@@ -646,302 +483,90 @@
                 <line x1="15.5" y1="15.5" x2="21" y2="21"/>
             </svg>
 
-            <h1>CONSULTAS GENERALES</h1>
+            <h1>CONSULTAS</h1>
 
         </section>
 
         <section class="consulta">
 
             <h2 class="subtitulo">
-                Asignación por profesor
+                Consulta de asignación por profesor
             </h2>
 
-            <div class="barra-herramientas">
+            <p class="resumen">
+                #{consultasBean.totalProfesores}
+                #{consultasBean.totalProfesores == 1 ? 'profesor registrado' : 'profesores registrados'}
+            </p>
 
-                <div class="busqueda">
-
-                    <div class="campo">
-
-                        <label for="buscar">
-                            Buscar profesor o materia:
-                        </label>
-
-                        <input
-                                type="search"
-                                id="buscar"
-                                placeholder="Nombre del profesor o materia"
-                                autocomplete="off"
-                        />
-
-                    </div>
-
-                    <button
-                            type="button"
-                            id="btn-buscar"
-                            class="boton"
-                    >
-                        Buscar
-                    </button>
-
+            <ui:fragment rendered="#{not consultasBean.hayProfesores}">
+                <div class="sin-resultados">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#075c66" stroke-width="1.6"
+                         stroke-linecap="round" aria-hidden="true">
+                        <circle cx="10.5" cy="10.5" r="6.5"/>
+                        <line x1="15.5" y1="15.5" x2="21" y2="21"/>
+                    </svg>
+                    <h3>Sin profesores</h3>
+                    <p>Todavía no hay profesores registrados.</p>
                 </div>
+            </ui:fragment>
 
-            </div>
+            <ui:fragment rendered="#{consultasBean.hayProfesores}">
+                <div class="lista">
+                    <ui:repeat value="#{consultasBean.profesores}" var="p">
+                        <article class="profesor-card">
 
-            <div class="estado">
+                            <div class="profesor-encabezado">
+                                <h3>#{p.nombre} #{p.apellidoPaterno} #{p.apellidoMaterno}</h3>
+                                <span class="profesor-datos">
+                                    RFC: #{p.rfc} &#160;|&#160;
+                                    #{fn:length(p.unidades)} #{fn:length(p.unidades) == 1 ? 'asignación' : 'asignaciones'}
+                                    &#160;|&#160; #{p.totalHoras} h en total
+                                </span>
+                            </div>
 
-                <span id="resumen" role="status" aria-live="polite"></span>
+                            <ui:fragment rendered="#{empty p.unidades}">
+                                <p class="sin-unidades">
+                                    Este profesor todavía no tiene unidades de aprendizaje asignadas.
+                                </p>
+                            </ui:fragment>
 
-            </div>
+                            <ui:fragment rendered="#{not empty p.unidades}">
+                                <div class="tabla-scroll">
+                                    <table class="tabla">
+                                        <thead>
+                                        <tr>
+                                            <th>Materia</th>
+                                            <th>Tipo</th>
+                                            <th>Horario</th>
+                                            <th>Horas</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <ui:repeat value="#{p.unidades}" var="u">
+                                            <tr>
+                                                <td>#{u.materia}</td>
+                                                <td>
+                                                        <span class="tipo tipo-#{fn:toLowerCase(u.tipo)}">
+                                                            #{u.tipo}
+                                                        </span>
+                                                </td>
+                                                <td>#{u.horario}</td>
+                                                <td>#{u.horas}</td>
+                                            </tr>
+                                        </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ui:fragment>
 
-            <div id="lista" class="lista"></div>
-
-            <div id="paginacion" class="paginacion" hidden="hidden">
-
-                <button type="button" id="btn-anteriores" class="btn-pagina" aria-label="Ver profesores anteriores">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"
-                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <polyline points="15 18 9 12 15 6"/>
-                    </svg>
-                </button>
-
-                <span id="pagina-info" class="pagina-info"></span>
-
-                <button type="button" id="btn-siguientes" class="btn-pagina" aria-label="Ver profesores más recientes">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4"
-                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <polyline points="9 18 15 12 9 6"/>
-                    </svg>
-                </button>
-
-            </div>
+                        </article>
+                    </ui:repeat>
+                </div>
+            </ui:fragment>
 
         </section>
 
     </main>
-
-    <script type="text/javascript">
-        //<![CDATA[
-
-        const URL_API = document.getElementById('app').getAttribute('data-api');
-        const POR_PAGINA = 5;
-
-        let profesores = [];
-        let cargado = false;
-
-        // Vista actual mostrada en pantalla: lista de {profesor, unidades} y si tiene paginación.
-        let vistaActual = [];
-        let paginaActual = 0;
-
-        const $lista = document.getElementById('lista');
-        const $resumen = document.getElementById('resumen');
-        const $buscar = document.getElementById('buscar');
-        const $btnBuscar = document.getElementById('btn-buscar');
-        const $paginacion = document.getElementById('paginacion');
-        const $paginaInfo = document.getElementById('pagina-info');
-        const $btnAnteriores = document.getElementById('btn-anteriores');
-        const $btnSiguientes = document.getElementById('btn-siguientes');
-
-        function normalizar(texto) {
-            return String(texto || '')
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '')
-                .toLowerCase();
-        }
-
-        function el(etiqueta, clase, texto) {
-            const nodo = document.createElement(etiqueta);
-            if (clase) nodo.className = clase;
-            if (texto !== undefined) nodo.textContent = texto;
-            return nodo;
-        }
-
-        function nombreCompleto(p) {
-            return [p.nombre, p.apellidoPaterno, p.apellidoMaterno].filter(Boolean).join(' ');
-        }
-
-        async function cargar() {
-            const aviso = setTimeout(() => mostrarMensaje('Cargando',
-                'Obteniendo los profesores registrados…'), 500);
-
-            let datos;
-            try {
-                const respuesta = await fetch(URL_API, {headers: {'Accept': 'application/json'}});
-                const tipo = respuesta.headers.get('content-type') || '';
-                if (!respuesta.ok || !tipo.includes('json')) {
-                    throw new Error('Respuesta inválida del servicio');
-                }
-                datos = await respuesta.json();
-            } catch (error) {
-                clearTimeout(aviso);
-                mostrarMensaje('No se pudo cargar la consulta',
-                    'El servicio no respondió. Revisa que el servidor y la base de datos estén funcionando.');
-                return;
-            }
-
-            clearTimeout(aviso);
-            profesores = datos;
-            cargado = true;
-            mostrarTodos();
-        }
-
-        // Construye una tarjeta para un profesor, mostrando solo las unidades indicadas.
-        function crearTarjeta(p, unidadesAMostrar) {
-            const tarjeta = el('article', 'profesor-card');
-
-            const encabezado = el('div', 'profesor-encabezado');
-            encabezado.appendChild(el('h3', '', nombreCompleto(p)));
-
-            const cuantas = unidadesAMostrar.length;
-            const horasMostradas = unidadesAMostrar.reduce((suma, u) => suma + u.horas, 0);
-            const datos = 'RFC: ' + p.rfc + '  |  ' +
-                cuantas + (cuantas === 1 ? ' asignación' : ' asignaciones') +
-                '  |  ' + horasMostradas + ' h en total';
-            encabezado.appendChild(el('span', 'profesor-datos', datos));
-            tarjeta.appendChild(encabezado);
-
-            if (cuantas === 0) {
-                tarjeta.appendChild(el('p', 'sin-unidades',
-                    'Este profesor todavía no tiene unidades de aprendizaje asignadas.'));
-                return tarjeta;
-            }
-
-            const envoltura = el('div', 'tabla-scroll');
-            const tabla = el('table', 'tabla');
-
-            const cabecera = tabla.createTHead().insertRow();
-            ['Materia', 'Tipo', 'Horario', 'Horas']
-                .forEach(t => cabecera.appendChild(el('th', '', t)));
-
-            const cuerpo = tabla.createTBody();
-            unidadesAMostrar.forEach(u => {
-                const fila = cuerpo.insertRow();
-                fila.insertCell().textContent = u.materia;
-                fila.insertCell().appendChild(el('span', 'tipo tipo-' + normalizar(u.tipo), u.tipo));
-                fila.insertCell().textContent = u.horario;
-                fila.insertCell().textContent = u.horas;
-            });
-
-            envoltura.appendChild(tabla);
-            tarjeta.appendChild(envoltura);
-            return tarjeta;
-        }
-
-        const ICONO_LUPA = '<svg viewBox="0 0 24 24" fill="none" stroke="#075c66" ' +
-            'stroke-width="1.6" stroke-linecap="round" aria-hidden="true">' +
-            '<circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>';
-
-        function mostrarMensaje(titulo, texto) {
-            const caja = el('div', 'sin-resultados');
-            caja.insertAdjacentHTML('afterbegin', ICONO_LUPA);
-            caja.appendChild(el('h3', '', titulo));
-            caja.appendChild(el('p', '', texto));
-            $lista.replaceChildren(caja);
-            $resumen.textContent = '';
-            $paginacion.hidden = true;
-        }
-
-        // entries: [{profesor, unidades}]. Sin paginación (se usa para resultados de búsqueda).
-        function pintarSinPaginar(entries, titulo) {
-            $lista.replaceChildren();
-            entries.forEach(e => $lista.appendChild(crearTarjeta(e.profesor, e.unidades)));
-
-            const totalAsignaciones = entries.reduce((suma, e) => suma + e.unidades.length, 0);
-            $resumen.textContent = titulo + ': ' +
-                entries.length + (entries.length === 1 ? ' profesor' : ' profesores') +
-                ', ' + totalAsignaciones + (totalAsignaciones === 1 ? ' asignación' : ' asignaciones');
-            $paginacion.hidden = true;
-        }
-
-        // Dibuja la página actual de vistaActual (usada para la consulta general).
-        function renderPagina() {
-            const totalPaginas = Math.max(1, Math.ceil(vistaActual.length / POR_PAGINA));
-            if (paginaActual >= totalPaginas) paginaActual = totalPaginas - 1;
-            if (paginaActual < 0) paginaActual = 0;
-
-            const inicio = paginaActual * POR_PAGINA;
-            const entries = vistaActual.slice(inicio, inicio + POR_PAGINA);
-
-            $lista.replaceChildren();
-            entries.forEach(e => $lista.appendChild(crearTarjeta(e.profesor, e.unidades)));
-
-            $resumen.textContent = 'Consulta general (más recientes primero): ' +
-                'mostrando ' + (inicio + 1) + '–' + Math.min(inicio + POR_PAGINA, vistaActual.length) +
-                ' de ' + vistaActual.length +
-                (vistaActual.length === 1 ? ' profesor' : ' profesores');
-
-            $paginaInfo.textContent = 'Página ' + (paginaActual + 1) + ' de ' + totalPaginas;
-            $btnAnteriores.disabled = paginaActual >= totalPaginas - 1;
-            $btnSiguientes.disabled = paginaActual <= 0;
-            $paginacion.hidden = totalPaginas <= 1;
-        }
-
-        // Consulta general: todos los profesores, más recientes primero (id más alto = más reciente), con paginación.
-        function mostrarTodos() {
-            if (profesores.length === 0) {
-                mostrarMensaje('Sin profesores', 'Todavía no hay profesores registrados.');
-                return;
-            }
-            vistaActual = profesores
-                .slice()
-                .sort((a, b) => b.id - a.id)
-                .map(p => ({profesor: p, unidades: p.unidades}));
-            paginaActual = 0;
-            renderPagina();
-        }
-
-        // Búsqueda por nombre del profesor o por materia:
-        // - si coincide el nombre del profesor, se muestran todas sus materias.
-        // - si coincide solo el nombre de una materia, se muestra ese profesor con
-        //   únicamente esa(s) materia(s), no con el resto de lo que tiene asignado.
-        function buscar() {
-            if (!cargado) return;
-
-            const texto = $buscar.value.trim();
-
-            if (!texto) {
-                mostrarTodos();
-                return;
-            }
-
-            const filtro = normalizar(texto);
-            const resultados = [];
-
-            profesores.forEach(p => {
-                const nombreCoincide = normalizar(nombreCompleto(p)).includes(filtro);
-                if (nombreCoincide) {
-                    resultados.push({profesor: p, unidades: p.unidades});
-                    return;
-                }
-                const unidadesQueCoinciden = p.unidades.filter(u => normalizar(u.materia).includes(filtro));
-                if (unidadesQueCoinciden.length > 0) {
-                    resultados.push({profesor: p, unidades: unidadesQueCoinciden});
-                }
-            });
-
-            if (resultados.length === 0) {
-                mostrarMensaje('Sin resultados',
-                    'Ningún profesor ni materia coincide con «' + texto + '».');
-                return;
-            }
-            pintarSinPaginar(resultados, 'Búsqueda «' + texto + '»');
-        }
-
-        $btnBuscar.addEventListener('click', buscar);
-        $buscar.addEventListener('keydown', e => {
-            if (e.key === 'Enter') buscar();
-        });
-        $buscar.addEventListener('input', () => {
-            if (cargado && !$buscar.value.trim()) mostrarTodos();
-        });
-
-        // "Siguientes" = hacia los más recientes (página anterior); "Anteriores" = hacia los más antiguos.
-        $btnSiguientes.addEventListener('click', () => { paginaActual--; renderPagina(); });
-        $btnAnteriores.addEventListener('click', () => { paginaActual++; renderPagina(); });
-
-        cargar();
-
-        //]]>
-    </script>
 
 </h:body>
 
