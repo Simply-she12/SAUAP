@@ -6,7 +6,6 @@ import jakarta.persistence.EntityManager;
 
 import mx.desarrollo.entity.Asignar;
 import mx.desarrollo.entity.Horario;
-import mx.desarrollo.entity.Materia;
 import mx.desarrollo.entity.Profesor;
 import mx.desarrollo.persistencia.integration.ServiceLocator;
 
@@ -20,9 +19,21 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Bean de respaldo para Consultas.xhtml.
+ * Junta la lógica de consulta (antes en un servlet aparte) y el bean JSF
+ * en una sola clase, para que viva completa en vista/ui junto con la vista.
+ *
+ * Requiere que el pom.xml de "vista" tenga como dependencias los módulos
+ * "entidad" y "persistencia" (ya las tiene).
+ */
 @Named("consultasBean")
 @RequestScoped
 public class Consultas {
+
+    // ---------------------------------------------------------------
+    // Bean expuesto al .xhtml
+    // ---------------------------------------------------------------
 
     private List<ProfesorConsulta> profesores;
 
@@ -40,13 +51,18 @@ public class Consultas {
     public boolean isHayProfesores() {
         return getTotalProfesores() > 0;
     }
+
+    // ---------------------------------------------------------------
+    // Modelos de datos
+    // ---------------------------------------------------------------
+
     public static class UnidadAsignada {
         public final String materia;
         public final String tipo;
         public final String horario;
-        public final int horas;
+        public final double horas;
 
-        public UnidadAsignada(String materia, String tipo, String horario, int horas) {
+        public UnidadAsignada(String materia, String tipo, String horario, double horas) {
             this.materia = materia;
             this.tipo = tipo;
             this.horario = horario;
@@ -56,7 +72,8 @@ public class Consultas {
         public String getMateria() { return materia; }
         public String getTipo() { return tipo; }
         public String getHorario() { return horario; }
-        public int getHoras() { return horas; }
+        public double getHoras() { return horas; }
+        public String getHorasTexto() { return formatearHoras(horas); }
     }
 
     public static class ProfesorConsulta {
@@ -83,23 +100,25 @@ public class Consultas {
         public String getRfc() { return rfc; }
         public List<UnidadAsignada> getUnidades() { return unidades; }
 
-        public int getTotalHoras() {
-            int total = 0;
+        public double getTotalHoras() {
+            double total = 0;
             for (UnidadAsignada u : unidades) {
                 total += u.horas;
             }
             return total;
         }
+
+        public String getTotalHorasTexto() { return formatearHoras(getTotalHoras()); }
     }
 
     private static class Fila {
         final long profesorId;
         final String nombre, apellidoPaterno, apellidoMaterno, rfc;
         final String materia, tipo, horario;
-        final int horas;
+        final double horas;
 
         Fila(long profesorId, String nombre, String apellidoPaterno, String apellidoMaterno,
-             String rfc, String materia, String tipo, String horario, int horas) {
+             String rfc, String materia, String tipo, String horario, double horas) {
             this.profesorId = profesorId;
             this.nombre = nombre;
             this.apellidoPaterno = apellidoPaterno;
@@ -111,6 +130,10 @@ public class Consultas {
             this.horas = horas;
         }
     }
+
+    // ---------------------------------------------------------------
+    // Consulta a base de datos
+    // ---------------------------------------------------------------
 
     private static final DateTimeFormatter HORA = DateTimeFormatter.ofPattern("HH:mm");
     private static final Collator COLLATOR = Collator.getInstance(Locale.forLanguageTag("es-MX"));
@@ -148,7 +171,7 @@ public class Consultas {
                         p.getApellidoM(), p.getRfc(),
                         a.getMateria().getNombre(), tipo,
                         textoHorario(a.getHorario()),
-                        horasDelTipo(a.getMateria(), tipo)));
+                        calcularHoras(a.getHorario())));
             }
         }
         return filas;
@@ -202,17 +225,23 @@ public class Consultas {
         }
     }
 
-    private static int horasDelTipo(Materia m, String tipo) {
-        switch (tipo) {
-            case "Clase":
-                return horas(m.getHoraC());
-            case "Taller":
-                return horas(m.getHoraT());
-            case "Laboratorio":
-                return horas(m.getHoraL());
-            default:
-                return 0;
+    private static double calcularHoras(Horario h) {
+        if (h == null || h.getHoraI() == null || h.getHoraF() == null) {
+            return 0;
         }
+        long minutos = java.time.Duration.between(h.getHoraI(), h.getHoraF()).toMinutes();
+        if (minutos < 0) {
+            // el horario cruza la medianoche (ej. 23:00 - 01:00)
+            minutos += 24 * 60;
+        }
+        return minutos / 60.0;
+    }
+
+    private static String formatearHoras(double horas) {
+        if (horas == Math.floor(horas)) {
+            return String.valueOf((long) horas);
+        }
+        return String.format(Locale.forLanguageTag("es-MX"), "%.1f", horas);
     }
 
     private static String textoHorario(Horario h) {
@@ -224,10 +253,6 @@ public class Consultas {
             return dia;
         }
         return (dia + " " + HORA.format(h.getHoraI()) + " - " + HORA.format(h.getHoraF())).trim();
-    }
-
-    private static int horas(Integer valor) {
-        return valor == null ? 0 : valor;
     }
 
     private static String vacioSiNulo(String texto) {
