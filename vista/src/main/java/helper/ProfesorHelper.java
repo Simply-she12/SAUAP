@@ -22,9 +22,21 @@ public class ProfesorHelper implements Serializable {
 
     public void registrar() {
         try {
+
+            String rfc = profesor.getRfc();
+
+            if (rfc == null || !rfc.toUpperCase().matches("^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$")) {
+                this.mensaje = "El RFC no tiene un formato válido";
+                return;
+            }
+
+            profesor.setRfc(rfc.toUpperCase());
+
             delegateProfesor.saveProfesor(profesor);
+
             this.mensaje = "Profesor registrado correctamente";
             this.profesor = new Profesor();
+
         } catch (Exception e) {
             e.printStackTrace();
             this.mensaje = "No se pudo registrar el profesor, intenta de nuevo";
