@@ -564,36 +564,56 @@
             <p>Mantenimiento CRUD</p>
         </div>
 
-        <form class="formulario">
+        <h:form>
+
             <b class="subtitulo">Catálogo de unidades de aprendizaje</b>
 
             <div class="campo">
                 <label for="identificador">Identificador</label>
-                <input type="text" id="indetificador" name="identificador" required="required"/>
+                <h:inputText
+                        id="identificador"
+                        value="#{materiaHelper.id}"
+                        required="true"/>
             </div>
 
             <div class="campo">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required="required"/>
+                <h:inputText
+                        id="nombre"
+                        value="#{materiaHelper.nombre}"
+                        required="true"/>
             </div>
 
             <div class="campo">
                 <label for="clase">Hora Clase</label>
-                <input type="text" id="lase" name="clase" required="required"/>
+                <h:inputText
+                        id="clase"
+                        value="#{materiaHelper.horaC}"
+                        required="true"/>
             </div>
 
             <div class="campo">
                 <label for="taller">Hora Taller</label>
-                <input type="text" id="taller" name="taller" required="required"/>
+                <h:inputText
+                        id="taller"
+                        value="#{materiaHelper.horaT}"
+                        required="true"/>
             </div>
 
             <div class="campo">
                 <label for="laboratorio">Hora Laboratorio</label>
-                <input type="text" id="laboratorio" name="laboratorio" required="required"/>
+                <h:inputText
+                        id="laboratorio"
+                        value="#{materiaHelper.horaL}"
+                        required="true"/>
             </div>
 
-            <button class="boton2">Registrar</button>
-        </form>
+            <h:commandButton
+                    value="Registrar"
+                    action="#{materiaHelper.registrar}"
+                    styleClass="boton2"/>
+
+        </h:form>
     </main>
 </h:body>
 
