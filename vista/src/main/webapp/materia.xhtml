@@ -393,8 +393,8 @@
         }
 
         .titulo {
-            font-family: "Inria Serif", serif;
-            font-size: 30px;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 36px;
             color: #000000;
             font-weight: normal;
             background-color: #d9d9d9;
@@ -404,6 +404,7 @@
             width: 100%;
             display: flex;
             flex-direction: row;
+            gap: 10px;
         }
         .subtitulo {
             font-family: "Inria Serif", serif;
@@ -448,7 +449,7 @@
         }
 
         .manten{
-            height: 80px;
+            height: 50px;
             filter: invert(59.55%) sepia(78.87%) saturate(1389.58%) hue-rotate(154.47deg) brightness(51.59%) contrast(94.51%);
         }
 
@@ -560,7 +561,7 @@
                     name="mantenimiento.png"
                     alt="Mantenimiento"
             />
-            <h1>Mantenimiento CRUD</h1>
+            <p>Mantenimiento CRUD</p>
         </div>
 
         <form class="formulario">
@@ -577,39 +578,18 @@
             </div>
 
             <div class="campo">
-                <label for="tipo">Tipo:</label>
-                <select>
-                    <option></option>
-                    <option>Clase</option>
-                    <option>Taller</option>
-                    <option>Laboratorio</option>
-                </select>
+                <label for="clase">Hora Clase</label>
+                <input type="text" id="lase" name="clase" required="required"/>
             </div>
 
             <div class="campo">
-                <label for="horas">Horas:</label>
-                <input type="text" id="horas" name="horas" required="required"/>
+                <label for="taller">Hora Taller</label>
+                <input type="text" id="taller" name="taller" required="required"/>
             </div>
 
             <div class="campo">
-                <label for="dia">Dia:</label>
-                <select>
-                    <option></option>
-                    <option>Lunes</option>
-                    <option>Martes</option>
-                    <option>Miercoles</option>
-                    <option>Jueves</option>
-                    <option>Viernes</option>
-                    <option>Sabado</option>
-                </select>
-            </div>
-
-            <div class="campo">
-                <label>Hora de Inicio:</label>
-                <input type="time"/>
-
-                <label>Hora Final:</label>
-                <input type="time"/>
+                <label for="laboratorio">Hora Laboratorio</label>
+                <input type="text" id="laboratorio" name="laboratorio" required="required"/>
             </div>
 
             <button class="boton2">Registrar</button>
