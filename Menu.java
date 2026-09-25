@@ -16,6 +16,7 @@ do{
         System.out.println("Menu: ");
         System.out.println("1. Altas ");
         System.out.println("2. Administracion ");
+        System.out.println("3.Consultas ");
         op = sc.nextInt();
         switch (op) {
             case 1:
@@ -42,6 +43,10 @@ do{
             case 2:
                 //Administracion
                 break;
+            case 3:
+
+                break;
+                
         }}while (op!=5);
     }
 }

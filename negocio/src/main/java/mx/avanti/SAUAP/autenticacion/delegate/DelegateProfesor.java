@@ -6,20 +6,42 @@ import mx.desarrollo.persistencia.integration.ServiceLocator;
 import java.util.List;
 
 public class DelegateProfesor {
-    public Profesor login(String rfc){
-        Profesor profesor = new Profesor();
-        List<Profesor> profesores = ServiceLocator.getInstanceProfesorDAO().findAll();
 
-        for(Profesor pr:profesores){
-            if(pr.getRfc().equalsIgnoreCase(rfc)){
-                profesor = pr;
+    public Profesor login(String idProfesor, String password) {
+
+        List<Profesor> profesores =
+                ServiceLocator.getInstanceProfesorDAO().findAll();
+
+        for (Profesor pr : profesores) {
+
+            System.out.println("ID BD: " + pr.getId());
+            System.out.println("Password BD: " + pr.getPassword());
+            System.out.println("ID recibido: " + idProfesor);
+            System.out.println("Password recibido: " + password);
+
+            if (String.valueOf(pr.getId()).equals(idProfesor)
+                    && password != null
+                    && password.equals(pr.getPassword())) {
+
+                System.out.println("ID y contraseña correctos");
+                return pr;
             }
         }
-        return profesor;
+
+        System.out.println("ID o contraseña incorrectos");
+        return null;
     }
 
-    public void saveProfesor(Profesor profesor){
+
+    public void saveProfesor(Profesor profesor) {
+        if (profesor.getPassword() == null || profesor.getPassword().trim().isEmpty()) {
+            profesor.setPassword("  ");
+        }
+
         ServiceLocator.getInstanceProfesorDAO().save(profesor);
     }
 
+    public List<Profesor> obtenerTodos() {
+        return ServiceLocator.getInstanceProfesorDAO().obtenerTodos();
+    }
 }

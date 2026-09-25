@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Asignación - SAUAP</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: #202020;
+            min-height: 100vh;
+        }
+
+
+        .barra-superior {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+
+            background-color: #075c66;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 25px;
+
+            z-index: 10;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            color: white;
+            font-size: 28px;
+        }
+
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+
+        .usuario {
+            color: white;
+            font-size: 18px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .icono-usuario {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+
+        .icono-salir {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+
+            margin-left: 25px;
+        }
+
+
+        .menu-lateral {
+            position: fixed;
+            top: 80px;
+            left: 0;
+
+            width: 190px;
+            height: calc(100vh - 80px);
+
+            background-color: #075c66;
+
+            padding-top: 25px;
+        }
+
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            width: 100%;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 16px;
+
+            padding: 18px 12px;
+
+            white-space: nowrap;
+        }
+
+
+        .menu-item img {
+            width: 20px;
+            height: 20px;
+
+            object-fit: contain;
+
+            flex-shrink: 0;
+        }
+
+
+        .menu-item:hover {
+            background-color: #064c55;
+        }
+
+
+        .contenido {
+            position: absolute;
+
+            top: 80px;
+            left: 190px;
+            right: 0;
+
+            min-height: calc(100vh - 80px);
+
+            background-color: white;
+
+            padding: 25px 26px;
+
+            overflow-x: hidden;
+        }
+
+
+        .titulo {
+            height: 84px;
+
+            background-color: #d9d9d9;
+
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+
+            padding-left: 30px;
+
+            gap: 28px;
+
+            margin-bottom: 24px;
+        }
+        .menu-item img,
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+
+            object-fit: contain;
+
+            flex-shrink: 0;
+        }
+
+        .titulo img {
+            width: 44px;
+            height: 44px;
+
+            object-fit: contain;
+        }
+
+
+        .titulo h1 {
+            font-size: 28px;
+            font-weight: normal;
+        }
+
+
+        .asignacion {
+            background-color: #d9d9d9;
+
+            border-radius: 13px;
+
+            min-height: 400px;
+
+            height: auto;
+
+            padding: 14px 30px 30px;
+
+            overflow: hidden;
+        }
+
+
+        .subtitulo {
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .formulario {
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: center;
+
+            gap: 35px;
+
+            flex-wrap: wrap;
+
+            margin-top: 25px;
+        }
+
+
+        .campo {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+
+        .campo label {
+            font-size: 14px;
+        }
+
+
+        .campo input {
+            height: 32px;
+
+            border: none;
+
+            border-radius: 18px;
+
+            background-color: white;
+
+            padding: 0 15px;
+
+            outline: none;
+
+            font-family: Georgia, 'Times New Roman', serif;
+
+            font-size: 14px;
+        }
+
+        .campo input[type="time"] {
+
+            width: 150px;
+
+            height: 32px;
+
+            border: 1px solid #aaa;
+
+            border-radius: 3px;
+
+            background-color: white;
+
+            padding: 0 8px;
+
+            outline: none;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
+        }
+
+
+        .ui-selectonemenu {
+
+            min-width: 180px;
+
+            height: 32px;
+
+            border-radius: 18px;
+        }
+
+        .boton-asignar {
+
+            display: block;
+
+            margin: 35px auto 0;
+
+            width: 125px;
+
+            height: 32px;
+
+            border: none;
+
+            border-radius: 18px;
+
+            background-color: #74116f;
+
+            color: white;
+
+            font-family: Georgia, 'Times New Roman', serif;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .boton-asignar:hover {
+
+            background-color: #5c0d58;
+
+            transform: scale(1.03);
+        }
+
+        .mensaje-error {
+
+            color: #d32f2f;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 8px;
+        }
+
+        .materias-asignadas {
+
+            background-color: white;
+
+            border-radius: 13px;
+
+            margin: 51px auto 0;
+
+            width: 78%;
+
+            padding: 12px;
+
+            max-height: 220px;
+
+            overflow-y: auto;
+        }
+
+
+        .materias-asignadas h3 {
+
+            text-align: center;
+
+            font-size: 12px;
+
+            font-weight: normal;
+
+            margin-bottom: 15px;
+        }
+
+
+        .tabla {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            font-size: 12px;
+        }
+
+
+        .tabla th {
+
+            background-color: #075c66;
+
+            color: white;
+
+            padding: 5px;
+
+            position: sticky;
+
+            top: 0;
+        }
+
+
+        .tabla td {
+
+            padding: 5px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        @media (max-width: 800px) {
+
+            .menu-lateral {
+
+                width: 100px;
+            }
+
+
+            .menu-item {
+
+                font-size: 0;
+
+                justify-content: center;
+            }
+
+
+            .menu-item img {
+
+                width: 20px;
+
+                height: 20px;
+            }
+
+
+            .contenido {
+
+                left: 107px;
+            }
+
+
+            .formulario {
+
+                gap: 15px;
+            }
+
+
+            .materias-asignadas {
+
+                width: 95%;
+            }
+
+        }
+
+    </style>
+
+</h:head>
+
+
+<h:body>
+
+
+    <header class="barra-superior">
+
+        <div class="logo">
+
+            <img
+                    src="resources/iconlogo.png"
+                    alt="Logo SAUAP"
+            />
+
+            <span>SAUAP</span>
+
+        </div>
+
+
+        <div class="usuario">
+
+            <img
+                    src="resources/iconuserblanco.png"
+                    alt="Usuario"
+                    class="icono-usuario"
+            />
+
+            <span>Administrador</span>
+
+
+            <img
+                    src="resources/iconsalir.png"
+                    alt="Cerrar sesión"
+                    class="icono-salir"
+            />
+
+        </div>
+
+    </header>
+
+
+    <aside class="menu-lateral">
+
+
+        <a href="menu.xhtml" class="menu-item">
+
+            <img
+                    src="resources/iconInicio.png"
+                    alt="Inicio"
+            />
+
+            <span>INICIO</span>
+
+        </a>
+
+
+        <a href="Profesores.xhtml" class="menu-item">
+
+            <img
+                    src="resources/iconuserblanco.png"
+                    alt="Profesores"
+            />
+
+            <span>PROFESORES</span>
+
+        </a>
+
+
+        <a href="materia.xhtml" class="menu-item">
+
+            <img
+                    src="resources/iconmateria.png"
+                    alt="Materias"
+            />
+
+            <span>MATERIAS</span>
+
+        </a>
+
+
+        <a href="asignar.xhtml" class="menu-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="4" width="14" height="17" rx="2"/>
+                <path d="M9 4h6v3H9z"/>
+                <path d="M9 14l2 2 4-4"/>
+            </svg>
+            <span>ASIGNACIÓN</span>
+        </a>
+
+
+        <a href="Consultas.xhtml" class="menu-item">
+
+            <img
+                    src="resources/iconocon.png"
+                    alt="Consultas"
+            />
+
+            <span>CONSULTAS</span>
+
+        </a>
+
+    </aside>
+
+
+    <main class="contenido">
+
+
+        <section class="titulo">
+
+            <img
+                    src="resources/iconasig.png"
+                    alt="Asignación de materias"
+            />
+
+            <h1>ASIGNACIÓN DE MATERIAS</h1>
+
+        </section>
+
+
+        <section class="asignacion">
+
+
+            <h2 class="subtitulo">
+                Nueva Asignación
+            </h2>
+
+
+            <h:form
+                    id="formAsignar"
+                    styleClass="formulario">
+
+                <div class="campo">
+
+                    <label>Profesor:</label>
+
+                    <p:selectOneMenu
+                            id="profesor"
+                            value="#{asignarHelper.profesorId}">
+
+                        <f:selectItem
+                                itemLabel="Seleccione un profesor"
+                                itemValue="#{null}"
+                                noSelectionOption="true"/>
+
+                        <f:selectItems
+                                value="#{asignarHelper.profesores}"
+                                var="p"
+                                itemLabel="#{p.nombre} #{p.apellidoP} #{p.apellidoM}"
+                                itemValue="#{p.id}"/>
+
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Materia:</label>
+
+                    <p:selectOneMenu
+                            id="materia"
+                            value="#{asignarHelper.materiaId}">
+
+                        <f:selectItem
+                                itemLabel="Seleccione una materia"
+                                itemValue="#{null}"
+                                noSelectionOption="true"/>
+
+                        <f:selectItems
+                                value="#{asignarHelper.materias}"
+                                var="m"
+                                itemLabel="#{m.nombre}"
+                                itemValue="#{m.id}"/>
+
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Tipo:</label>
+
+                    <p:selectOneMenu
+                            id="tipo"
+                            value="#{asignarHelper.tipo}">
+
+                        <f:selectItem
+                                itemLabel="Seleccione un tipo"
+                                itemValue="#{null}"
+                                noSelectionOption="true"/>
+
+                        <f:selectItem
+                                itemLabel="Clase"
+                                itemValue="teoria"/>
+
+                        <f:selectItem
+                                itemLabel="Taller"
+                                itemValue="taller"/>
+
+                        <f:selectItem
+                                itemLabel="Laboratorio"
+                                itemValue="laboratorio"/>
+
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Día:</label>
+
+                    <p:selectOneMenu
+                            id="dia"
+                            value="#{asignarHelper.dia}">
+
+                        <f:selectItem
+                                itemLabel="Seleccione un día"
+                                itemValue="#{null}"
+                                noSelectionOption="true"/>
+
+                        <f:selectItem
+                                itemLabel="Lunes"
+                                itemValue="Lunes"/>
+
+                        <f:selectItem
+                                itemLabel="Martes"
+                                itemValue="Martes"/>
+
+                        <f:selectItem
+                                itemLabel="Miércoles"
+                                itemValue="Miércoles"/>
+
+                        <f:selectItem
+                                itemLabel="Jueves"
+                                itemValue="Jueves"/>
+
+                        <f:selectItem
+                                itemLabel="Viernes"
+                                itemValue="Viernes"/>
+
+                        <f:selectItem
+                                itemLabel="Sábado"
+                                itemValue="Sábado"/>
+
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Hora de inicio:</label>
+
+                    <h:inputText
+                            id="horaInicio"
+                            value="#{asignarHelper.horaInicio}"
+                            type="time"/>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Hora final:</label>
+
+                    <h:inputText
+                            id="horaFin"
+                            value="#{asignarHelper.horaFin}"
+                            type="time"/>
+
+                </div>
+
+                <p:commandButton
+                        value="Asignar"
+                        action="#{asignarHelper.asignar}"
+                        update="@form tablaAsignaciones"
+                        styleClass="boton-asignar"/>
+
+                <h:panelGroup
+                        id="mensajeError"
+                        layout="block">
+
+                    <h:outputText
+                            value="#{asignarHelper.mensajeError}"
+                            rendered="#{not empty asignarHelper.mensajeError}"
+                            styleClass="mensaje-error"/>
+
+                </h:panelGroup>
+
+
+            </h:form>
+
+            <div
+                    id="tablaAsignaciones"
+                    class="materias-asignadas">
+
+                <h3>Materias asignadas</h3>
+
+
+                <table class="tabla">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Profesor</th>
+
+                        <th>Materia</th>
+
+                        <th>Tipo</th>
+
+                        <th>Horario</th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                    <ui:repeat
+                            value="#{asignarHelper.asignaciones}"
+                            var="a">
+
+
+                        <tr>
+
+
+                            <td>
+
+                                #{a.profesor.nombre}
+
+                                #{a.profesor.apellidoP}
+
+                                #{a.profesor.apellidoM}
+
+                            </td>
+
+
+                            <td>
+
+                                #{a.materia.nombre}
+
+                            </td>
+
+
+                            <td>
+
+                                #{a.tipo}
+
+                            </td>
+
+
+                            <td>
+
+                                #{a.horario.dia}
+
+                                #{a.horario.horaI}
+
+                                -
+
+                                #{a.horario.horaF}
+
+                            </td>
+
+
+                        </tr>
+
+
+                    </ui:repeat>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</h:body>
+
+</html>

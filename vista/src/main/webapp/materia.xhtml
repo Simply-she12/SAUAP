@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      lang="es">
+
+<h:head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Menu - SAUAP</title>
+
+    <style type="text/css">
+        /*<![CDATA[*/
+
+        :root {
+            --teal-950: #053237;
+            --teal-800: #075c66;
+            --teal-900: #064c55;
+            --teal-700: #286671;
+            --teal-100: #dff0f2;
+            --purple-700: #74116f;
+            --purple-900: #5c0d58;
+            --texto: #172325;
+            --texto-suave: #4d6164;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: #202020;
+            min-height: 100vh;
+        }
+
+        .barra-superior {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+
+            background-color: var(--teal-800);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 25px;
+
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            color: white;
+            font-size: 28px;
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .usuario {
+            color: white;
+            font-size: 18px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .icono-usuario {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .icono-salir {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+
+            margin-left: 25px;
+        }
+
+        .menu-lateral {
+            position: fixed;
+            top: 80px;
+            left: 0;
+
+            width: 190px;
+            height: calc(100vh - 80px);
+
+            background-color: var(--teal-800);
+
+            padding-top: 25px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            width: 100%;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 16px;
+
+            padding: 18px 12px;
+
+            white-space: nowrap;
+        }
+
+        .menu-item img,
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+
+            object-fit: contain;
+
+            flex-shrink: 0;
+        }
+
+        .menu-item:hover,
+        .menu-item.activo {
+            background-color: var(--teal-900);
+        }
+
+        .menu-item:focus-visible {
+            outline: 2px solid white;
+            outline-offset: -2px;
+        }
+
+        .contenido {
+            position: absolute;
+
+            top: 80px;
+            left: 190px;
+            right: 0;
+
+            min-height: calc(100vh - 80px);
+
+            background-color: #f4f8f8;
+
+            padding: 30px 34px 40px;
+
+            overflow-x: hidden;
+        }
+
+        .banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 24px;
+
+            max-width: 1100px;
+
+            margin: 0 auto 34px;
+
+            padding: 30px 36px;
+
+            border-radius: 18px;
+
+            color: white;
+
+            background: linear-gradient(120deg, var(--teal-950) 0%, var(--teal-800) 62%, var(--teal-700) 100%);
+
+            box-shadow: 0 8px 22px rgba(5, 50, 55, 0.22);
+        }
+
+        .banner h1 {
+            font-size: 30px;
+            font-weight: normal;
+
+            margin-bottom: 8px;
+        }
+
+        .banner p {
+            max-width: 560px;
+
+            font-size: 16px;
+            line-height: 1.5;
+
+            color: #d5ecef;
+        }
+
+        .banner-logo {
+            width: 78px;
+            height: 78px;
+
+            object-fit: contain;
+
+            flex-shrink: 0;
+        }
+
+        .seccion {
+            max-width: 1100px;
+
+            margin: 0 auto;
+        }
+
+        .seccion-titulo {
+            font-size: 20px;
+            font-weight: normal;
+
+            color: var(--texto);
+
+            margin-bottom: 16px;
+        }
+
+        .barras {
+            display: flex;
+            flex-direction: column;
+
+            gap: 16px;
+        }
+
+        .barra {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 24px;
+
+            background-color: white;
+
+            border: 1px solid #dfe8e9;
+            border-radius: 16px;
+
+            padding: 22px 28px;
+
+            box-shadow: 0 6px 18px rgba(5, 50, 55, 0.08);
+
+            transition: box-shadow 0.2s;
+        }
+
+        .barra:hover {
+            box-shadow: 0 10px 24px rgba(5, 50, 55, 0.14);
+        }
+
+        .barra-info {
+            display: flex;
+            align-items: center;
+
+            gap: 18px;
+        }
+
+        .barra-icono {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 52px;
+            height: 52px;
+
+            border-radius: 50%;
+
+            background-color: var(--teal-100);
+
+            flex-shrink: 0;
+        }
+
+        .barra-icono svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .barra h3 {
+            font-size: 22px;
+            font-weight: normal;
+
+            color: var(--texto);
+
+            margin-bottom: 4px;
+        }
+
+        .barra p {
+            font-size: 15px;
+            line-height: 1.5;
+
+            color: var(--texto-suave);
+        }
+
+        .acciones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+
+            gap: 10px;
+
+            flex-shrink: 0;
+        }
+
+        .btn {
+            display: inline-block;
+
+            min-width: 150px;
+
+            padding: 9px 22px;
+
+            border-radius: 20px;
+
+            background-color: var(--purple-700);
+
+            color: white;
+
+            text-align: center;
+
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 15px;
+            text-decoration: none;
+
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--purple-900);
+
+            transform: scale(1.03);
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--teal-800);
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 800px) {
+
+            .menu-lateral {
+                width: 100px;
+            }
+
+            .menu-item {
+                font-size: 0;
+
+                justify-content: center;
+            }
+
+            .contenido {
+                left: 107px;
+
+                padding: 20px 16px 30px;
+            }
+
+            .banner {
+                flex-direction: column-reverse;
+                align-items: flex-start;
+
+                padding: 24px;
+            }
+
+            .banner h1 {
+                font-size: 24px;
+            }
+
+            .barra {
+                flex-direction: column;
+                align-items: flex-start;
+
+                padding: 20px;
+            }
+
+            .acciones {
+                justify-content: flex-start;
+            }
+        }
+
+        .contenidoo {
+            margin-top: 70px;
+            margin-left: 190px;
+            min-height: calc(100vh - 70px);
+            background-color: #f2f4f4;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .titulo {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 36px;
+            color: #000000;
+            font-weight: normal;
+            background-color: #d9d9d9;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        .subtitulo {
+            font-family: "Inria Serif", serif;
+            font-size: 23px;
+            color: #000000;
+            margin-top: 8px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .formulario {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            background-color: #d9d9d9;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+
+        .campo{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            max-width: 600px;
+            align-self: center;
+        }
+        .boton2 {
+            background-color: #612c53;
+            color: #ffffff;
+            border: none;
+            padding: 10px 75px;
+            font-size: 20px;
+            border-radius: 40px;
+            font-family: "Inria Serif", serif;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 500px;
+            align-self: center;
+        }
+
+        .manten{
+            height: 50px;
+            filter: invert(59.55%) sepia(78.87%) saturate(1389.58%) hue-rotate(154.47deg) brightness(51.59%) contrast(94.51%);
+        }
+
+        /*]]>*/
+    </style>
+
+</h:head>
+
+<h:body>
+
+    <header class="barra-superior">
+
+        <div class="logo">
+
+            <h:graphicImage
+                    name="iconlogo.png"
+                    alt="Logo SAUAP"
+            />
+
+            <span>SAUAP</span>
+
+        </div>
+
+        <div class="usuario">
+
+            <h:graphicImage
+                    name="iconuserblanco.png"
+                    alt="Usuario"
+                    styleClass="icono-usuario"
+            />
+
+            <span>Administrador</span>
+
+            <h:graphicImage
+                    name="iconsalir.png"
+                    alt="Cerrar sesión"
+                    styleClass="icono-salir"
+            />
+
+        </div>
+
+    </header>
+
+    <aside class="menu-lateral">
+
+        <a href="menu.xhtml" class="menu-item activo">
+
+            <h:graphicImage
+                    name="iconInicio.png"
+                    alt="Inicio"
+            />
+
+            <span>INICIO</span>
+
+        </a>
+
+        <a href="Profesores.xhtml" class="menu-item">
+
+            <h:graphicImage
+                    name="iconuserblanco.png"
+                    alt="Profesores"
+            />
+
+            <span>PROFESORES</span>
+
+        </a>
+
+        <a href="materia.xhtml" class="menu-item">
+
+            <h:graphicImage
+                    name="iconmateria.png"
+                    alt="Materias"
+            />
+
+            <span>MATERIAS</span>
+
+        </a>
+
+        <a href="asignar.xhtml" class="menu-item" aria-label="Asignación">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="4" width="14" height="17" rx="2"/>
+                <path d="M9 4h6v3H9z"/>
+                <path d="M9 14l2 2 4-4"/>
+            </svg>
+
+            <span>ASIGNACIÓN</span>
+
+        </a>
+
+        <a href="Consultas.xhtml" class="menu-item">
+
+            <h:graphicImage
+                    name="iconocon.png"
+                    alt="Consultas"
+            />
+
+            <span>CONSULTAS</span>
+
+        </a>
+
+    </aside>
+
+    <main class="contenidoo">
+        <div class="titulo">
+            <h:graphicImage
+                    class="manten"
+                    name="mantenimiento.png"
+                    alt="Mantenimiento"
+            />
+            <p>Mantenimiento CRUD</p>
+        </div>
+
+        <h:form class="formulario">
+
+            <b class="subtitulo">Catálogo de unidades de aprendizaje</b>
+
+            <div class="campo">
+                <label for="identificador">Identificador</label>
+                <h:inputText
+                        id="identificador"
+                        required="true"/>
+            </div>
+
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <h:inputText
+                        id="nombre"
+                        value="#{materiaHelper.nombre}"
+                        required="true"/>
+            </div>
+
+            <div class="campo">
+                <label for="clase">Hora Clase</label>
+                <h:inputText
+                        id="clase"
+                        value="#{materiaHelper.horaC}"
+                        required="true"/>
+            </div>
+
+            <div class="campo">
+                <label for="taller">Hora Taller</label>
+                <h:inputText
+                        id="taller"
+                        value="#{materiaHelper.horaT}"
+                        required="true"/>
+            </div>
+
+            <div class="campo">
+                <label for="laboratorio">Hora Laboratorio</label>
+                <h:inputText
+                        id="laboratorio"
+                        value="#{materiaHelper.horaL}"
+                        required="true"/>
+            </div>
+
+            <h:commandButton
+                    value="Registrar"
+                    action="#{materiaHelper.registrar}"
+                    styleClass="boton2"
+                    onclick="document.getElementById('formulario:identificador').value = '';"/>
+
+        </h:form>
+    </main>
+</h:body>
+
+</html>

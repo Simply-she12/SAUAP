@@ -3,14 +3,18 @@ package mx.desarrollo.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
-@Table(name = "materias", schema = "sauap")
+@Table(name = "materia", schema = "sauap")
 public class Materia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idmaterias", nullable = false)
     private Integer id;
 
+    @OneToMany(mappedBy = "materia")
+    private List<Horario> horarios;
     @Size(max = 50)
     @Column(name = "nombre", length = 50)
     private String nombre;
@@ -62,6 +66,14 @@ public class Materia {
 
     public void setHoraL(Integer horaL) {
         this.horaL = horaL;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
 
 }

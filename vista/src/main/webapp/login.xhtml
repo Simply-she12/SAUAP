@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>SAUAP - Iniciar sesión</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+
+            background-image:
+                    linear-gradient(
+                            rgba(255, 255, 255, 0.55),
+                            rgba(255, 255, 255, 0.55)
+                    ),
+                    url("resources/fondo.png");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .pagina {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 70px;
+        }
+
+        .izquierda {
+            text-align: center;
+        }
+
+
+        .logo {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+        }
+
+        .sauap {
+            color: #0F4C52;
+            font-size: 96px;
+            font-family: "Inria Serif", serif;
+        }
+
+        .descripcion {
+            color: #172325;
+            font-size: 24px;
+            font-family: "Inria Serif", serif;
+            max-width: 500px;
+        }
+
+        .login {
+            width: 637px;
+            min-height: 567px;
+            background: rgb(12 61 66 / 0.72);
+            border-radius: 47px;
+            box-shadow: 12px 23px 7px rgba(0,0,0,0.25);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contenido {
+            width: 556px;
+            text-align: center;
+        }
+
+        .titulo {
+            color: #172325;
+            font-size: 64px;
+            font-family: "Inria Serif", serif;
+            margin-bottom: 60px;
+        }
+
+        .campo {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .campo input {
+            width: 100%;
+            height: 60px;
+            box-sizing: border-box;
+            border-radius: 100px;
+            border: none;
+            background: #D9D9D9;
+            padding: 0 60px;
+            font-size: 18px;
+        }
+
+        .icono {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .icono-ojo {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+
+
+        .boton {
+            background: #64165F !important;
+            border: none !important;
+            border-radius: 28px !important;
+            padding: 12px 35px !important;
+        }
+
+        .mensaje-error {
+            color: #d32f2f;
+            font-size: 14px;
+            display: block;
+            text-align: center;
+            margin-top: 3px;
+        }
+
+    </style>
+</h:head>
+
+
+<h:body>
+
+    <div class="pagina">
+
+
+        <div class="izquierda">
+
+
+            <h:graphicImage
+                    name="logo.png"
+                    styleClass="logo"/>
+
+            <div class="sauap">
+                SAUAP
+            </div>
+
+            <div class="descripcion">
+                Sistema de Asignación de
+                <br/>
+                Unidades de Aprendizaje a los Profesores
+            </div>
+
+        </div>
+
+        <div class="login">
+
+            <div class="contenido">
+
+                <div class="titulo">
+                    SIGN IN
+                </div>
+
+                <h:form>
+
+
+                    <div class="campo">
+
+                        <h:graphicImage
+                                name="iconUser.png"
+                                styleClass="icono"/>
+
+                        <p:inputText
+                                value="#{loginHelper.idProfesor}"
+                                placeholder="Usuario"/>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <h:graphicImage
+                                name="iconLlave.png"
+                                styleClass="icono"/>
+
+                        <p:password
+                                value="#{loginHelper.password}"
+                                placeholder="Contraseña"/>
+
+                        <h:graphicImage
+                                name="iconOjo.png"
+                                styleClass="icono-ojo"/>
+
+                    </div>
+
+                    <h:panelGroup id="mensajeError">
+
+                        <h:outputText
+                                value="Usuario o contraseña incorrectos"
+                                rendered="#{loginHelper.error}"
+                                styleClass="mensaje-error"/>
+
+                    </h:panelGroup>
+
+                    <p:commandButton
+                            value="Entrar"
+                            action="#{loginHelper.login}"
+                            update="mensajeError"
+                            styleClass="boton"/>
+
+
+
+                </h:form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</h:body>
+
+</html>

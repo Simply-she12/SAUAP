@@ -153,7 +153,7 @@ public abstract class AbstractDAO<T> {
 
 
     // Utility to run in transaction
-    private void executeInsideTransaction(Consumer<EntityManager> action) {
+    protected void executeInsideTransaction(Consumer<EntityManager> action) {
         execute(em -> {
             action.accept(em);
             return null;
